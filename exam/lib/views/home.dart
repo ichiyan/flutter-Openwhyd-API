@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:openwhyd_api_music_app/api/openwhyd.dart';
+import 'package:openwhyd_api_music_app/views/Registration.dart';
 import 'package:openwhyd_api_music_app/views/player.dart';
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
 import 'package:openwhyd_api_music_app/custom_widgets/gradient_containers.dart';
@@ -7,7 +8,9 @@ import 'package:openwhyd_api_music_app/custom_widgets/track_list_item.dart';
 import 'package:openwhyd_api_music_app/models/track_model.dart';
 
 class Home extends StatefulWidget {
-  const Home({Key? key}) : super(key: key);
+  static const String routeName = "home";
+  final User user;
+  const Home({Key? key, required this.user}) : super(key: key);
 
   @override
   _HomeState createState() => _HomeState();
@@ -22,6 +25,7 @@ class _HomeState extends State<Home> {
     super.initState();
     futureTrack = fetchHotTracks();
   }
+
 
   @override
   Widget build(BuildContext context) {
