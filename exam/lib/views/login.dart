@@ -61,7 +61,7 @@ class _LoginState extends State<Login> with ValidationMixin {
                       obscureText: obscureText,
                       onTap: setPasswordVisibility,
                       textEditingController: passwordTextController,
-                      validation: validatePassword,
+                      // validation: validatePassword,
                     ),
                     SizedBox(
                       height: 20.0,
