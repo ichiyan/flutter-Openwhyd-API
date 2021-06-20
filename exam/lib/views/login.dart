@@ -1,21 +1,21 @@
 import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:openwhyd_api_music_app/mixins/validation_mixin.dart';
 import 'package:http/http.dart' as http;
 import 'package:crypto/crypto.dart' as crypto;
 import 'package:openwhyd_api_music_app/models/user_model.dart';
 import 'package:openwhyd_api_music_app/views/home.dart';
-import 'package:openwhyd_api_music_app/views/playlist.dart';
 import 'package:openwhyd_api_music_app/widgets/custom_text_form_field.dart';
-import 'package:openwhyd_api_music_app/widgets/forgot_password.dart';
 import 'package:openwhyd_api_music_app/widgets/password_field.dart';
 import 'package:openwhyd_api_music_app/widgets/primary_button.dart';
 import 'package:openwhyd_api_music_app/widgets/secondary_button.dart';
+import 'package:openwhyd_api_music_app/widgets/forgot_password.dart';
 
 import 'registration.dart';
 
 class Login extends StatefulWidget {
-  static const String routeName = "Login";
+  static const String routeName = "login";
   @override
   _LoginState createState() => _LoginState();
 }
@@ -26,7 +26,7 @@ class _LoginState extends State<Login> with ValidationMixin {
   final TextEditingController passwordTextController = TextEditingController();
   bool obscureText = true;
   bool invalid = false;
-  late final err;
+  String? err;
 
   @override
   Widget build(BuildContext context) {
@@ -61,7 +61,7 @@ class _LoginState extends State<Login> with ValidationMixin {
                       obscureText: obscureText,
                       onTap: setPasswordVisibility,
                       textEditingController: passwordTextController,
-                      validation: validatePassword,
+                      // validation: validatePassword,
                     ),
                     SizedBox(
                       height: 20.0,
@@ -70,7 +70,7 @@ class _LoginState extends State<Login> with ValidationMixin {
                       text: "Login",
                       iconData: Icons.login,
                       onPress: () {
-                        if (formKey.currentState!.validate()) {
+                        if (formKey.currentState!.validate() && !invalid) {
                           final res = signIn(emailTextController.text,
                               passwordTextController.text)
                               .then((data) {
@@ -80,15 +80,23 @@ class _LoginState extends State<Login> with ValidationMixin {
                                 MaterialPageRoute(
                                     builder: (context) => Home(user: User(email: emailTextController.text, password: passwordTextController.text))
                                 ));
+                            invalid = false;
+                            formKey.currentState!.reset();
                           }, onError: (error) {
-                            setState(() {
-                              invalid = true;
                               err = error;
-                            });
-                            print(error);
+                              invalid = true;
+                              print(error);
+                              // ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                              //   content: Text('Incorrect password or email'),
+                              //   action: SnackBarAction(
+                              //     label: 'Undo',
+                              //     onPressed: () {
+                              //       // Some code to undo the change.
+                              //     },
+                              //   ),
+                              // ));
                           });
                         }
-                        formKey.currentState!.reset();
                       },
                     ),
                     SizedBox(
@@ -155,12 +163,6 @@ class _LoginState extends State<Login> with ValidationMixin {
   }
 
   void navigateToRegistration(BuildContext context) {
-    Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) {
-        return Registration();
-      }),
-    );
-    //Navigator.pushNamed(context, Registration.routeName);
+    Navigator.pushNamed(context, Registration.routeName);
   }
 }
