@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:openwhyd_api_music_app/api/openwhyd.dart';
+import 'package:openwhyd_api_music_app/models/playlist_model.dart';
 import 'package:openwhyd_api_music_app/models/user_model.dart';
-import 'package:openwhyd_api_music_app/views/registration.dart';
 import 'package:openwhyd_api_music_app/views/player.dart';
 import 'package:openwhyd_api_music_app/widgets/logout_button.dart';
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
@@ -11,12 +11,12 @@ import 'package:openwhyd_api_music_app/models/track_model.dart';
 
 class Home extends StatefulWidget {
   static const String routeName = "home";
-  final User user;
-  // const Home({Key? key}) : super(key: key);
-  const Home({
-    Key? key,
-    required this.user,
-  }) : super(key: key);
+  //final User user;
+  const Home({Key? key}) : super(key: key);
+  // const Home({
+  //   Key? key,
+  //   required this.user,
+  // }) : super(key: key);
 
   @override
   _HomeState createState() => _HomeState();
@@ -24,7 +24,21 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   late Future<List<TrackModel>> futureTrack;
-  int _selectedIndex = 0;
+  late Future<List<PlaylistModel>> futurePlaylist;
+  // PageController pageController = PageController(initialPage: 0);
+  // int _selectedIndex = 0;
+
+  // void _onItemTapped(int index) {
+  //   setState(() {
+  //     _selectedIndex = index;
+  //     WidgetsBinding.instance!.addPostFrameCallback((_) {
+  //       if (pageController.hasClients) {
+  //         pageController.animateToPage(index,
+  //             duration: Duration(milliseconds: 400), curve: Curves.ease);
+  //       }
+  //     });
+  //   });
+  // }
 
   @override
   void initState() {
@@ -97,36 +111,30 @@ class _HomeState extends State<Home> {
             ),
           ),
         ),
-        bottomNavigationBar: SalomonBottomBar(
-          currentIndex: _selectedIndex,
-          onTap: (index) {
-            _onItemTapped(index);
-          },
-          items: [
-            SalomonBottomBarItem(
-              icon: Icon(Icons.home_rounded),
-              title: Text("Home"),
-              selectedColor: Theme.of(context).accentColor,
-            ),
-            SalomonBottomBarItem(
-              icon: Icon(Icons.favorite_border_rounded),
-              title: Text("Likes"),
-              selectedColor: Theme.of(context).accentColor,
-            ),
-            SalomonBottomBarItem(
-              icon: Icon(Icons.queue_music_rounded),
-              title: Text("Playlist"),
-              selectedColor: Theme.of(context).accentColor,
-            ),
-          ],
-        ),
+        // bottomNavigationBar: SalomonBottomBar(
+        //   currentIndex: _selectedIndex,
+        //   onTap: (index) {
+        //     _onItemTapped(index);
+        //   },
+        //   items: [
+        //     SalomonBottomBarItem(
+        //       icon: Icon(Icons.home_rounded),
+        //       title: Text("Home"),
+        //       selectedColor: Theme.of(context).accentColor,
+        //     ),
+        //     SalomonBottomBarItem(
+        //       icon: Icon(Icons.favorite_border_rounded),
+        //       title: Text("Likes"),
+        //       selectedColor: Theme.of(context).accentColor,
+        //     ),
+        //     SalomonBottomBarItem(
+        //       icon: Icon(Icons.queue_music_rounded),
+        //       title: Text("Playlist"),
+        //       selectedColor: Theme.of(context).accentColor,
+        //     ),
+        //   ],
+        // ),
       ),
     );
-  }
-
-  void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
   }
 }

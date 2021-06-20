@@ -4,14 +4,13 @@ import 'package:flutter/material.dart';
 import 'package:openwhyd_api_music_app/mixins/validation_mixin.dart';
 import 'package:http/http.dart' as http;
 import 'package:crypto/crypto.dart' as crypto;
-import 'package:openwhyd_api_music_app/models/user_model.dart';
-import 'package:openwhyd_api_music_app/views/home.dart';
 import 'package:openwhyd_api_music_app/widgets/custom_text_form_field.dart';
 import 'package:openwhyd_api_music_app/widgets/password_field.dart';
 import 'package:openwhyd_api_music_app/widgets/primary_button.dart';
 import 'package:openwhyd_api_music_app/widgets/secondary_button.dart';
 import 'package:openwhyd_api_music_app/widgets/forgot_password.dart';
 
+import 'bottom_nav.dart';
 import 'registration.dart';
 
 class Login extends StatefulWidget {
@@ -78,38 +77,29 @@ class _LoginState extends State<Login> with ValidationMixin {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-<<<<<<< Updated upstream
-                                    builder: (context) => Home(user: User(email: emailTextController.text, password: passwordTextController.text))
-                                ));
+                                    builder: (context) => BottomNavBar(
+                                        // user: User(
+                                        //     email: emailTextController.text,
+                                        //     password:
+                                        //         passwordTextController.text)
+                                        )));
                             invalid = false;
                             formKey.currentState!.reset();
-=======
-                                    builder: (context) => Home(
-                                        user: User(
-                                            email: emailTextController.text,
-                                            password:
-                                                passwordTextController.text))));
->>>>>>> Stashed changes
                           }, onError: (error) {
-                              err = error;
-                              invalid = true;
-                              print(error);
-                              // ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                              //   content: Text('Incorrect password or email'),
-                              //   action: SnackBarAction(
-                              //     label: 'Undo',
-                              //     onPressed: () {
-                              //       // Some code to undo the change.
-                              //     },
-                              //   ),
-                              // ));
+                            err = error;
+                            invalid = true;
+                            print(error);
+                            // ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                            //   content: Text('Incorrect password or email'),
+                            //   action: SnackBarAction(
+                            //     label: 'Undo',
+                            //     onPressed: () {
+                            //       // Some code to undo the change.
+                            //     },
+                            //   ),
+                            // ));
                           });
                         }
-<<<<<<< Updated upstream
-=======
-
-                        formKey.currentState!.reset();
->>>>>>> Stashed changes
                       },
                     ),
                     SizedBox(

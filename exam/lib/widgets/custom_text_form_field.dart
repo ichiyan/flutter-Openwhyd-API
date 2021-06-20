@@ -32,6 +32,7 @@ class CustomTextFormField extends StatelessWidget {
           borderRadius: BorderRadius.all(Radius.circular(30.0)),
         ),
       ),
+      autofocus: true,
     );
   }
 }

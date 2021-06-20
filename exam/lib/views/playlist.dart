@@ -2,19 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:openwhyd_api_music_app/api/openwhyd.dart';
 import 'package:openwhyd_api_music_app/custom_widgets/playlist_item.dart';
 import 'package:openwhyd_api_music_app/models/playlist_model.dart';
-import 'package:openwhyd_api_music_app/models/user_model.dart';
-import 'package:openwhyd_api_music_app/views/Registration.dart';
-import 'package:openwhyd_api_music_app/views/player.dart';
-import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
 import 'package:openwhyd_api_music_app/custom_widgets/gradient_containers.dart';
-import 'package:http/http.dart' as http;
-import 'dart:convert';
 
 class Playlist extends StatefulWidget {
   static const String routeName = "Playlist";
-  final User user;
+  // final User user;
+  const Playlist({Key? key}) : super(key: key);
 
-  const Playlist({Key? key, required this.user}) : super(key: key);
+  //const Playlist({Key? key, required this.user}) : super(key: key);
 
   @override
   _PlaylistState createState() => _PlaylistState();
@@ -22,7 +17,6 @@ class Playlist extends StatefulWidget {
 
 class _PlaylistState extends State<Playlist> {
   late Future<List<PlaylistModel>> futurePlaylist;
-  int _selectedIndex = 2;
 
   @override
   void initState() {
@@ -89,36 +83,7 @@ class _PlaylistState extends State<Playlist> {
             ),
           ),
         ),
-        bottomNavigationBar: SalomonBottomBar(
-          currentIndex: _selectedIndex,
-          onTap: (index) {
-            _onItemTapped(index);
-          },
-          items: [
-            SalomonBottomBarItem(
-              icon: Icon(Icons.home_rounded),
-              title: Text("Home"),
-              selectedColor: Theme.of(context).accentColor,
-            ),
-            SalomonBottomBarItem(
-              icon: Icon(Icons.favorite_border_rounded),
-              title: Text("Likes"),
-              selectedColor: Theme.of(context).accentColor,
-            ),
-            SalomonBottomBarItem(
-              icon: Icon(Icons.queue_music_rounded),
-              title: Text("Playlist"),
-              selectedColor: Theme.of(context).accentColor,
-            ),
-          ],
-        ),
       ),
     );
-  }
-
-  void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
   }
 }

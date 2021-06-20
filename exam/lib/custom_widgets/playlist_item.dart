@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
 
 class PlaylistItem extends StatelessWidget {
   final String playlist;
   final int trackNum;
   final String image;
 
-  PlaylistItem({required this.playlist, required this.image, required this.trackNum});
+  PlaylistItem(
+      {required this.playlist, required this.image, required this.trackNum});
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +19,7 @@ class PlaylistItem extends StatelessWidget {
             width: 85.0,
             decoration: BoxDecoration(
               image: DecorationImage(
-                image: NetworkImage("https://openwhyd.org"+image),
+                image: NetworkImage("https://openwhyd.org" + image),
               ),
             ),
           ),
