@@ -5,6 +5,7 @@ import 'package:openwhyd_api_music_app/app_colors.dart';
 import 'package:openwhyd_api_music_app/custom_widgets/gradient_containers.dart';
 import 'package:openwhyd_api_music_app/custom_widgets/neumorphic_element.dart';
 import 'package:openwhyd_api_music_app/models/track_model.dart';
+import 'package:openwhyd_api_music_app/views/audio.dart';
 
 class Player extends StatefulWidget {
   final TrackModel track;
@@ -64,6 +65,10 @@ class _PlayerState extends State<Player> {
                         Icons.expand_more_rounded,
                         color: AppColors.styleColor,
                       ),
+                      onPress: () {
+                        advancedPlayer.stop();
+                        Navigator.of(context).pop();
+                      },
                     ),
                     Text(
                       "PLAYING NOW",
@@ -79,6 +84,7 @@ class _PlayerState extends State<Player> {
                         Icons.menu,
                         color: AppColors.styleColor,
                       ),
+                      onPress: () {},
                     ),
                   ],
                 ),
@@ -87,9 +93,10 @@ class _PlayerState extends State<Player> {
                 size: MediaQuery.of(context).size.width * .7,
                 borderWidth: 5,
                 image: widget.track.image,
+                onPress: () {},
               ),
               SizedBox(
-                height: 25.0,
+                height: 35.0,
               ),
               Text(
                 widget.track.trackName,
@@ -113,6 +120,12 @@ class _PlayerState extends State<Player> {
                   fontSize: 16,
                   fontWeight: FontWeight.w300,
                 ),
+              ),
+              SizedBox(
+                height: 25.0,
+              ),
+              Audio(
+                advancedPlayer: advancedPlayer,
               ),
             ],
           ),

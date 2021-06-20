@@ -16,14 +16,20 @@ class TrackModel {
   late String trackName;
   late String? userName;
   late String image;
+  late String audio;
 
-  TrackModel({required this.trackName, required this.image, this.userName});
+  TrackModel(
+      {required this.trackName,
+      required this.image,
+      required this.audio,
+      this.userName});
 
   factory TrackModel.fromJson(Map<String, dynamic> parsedjson) {
     return TrackModel(
       trackName: parsedjson['name'],
       userName: parsedjson['uNm'] ?? 'unknown',
       image: parsedjson['img'],
+      audio: parsedjson['eId'],
     );
   }
 }

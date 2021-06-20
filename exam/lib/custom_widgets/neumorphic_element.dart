@@ -7,9 +7,17 @@ class NeumorphicElement extends StatelessWidget {
   final double? borderWidth;
   final String? image;
   static const String defaultImage = "assets/defaultImage.jpg";
+  final VoidCallback onPress;
+  final bool isActive;
 
-  NeumorphicElement(
-      {required this.size, this.child, this.borderWidth, this.image});
+  NeumorphicElement({
+    required this.size,
+    required this.onPress,
+    this.child,
+    this.borderWidth,
+    this.image,
+    this.isActive = false,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -33,16 +41,6 @@ class NeumorphicElement extends StatelessWidget {
           spreadRadius: 3,
         )
       ],
-      gradient: RadialGradient(colors: [
-        Color(0xFF303030),
-        Color(0xFF303030),
-        Color(0xFF303030),
-        Color(0xFF1a1a1a),
-        // AppColors.mainColor,
-        // AppColors.mainColor,
-        // AppColors.mainColor,
-        // Color(0XFF383838),
-      ]),
     );
 
     if (image != null) {
@@ -66,12 +64,37 @@ class NeumorphicElement extends StatelessWidget {
           ]);
     }
 
+    if (isActive) {
+      boxDecoration = boxDecoration.copyWith(
+          border: Border.all(
+            color: Colors.teal[700]!,
+          ),
+          gradient: RadialGradient(colors: [
+            Colors.tealAccent[700]!,
+            Colors.tealAccent[700]!,
+            Colors.tealAccent[400]!,
+          ]));
+    } else {
+      boxDecoration = boxDecoration.copyWith(
+        gradient: RadialGradient(colors: [
+          Color(0xFF303030),
+          Color(0xFF303030),
+          Color(0xFF303030),
+          Color(0xFF1a1a1a),
+          // AppColors.mainColor,
+          // AppColors.mainColor,
+          // AppColors.mainColor,
+          // Color(0XFF383838),
+        ]),
+      );
+    }
+
     return Container(
       width: size,
       height: size,
       decoration: boxDecoration,
       child: TextButton(
-        onPressed: () {},
+        onPressed: onPress,
         child: child ?? Container(),
         style: TextButton.styleFrom(
           padding: EdgeInsets.all(0),
