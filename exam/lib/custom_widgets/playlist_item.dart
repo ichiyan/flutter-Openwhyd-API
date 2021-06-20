@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 
-class TrackListItem extends StatelessWidget {
-  final String trackName;
-  final String? userName;
+class PlaylistItem extends StatelessWidget {
+  final String playlist;
+  final int trackNum;
   final String image;
 
-  TrackListItem({required this.trackName, required this.image, this.userName});
+  PlaylistItem({required this.playlist, required this.image, required this.trackNum});
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +19,7 @@ class TrackListItem extends StatelessWidget {
             width: 85.0,
             decoration: BoxDecoration(
               image: DecorationImage(
-                image: NetworkImage(image),
+                image: NetworkImage("https://openwhyd.org"+image),
               ),
             ),
           ),
@@ -30,7 +31,7 @@ class TrackListItem extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  trackName,
+                  playlist,
                   style: TextStyle(
                     fontSize: 14.0,
                     fontWeight: FontWeight.w600,
@@ -39,12 +40,23 @@ class TrackListItem extends StatelessWidget {
                 SizedBox(
                   height: 5.0,
                 ),
-                Text(
-                  userName ?? 'unknown',
-                  style: TextStyle(
-                    color: Colors.grey,
-                    fontSize: 14.0,
-                  ),
+                Row(
+                  children: [
+                    Text(
+                      "Tracks: ",
+                      style: TextStyle(
+                        color: Colors.grey,
+                        fontSize: 14.0,
+                      ),
+                    ),
+                    Text(
+                      trackNum.toString(),
+                      style: TextStyle(
+                        color: Colors.grey,
+                        fontSize: 14.0,
+                      ),
+                    ),
+                  ],
                 ),
               ],
             ),

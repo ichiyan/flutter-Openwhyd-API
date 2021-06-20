@@ -1,33 +1,34 @@
 import 'package:flutter/material.dart';
 import 'package:openwhyd_api_music_app/api/openwhyd.dart';
+import 'package:openwhyd_api_music_app/custom_widgets/playlist_item.dart';
+import 'package:openwhyd_api_music_app/models/playlist_model.dart';
 import 'package:openwhyd_api_music_app/models/user_model.dart';
-import 'package:openwhyd_api_music_app/views/registration.dart';
+import 'package:openwhyd_api_music_app/views/Registration.dart';
 import 'package:openwhyd_api_music_app/views/player.dart';
-import 'package:openwhyd_api_music_app/widgets/logout_button.dart';
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
 import 'package:openwhyd_api_music_app/custom_widgets/gradient_containers.dart';
-import 'package:openwhyd_api_music_app/custom_widgets/track_list_item.dart';
-import 'package:openwhyd_api_music_app/models/track_model.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
-class Home extends StatefulWidget {
-  static const String routeName = "home";
+class Playlist extends StatefulWidget {
+  static const String routeName = "Playlist";
   final User user;
-  const Home({Key? key, required this.user}) : super(key: key);
+
+  const Playlist({Key? key, required this.user}) : super(key: key);
 
   @override
-  _HomeState createState() => _HomeState();
+  _PlaylistState createState() => _PlaylistState();
 }
 
-class _HomeState extends State<Home> {
-  late Future<List<TrackModel>> futureTrack;
-  int _selectedIndex = 0;
+class _PlaylistState extends State<Playlist> {
+  late Future<List<PlaylistModel>> futurePlaylist;
+  int _selectedIndex = 2;
 
   @override
   void initState() {
     super.initState();
-    futureTrack = fetchHotTracks();
+    futurePlaylist = fetchPlaylist();
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -41,44 +42,38 @@ class _HomeState extends State<Home> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Padding(
-                      padding: EdgeInsets.symmetric(vertical: 20.0),
-                      child: Text(
-                        "Hot Tracks",
-                        style: TextStyle(
-                          fontSize: 18.0,
-                          fontWeight: FontWeight.bold,
-                          color: Theme.of(context).accentColor,
-                        ),
-                      ),
+                Padding(
+                  padding: EdgeInsets.symmetric(vertical: 20.0),
+                  child: Text(
+                    "Playlist",
+                    style: TextStyle(
+                      fontSize: 18.0,
+                      fontWeight: FontWeight.bold,
+                      color: Theme.of(context).accentColor,
                     ),
-                    LogoutButton(),
-                  ],
+                  ),
                 ),
                 Expanded(
-                  child: FutureBuilder<List<TrackModel>>(
-                    future: futureTrack,
+                  child: FutureBuilder<List<PlaylistModel>>(
+                    future: futurePlaylist,
                     builder: (BuildContext context,
-                        AsyncSnapshot<List<TrackModel>> snapshot) {
+                        AsyncSnapshot<List<PlaylistModel>> snapshot) {
                       if (snapshot.hasData) {
                         return ListView.builder(
                           itemCount: snapshot.data!.length,
                           itemBuilder: (context, index) => GestureDetector(
-                            child: TrackListItem(
-                              trackName: snapshot.data![index].trackName,
+                            child: PlaylistItem(
+                              playlist: snapshot.data![index].playlist,
                               image: snapshot.data![index].image,
-                              userName: snapshot.data![index].userName,
+                              trackNum: snapshot.data![index].trackNum,
                             ),
                             onTap: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) =>
-                                        Player(track: snapshot.data![index])),
-                              );
+                              // Navigator.push(
+                              //   context,
+                              //   MaterialPageRoute(
+                              //       builder: (context) =>
+                              //           Player(track: snapshot.data![index])),
+                              // );
                             },
                           ),
                         );

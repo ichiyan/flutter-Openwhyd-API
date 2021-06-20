@@ -1,21 +1,21 @@
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:openwhyd_api_music_app/mixins/validation_mixin.dart';
 import 'package:http/http.dart' as http;
 import 'package:crypto/crypto.dart' as crypto;
 import 'package:openwhyd_api_music_app/models/user_model.dart';
 import 'package:openwhyd_api_music_app/views/home.dart';
+import 'package:openwhyd_api_music_app/views/playlist.dart';
 import 'package:openwhyd_api_music_app/widgets/custom_text_form_field.dart';
+import 'package:openwhyd_api_music_app/widgets/forgot_password.dart';
 import 'package:openwhyd_api_music_app/widgets/password_field.dart';
 import 'package:openwhyd_api_music_app/widgets/primary_button.dart';
 import 'package:openwhyd_api_music_app/widgets/secondary_button.dart';
-import 'package:openwhyd_api_music_app/widgets/forgot_password.dart';
 
 import 'registration.dart';
 
 class Login extends StatefulWidget {
-  static const String routeName = "login";
+  static const String routeName = "Login";
   @override
   _LoginState createState() => _LoginState();
 }
@@ -88,8 +88,6 @@ class _LoginState extends State<Login> with ValidationMixin {
                             print(error);
                           });
                         }
-
-
                         formKey.currentState!.reset();
                       },
                     ),
@@ -157,6 +155,12 @@ class _LoginState extends State<Login> with ValidationMixin {
   }
 
   void navigateToRegistration(BuildContext context) {
-    Navigator.pushNamed(context, Registration.routeName);
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) {
+        return Registration();
+      }),
+    );
+    //Navigator.pushNamed(context, Registration.routeName);
   }
 }
