@@ -21,6 +21,7 @@ class CustomTextFormField extends StatelessWidget {
       validator: validation,
       controller: textEditingController,
       keyboardType: textInputType,
+      autofocus: true,
       decoration: InputDecoration(
         prefixIcon: Container(
           padding: EdgeInsets.symmetric(horizontal: 15.0),
@@ -32,7 +33,6 @@ class CustomTextFormField extends StatelessWidget {
           borderRadius: BorderRadius.all(Radius.circular(30.0)),
         ),
       ),
-      autofocus: true,
     );
   }
 }
