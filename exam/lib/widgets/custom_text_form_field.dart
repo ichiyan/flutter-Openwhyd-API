@@ -21,6 +21,7 @@ class CustomTextFormField extends StatelessWidget {
       validator: validation,
       controller: textEditingController,
       keyboardType: textInputType,
+      autofocus: true,
       decoration: InputDecoration(
         prefixIcon: Container(
           padding: EdgeInsets.symmetric(horizontal: 15.0),

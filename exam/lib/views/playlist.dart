@@ -4,6 +4,8 @@ import 'package:openwhyd_api_music_app/custom_widgets/playlist_item.dart';
 import 'package:openwhyd_api_music_app/models/playlist_model.dart';
 import 'package:openwhyd_api_music_app/models/user_model.dart';
 import 'package:openwhyd_api_music_app/views/Registration.dart';
+import 'package:openwhyd_api_music_app/views/home.dart';
+import 'package:openwhyd_api_music_app/views/likes.dart';
 import 'package:openwhyd_api_music_app/views/player.dart';
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
 import 'package:openwhyd_api_music_app/custom_widgets/gradient_containers.dart';
@@ -120,5 +122,29 @@ class _PlaylistState extends State<Playlist> {
     setState(() {
       _selectedIndex = index;
     });
+    if(index == 0){
+      navigateToHome(context);
+    }
+    if(index == 1){
+      navigateToLike(context);
+    }
+  }
+
+  void navigateToHome(BuildContext context) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) {
+        return Home(user: User(email: "annethere_paulo@yahoo.com", password: "7300227paulo"));
+      }),
+    );
+  }
+
+  void navigateToLike(BuildContext context) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) {
+        return Likes();
+      }),
+    );
   }
 }

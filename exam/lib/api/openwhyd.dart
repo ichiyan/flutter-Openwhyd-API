@@ -27,7 +27,7 @@ Future<List<PlaylistModel>> fetchPlaylist() async {
   if (result.statusCode == 200) {
 
     var res = jsonDecode(result.body);
-    var findURL = "https://openwhyd.org/u/" + res["id"] + "/playlists?format=json";
+    var findURL = "https://openwhyd.org/u/" + res["id"].toString() + "/playlists?format=json";
 
     final response =
     await http.get(Uri.parse(findURL));

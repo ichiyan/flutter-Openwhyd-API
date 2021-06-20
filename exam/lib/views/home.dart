@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:openwhyd_api_music_app/api/openwhyd.dart';
 import 'package:openwhyd_api_music_app/models/user_model.dart';
+import 'package:openwhyd_api_music_app/views/likes.dart';
+import 'package:openwhyd_api_music_app/views/playlist.dart';
 import 'package:openwhyd_api_music_app/views/registration.dart';
 import 'package:openwhyd_api_music_app/views/player.dart';
 import 'package:openwhyd_api_music_app/widgets/logout_button.dart';
@@ -125,5 +127,28 @@ class _HomeState extends State<Home> {
     setState(() {
       _selectedIndex = index;
     });
+    if(index == 1){
+      navigateToLike(context);
+    }
+    if(index == 2){
+      navigateToPlaylist(context);
+    }
+  }
+
+  void navigateToPlaylist(BuildContext context) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) {
+      return Playlist(user: User(email: "annethere_paulo@yahoo.com", password: "7300227paulo"));
+    }),);
+  }
+
+  void navigateToLike(BuildContext context) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) {
+        return Likes();
+      }),
+    );
   }
 }
