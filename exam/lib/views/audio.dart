@@ -5,8 +5,10 @@ import 'package:openwhyd_api_music_app/custom_widgets/neumorphic_element.dart';
 
 class Audio extends StatefulWidget {
   final AudioPlayer advancedPlayer;
-  //final String audioPath;
-  const Audio({Key? key, required this.advancedPlayer}) : super(key: key);
+  final String audioPath;
+  // const Audio({Key? key, required this.advancedPlayer}) : super(key: key);
+  const Audio({Key? key, required this.advancedPlayer, required this.audioPath})
+      : super(key: key);
 
   @override
   _AudioState createState() => _AudioState();
@@ -15,8 +17,8 @@ class Audio extends StatefulWidget {
 class _AudioState extends State<Audio> {
   Duration _duration = new Duration();
   Duration _position = new Duration();
-  final String path =
-      "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-13.mp3";
+  // final String path =
+  //     "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-13.mp3";
   bool isPlaying = false;
   bool isPaused = false;
   bool isRepeat = false;
@@ -39,8 +41,8 @@ class _AudioState extends State<Audio> {
         _position = p;
       });
     });
-    // this.widget.advancedPlayer.setUrl(this.widget.audioPath);
-    this.widget.advancedPlayer.setUrl(path);
+    this.widget.advancedPlayer.play(this.widget.audioPath);
+    //this.widget.advancedPlayer.setUrl(path);
     this.widget.advancedPlayer.onPlayerCompletion.listen((event) {
       setState(() {
         _position = Duration(seconds: 0);
@@ -65,7 +67,8 @@ class _AudioState extends State<Audio> {
       onPress: () {
         // this.widget.advancedPlayer.play(this.widget.audioPath);
         if (isPlaying == false) {
-          this.widget.advancedPlayer.play(path);
+          this.widget.advancedPlayer.play(this.widget.audioPath);
+          // this.widget.advancedPlayer.play(path);
           setState(() {
             isPlaying = true;
           });

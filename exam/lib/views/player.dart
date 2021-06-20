@@ -126,6 +126,7 @@ class _PlayerState extends State<Player> {
               ),
               Audio(
                 advancedPlayer: advancedPlayer,
+                audioPath: widget.track.audio,
               ),
             ],
           ),

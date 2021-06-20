@@ -12,7 +12,11 @@ import 'package:openwhyd_api_music_app/models/track_model.dart';
 class Home extends StatefulWidget {
   static const String routeName = "home";
   final User user;
-  const Home({Key? key, required this.user}) : super(key: key);
+  // const Home({Key? key}) : super(key: key);
+  const Home({
+    Key? key,
+    required this.user,
+  }) : super(key: key);
 
   @override
   _HomeState createState() => _HomeState();
@@ -27,7 +31,6 @@ class _HomeState extends State<Home> {
     super.initState();
     futureTrack = fetchHotTracks();
   }
-
 
   @override
   Widget build(BuildContext context) {

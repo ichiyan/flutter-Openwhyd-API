@@ -72,16 +72,24 @@ class _LoginState extends State<Login> with ValidationMixin {
                       onPress: () {
                         if (formKey.currentState!.validate() && !invalid) {
                           final res = signIn(emailTextController.text,
-                              passwordTextController.text)
+                                  passwordTextController.text)
                               .then((data) {
                             print('Logging In...');
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
+<<<<<<< Updated upstream
                                     builder: (context) => Home(user: User(email: emailTextController.text, password: passwordTextController.text))
                                 ));
                             invalid = false;
                             formKey.currentState!.reset();
+=======
+                                    builder: (context) => Home(
+                                        user: User(
+                                            email: emailTextController.text,
+                                            password:
+                                                passwordTextController.text))));
+>>>>>>> Stashed changes
                           }, onError: (error) {
                               err = error;
                               invalid = true;
@@ -97,6 +105,11 @@ class _LoginState extends State<Login> with ValidationMixin {
                               // ));
                           });
                         }
+<<<<<<< Updated upstream
+=======
+
+                        formKey.currentState!.reset();
+>>>>>>> Stashed changes
                       },
                     ),
                     SizedBox(
@@ -126,7 +139,8 @@ class _LoginState extends State<Login> with ValidationMixin {
   Future<dynamic> signIn(String email, String password) async {
     print(password);
     password = crypto.md5.convert(utf8.encode(password)).toString();
-    final res = await http.get(Uri.parse('https://openwhyd.org/login?action=login&ajax=true&email=$email&md5=$password'));
+    final res = await http.get(Uri.parse(
+        'https://openwhyd.org/login?action=login&ajax=true&email=$email&md5=$password'));
 
     print(res.statusCode);
     print(res.request);
