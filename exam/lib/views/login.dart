@@ -26,7 +26,7 @@ class _LoginState extends State<Login> with ValidationMixin {
   final TextEditingController passwordTextController = TextEditingController();
   bool obscureText = true;
   bool invalid = false;
-  late final err;
+  String? err;
 
   @override
   Widget build(BuildContext context) {
@@ -70,7 +70,7 @@ class _LoginState extends State<Login> with ValidationMixin {
                       text: "Login",
                       iconData: Icons.login,
                       onPress: () {
-                        if (formKey.currentState!.validate()) {
+                        if (formKey.currentState!.validate() && !invalid) {
                           final res = signIn(emailTextController.text,
                               passwordTextController.text)
                               .then((data) {
@@ -80,17 +80,23 @@ class _LoginState extends State<Login> with ValidationMixin {
                                 MaterialPageRoute(
                                     builder: (context) => Home(user: User(email: emailTextController.text, password: passwordTextController.text))
                                 ));
+                            invalid = false;
+                            formKey.currentState!.reset();
                           }, onError: (error) {
-                            setState(() {
-                              invalid = true;
                               err = error;
-                            });
-                            print(error);
+                              invalid = true;
+                              print(error);
+                              // ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                              //   content: Text('Incorrect password or email'),
+                              //   action: SnackBarAction(
+                              //     label: 'Undo',
+                              //     onPressed: () {
+                              //       // Some code to undo the change.
+                              //     },
+                              //   ),
+                              // ));
                           });
                         }
-
-
-                        formKey.currentState!.reset();
                       },
                     ),
                     SizedBox(
