@@ -1,4 +1,4 @@
-# exam
+# openwhyd_api_music_app
 
 A new Flutter project.
 

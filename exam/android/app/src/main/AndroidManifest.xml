@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.exam">
+    package="com.example.openwhyd_api_music_app">
    <application
-        android:label="exam"
+        android:label="openwhyd_api_music_app"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"
@@ -38,5 +38,4 @@
             android:name="flutterEmbedding"
             android:value="2" />
     </application>
-    <uses-permission android:name="android.permission.INTERNET" />
 </manifest>

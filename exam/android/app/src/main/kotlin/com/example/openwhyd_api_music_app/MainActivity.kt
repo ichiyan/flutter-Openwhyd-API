@@ -1,4 +1,4 @@
-package com.example.exam
+package com.example.openwhyd_api_music_app
 
 import io.flutter.embedding.android.FlutterActivity
 

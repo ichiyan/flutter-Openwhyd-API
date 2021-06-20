@@ -1,6 +1,6 @@
 {
-    "name": "exam",
-    "short_name": "exam",
+    "name": "openwhyd_api_music_app",
+    "short_name": "openwhyd_api_music_app",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

@@ -1,18 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:openwhyd_api_music_app/views/player.dart';
 
-import 'track-list.dart';
+import 'views/home.dart';
 
-void main() => runApp(MyApp());
-
-class MyApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Rest API Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: TrackList(),
-    );
-  }
+void main() {
+  Paint.enableDithering = true;
+  runApp(MaterialApp(
+    theme: ThemeData(
+      brightness: Brightness.dark,
+    ),
+    home: Home(),
+  ));
 }
