@@ -1,15 +1,16 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:openwhyd_api_music_app/mixins/ValidationMixin.dart';
-import 'package:openwhyd_api_music_app/widgets/CustomTextFormField.dart';
-import 'package:openwhyd_api_music_app/widgets/PasswordField.dart';
-import 'package:openwhyd_api_music_app/widgets/PrimaryButton.dart';
-import 'package:openwhyd_api_music_app/widgets/SecondaryButton.dart';
+import 'package:openwhyd_api_music_app/mixins/validation_mixin.dart';
+import 'package:openwhyd_api_music_app/models/user_model.dart';
+import 'package:openwhyd_api_music_app/widgets/custom_text_form_field.dart';
+import 'package:openwhyd_api_music_app/widgets/password_field.dart';
+import 'package:openwhyd_api_music_app/widgets/primary_button.dart';
+import 'package:openwhyd_api_music_app/widgets/secondary_button.dart';
 import 'package:http/http.dart' as http;
 import 'package:crypto/crypto.dart' as crypto;
 
-import 'Login.dart';
+import 'login.dart';
 
 class Registration extends StatefulWidget {
   static const String routeName = "registration";
@@ -99,23 +100,6 @@ class _RegistrationState extends State<Registration> with ValidationMixin {
                         ),
                       ],
                     ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        SecondaryButton(
-                          text: "Post Something",
-                          onPress: () {
-                            Future<Album> album = createAlbum("CREATE TEST");
-                            print(album);
-                            album.then((value) {print(value.title);});
-
-                            album = fetchAlbum();
-                            print(album);
-                            album.then((value) {print(value.title);});
-                          },
-                        ),
-                      ],
-                    ),
                   ],
                 ),
               ),
@@ -154,15 +138,6 @@ class _RegistrationState extends State<Registration> with ValidationMixin {
   }
 }
 
-class User {
-  final String? name;
-  final String email;
-  final String password;
-
-  User({this.name, required this.email, required this.password});
-
-  factory User.fromJson(Map<String, dynamic> json) => User(name: json['name']? json['name']: "", email: json['email'], password: json['password']);
-}
 
 Future<User> createUser(String name, String email, String password) async{
   final response = await http.post(
@@ -210,49 +185,3 @@ Future<User> createUser(String name, String email, String password) async{
   }
 }
 
-class Album {
-  final int id;
-  final String title;
-
-  Album({required this.id, required this.title});
-
-  factory Album.fromJson(Map<String, dynamic> json) {
-    return Album(
-      id: json['id'],
-      title: json['title'],
-    );
-  }
-}
-
-Future<Album> createAlbum(String title) async {
-  final response = await http.post(
-    Uri.parse('https://jsonplaceholder.typicode.com/albums'),
-    headers: <String, String>{
-      'Content-Type': 'application/json; charset=UTF-8',
-    },
-    body: jsonEncode(<String, String>{
-      'title': title,
-    }),
-  );
-
-  if (response.statusCode == 201) {
-    return Album.fromJson(jsonDecode(response.body));
-  } else {
-    throw Exception('Failed to create album.');
-  }
-}
-
-Future<Album> fetchAlbum() async {
-  final response =
-  await http.get(Uri.parse('https://jsonplaceholder.typicode.com/albums/1'));
-
-  if (response.statusCode == 200) {
-    // If the server did return a 200 OK response,
-    // then parse the JSON.
-    return Album.fromJson(jsonDecode(response.body));
-  } else {
-    // If the server did not return a 200 OK response,
-    // then throw an exception.
-    throw Exception('Failed to load album');
-  }
-}

@@ -1,16 +1,18 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:openwhyd_api_music_app/mixins/ValidationMixin.dart';
+import 'package:openwhyd_api_music_app/mixins/validation_mixin.dart';
 import 'package:http/http.dart' as http;
 import 'package:crypto/crypto.dart' as crypto;
+import 'package:openwhyd_api_music_app/models/user_model.dart';
 import 'package:openwhyd_api_music_app/views/home.dart';
-import 'package:openwhyd_api_music_app/widgets/CustomTextFormField.dart';
-import 'package:openwhyd_api_music_app/widgets/PasswordField.dart';
-import 'package:openwhyd_api_music_app/widgets/PrimaryButton.dart';
-import 'package:openwhyd_api_music_app/widgets/SecondaryButton.dart';
+import 'package:openwhyd_api_music_app/widgets/custom_text_form_field.dart';
+import 'package:openwhyd_api_music_app/widgets/password_field.dart';
+import 'package:openwhyd_api_music_app/widgets/primary_button.dart';
+import 'package:openwhyd_api_music_app/widgets/secondary_button.dart';
+import 'package:openwhyd_api_music_app/widgets/forgot_password.dart';
 
-import 'Registration.dart';
+import 'registration.dart';
 
 class Login extends StatefulWidget {
   static const String routeName = "login";
@@ -23,6 +25,8 @@ class _LoginState extends State<Login> with ValidationMixin {
   final TextEditingController emailTextController = TextEditingController();
   final TextEditingController passwordTextController = TextEditingController();
   bool obscureText = true;
+  bool invalid = false;
+  late final err;
 
   @override
   Widget build(BuildContext context) {
@@ -66,27 +70,27 @@ class _LoginState extends State<Login> with ValidationMixin {
                       text: "Login",
                       iconData: Icons.login,
                       onPress: () {
-                        // Navigator.pushReplacementNamed(context, Home.routeName, arguments: User(email: emailTextController.text, password: passwordTextController.text));
-                        // Navigator.push(
-                        //     context,
-                        //     MaterialPageRoute(
-                        //       builder: (context) => Home(user: User(email: emailTextController.text, password: passwordTextController.text))
-                        //     ));
-
-                        final res = signIn(emailTextController.text,
-                            passwordTextController.text)
-                            .then((data) {
-                              print('Loggin In...');
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => Home(user: User(email: emailTextController.text, password: passwordTextController.text))
-                                  ));
-                            }, onError: (error) {
-                              print("Error here");
-                              print(error);
+                        if (formKey.currentState!.validate()) {
+                          final res = signIn(emailTextController.text,
+                              passwordTextController.text)
+                              .then((data) {
+                            print('Logging In...');
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => Home(user: User(email: emailTextController.text, password: passwordTextController.text))
+                                ));
+                          }, onError: (error) {
+                            setState(() {
+                              invalid = true;
+                              err = error;
                             });
+                            print(error);
+                          });
+                        }
 
+
+                        formKey.currentState!.reset();
                       },
                     ),
                     SizedBox(
@@ -100,8 +104,7 @@ class _LoginState extends State<Login> with ValidationMixin {
                             onPress: () {
                               navigateToRegistration(context);
                             }),
-                        SecondaryButton(
-                            text: "Forgot Password?", onPress: () {}),
+                        ForgotPassword(),
                       ],
                     ),
                   ],
@@ -115,6 +118,7 @@ class _LoginState extends State<Login> with ValidationMixin {
   }
 
   Future<dynamic> signIn(String email, String password) async {
+    print(password);
     password = crypto.md5.convert(utf8.encode(password)).toString();
     final res = await http.get(Uri.parse('https://openwhyd.org/login?action=login&ajax=true&email=$email&md5=$password'));
 

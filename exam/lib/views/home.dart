@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:openwhyd_api_music_app/api/openwhyd.dart';
-import 'package:openwhyd_api_music_app/views/Registration.dart';
+import 'package:openwhyd_api_music_app/models/user_model.dart';
+import 'package:openwhyd_api_music_app/views/registration.dart';
 import 'package:openwhyd_api_music_app/views/player.dart';
+import 'package:openwhyd_api_music_app/widgets/logout_button.dart';
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
 import 'package:openwhyd_api_music_app/custom_widgets/gradient_containers.dart';
 import 'package:openwhyd_api_music_app/custom_widgets/track_list_item.dart';
@@ -39,16 +41,22 @@ class _HomeState extends State<Home> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Padding(
-                  padding: EdgeInsets.symmetric(vertical: 20.0),
-                  child: Text(
-                    "Hot Tracks",
-                    style: TextStyle(
-                      fontSize: 18.0,
-                      fontWeight: FontWeight.bold,
-                      color: Theme.of(context).accentColor,
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Padding(
+                      padding: EdgeInsets.symmetric(vertical: 20.0),
+                      child: Text(
+                        "Hot Tracks",
+                        style: TextStyle(
+                          fontSize: 18.0,
+                          fontWeight: FontWeight.bold,
+                          color: Theme.of(context).accentColor,
+                        ),
+                      ),
                     ),
-                  ),
+                    LogoutButton(),
+                  ],
                 ),
                 Expanded(
                   child: FutureBuilder<List<TrackModel>>(

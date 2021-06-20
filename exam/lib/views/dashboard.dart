@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:openwhyd_api_music_app/models/user_model.dart';
 
-import 'Registration.dart';
+import 'registration.dart';
 
 class Dashboard extends StatelessWidget {
   static const String routeName = "Dashboard";
