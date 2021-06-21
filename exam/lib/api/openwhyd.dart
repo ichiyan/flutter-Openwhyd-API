@@ -35,7 +35,13 @@ Future<List<PlaylistModel>> fetchPlaylist() async {
 
   if (result.statusCode == 200) {
     var res = jsonDecode(result.body);
+<<<<<<< Updated upstream
     var findURL = "https://openwhyd.org/u/" + res["id"].toString() + "/playlists?format=json";
+=======
+    var findURL = "https://openwhyd.org/u/" +
+        res["id"].toString() +
+        "/playlists?format=json";
+>>>>>>> Stashed changes
 
     final response = await http.get(Uri.parse(findURL));
     if (response.statusCode == 200) {

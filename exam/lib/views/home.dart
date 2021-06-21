@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:openwhyd_api_music_app/api/openwhyd.dart';
 import 'package:openwhyd_api_music_app/models/playlist_model.dart';
+<<<<<<< Updated upstream
 import 'package:openwhyd_api_music_app/views/likes.dart';
 import 'package:openwhyd_api_music_app/views/playlist.dart';
+=======
+>>>>>>> Stashed changes
 import 'package:openwhyd_api_music_app/views/player.dart';
 import 'package:openwhyd_api_music_app/widgets/logout_button.dart';
 import 'package:openwhyd_api_music_app/custom_widgets/gradient_containers.dart';

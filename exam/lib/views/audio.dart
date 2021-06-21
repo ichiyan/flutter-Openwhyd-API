@@ -2,6 +2,7 @@ import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:openwhyd_api_music_app/app_colors.dart';
 import 'package:openwhyd_api_music_app/custom_widgets/neumorphic_element.dart';
+import 'package:youtube_explode_dart/youtube_explode_dart.dart';
 
 class Audio extends StatefulWidget {
   final AudioPlayer advancedPlayer;
@@ -9,6 +10,7 @@ class Audio extends StatefulWidget {
   // const Audio({Key? key, required this.advancedPlayer}) : super(key: key);
   const Audio({Key? key, required this.advancedPlayer, required this.audioPath})
       : super(key: key);
+  //const Audio({Key? key, required this.advancedPlayer}) : super(key: key);
 
   @override
   _AudioState createState() => _AudioState();
@@ -41,8 +43,16 @@ class _AudioState extends State<Audio> {
         _position = p;
       });
     });
-    this.widget.advancedPlayer.play(this.widget.audioPath);
+
     //this.widget.advancedPlayer.setUrl(path);
+    //var yt = YoutubeExplode();
+    //var manifest = yt.videos.streamsClient.getManifest('Dpp1sIL1m5Q');
+    // var streamInfo = StreamManifest().audioOnly.withHighestBitrate();
+    // var stream = yt.videos.streamsClient.get(streamInfo);
+    // print(manifest);
+
+    this.widget.advancedPlayer.play(this.widget.audioPath);
+
     this.widget.advancedPlayer.onPlayerCompletion.listen((event) {
       setState(() {
         _position = Duration(seconds: 0);
@@ -65,7 +75,7 @@ class _AudioState extends State<Audio> {
       ),
       isActive: true,
       onPress: () {
-        // this.widget.advancedPlayer.play(this.widget.audioPath);
+        this.widget.advancedPlayer.play(this.widget.audioPath);
         if (isPlaying == false) {
           this.widget.advancedPlayer.play(this.widget.audioPath);
           // this.widget.advancedPlayer.play(path);

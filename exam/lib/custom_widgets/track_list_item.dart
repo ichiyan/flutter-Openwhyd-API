@@ -17,6 +17,7 @@ class TrackListItem extends StatelessWidget {
             height: 85.0,
             width: 85.0,
             decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(16.0),
               image: DecorationImage(
                 image: NetworkImage(image),
               ),
