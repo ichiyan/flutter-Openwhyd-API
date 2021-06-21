@@ -137,21 +137,4 @@ class _HomeState extends State<Home> {
       ),
     );
   }
-
-  void navigateToPlaylist(BuildContext context) {
-    Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) {
-      return Playlist();
-    }),);
-  }
-
-  void navigateToLike(BuildContext context) {
-    Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) {
-        return Likes();
-      }),
-    );
-  }
 }

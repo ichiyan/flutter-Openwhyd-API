@@ -8,6 +8,5 @@ void main() {
       brightness: Brightness.dark,
     ),
     home: Login(),
-    //Playlist(user: User(email: "annethere_paulo@yahoo.com", password: "7300227paulo")),
   ));
 }

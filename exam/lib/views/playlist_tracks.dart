@@ -104,22 +104,4 @@ class _PlaylistTracksState extends State<PlaylistTracks> {
       ),
     );
   }
-
-  void navigateToHome(BuildContext context) {
-    Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) {
-        return Home();
-      }),
-    );
-  }
-
-  void navigateToLike(BuildContext context) {
-    Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) {
-        return Likes();
-      }),
-    );
-  }
 }

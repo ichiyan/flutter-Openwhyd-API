@@ -1,8 +1,11 @@
 import 'dart:convert';
+import 'dart:io';
 import 'package:http/http.dart' as http;
 import 'package:openwhyd_api_music_app/models/playlist_model.dart';
 import 'package:openwhyd_api_music_app/models/playlist_tracks_model.dart';
 import 'package:openwhyd_api_music_app/models/track_model.dart';
+import 'package:webdriver/sync_io.dart';
+import 'package:openwhyd_api_music_app/globals.dart' as globals;
 
 // Future<List<dynamic>> getHotTracks() async {
 //   var response = await http.get(Uri.parse(apiUrl));
@@ -21,9 +24,14 @@ Future<List<TrackModel>> fetchHotTracks() async {
 }
 
 Future<List<PlaylistModel>> fetchPlaylist() async {
+  //Cookie chip = getCookie("whydSid");
+
+  //, headers: {HttpHeaders.authorizationHeader: chip}
+  print(globals.id);
+  var findUser = "https://openwhyd.org/api/user?id=" + globals.id;
+
   final result = await http.get(
-      Uri.parse("https://openwhyd.org/api/user?id=60cf20eb08ced3543d81c3d2"));
-  //REMOVE THE ID PARAMETER ONCE LOGIN HAS BEEN FIXED
+      Uri.parse(findUser));
 
   if (result.statusCode == 200) {
     var res = jsonDecode(result.body);
@@ -41,10 +49,10 @@ Future<List<PlaylistModel>> fetchPlaylist() async {
 }
 
 Future<List<PlaylistTracksModel>> fetchPlaylistTracks(int num) async {
-  final result =
-  await http.get(
-      Uri.parse("https://openwhyd.org/api/user?id=60cf20eb08ced3543d81c3d2"));
-  //REMOVE THE ID PARAMETER ONCE LOGIN HAS BEEN FIXED
+  var findUser = "https://openwhyd.org/api/user?id=" + globals.id;
+
+  final result = await http.get(
+      Uri.parse(findUser));
 
   if (result.statusCode == 200) {
     var res = jsonDecode(result.body);
