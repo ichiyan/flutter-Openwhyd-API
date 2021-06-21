@@ -1,3 +1,5 @@
+import 'dart:convert';
+import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:openwhyd_api_music_app/api/openwhyd.dart';
 import 'package:openwhyd_api_music_app/custom_widgets/playlist_item.dart';
@@ -19,6 +21,9 @@ class Playlist extends StatefulWidget {
 
 class _PlaylistState extends State<Playlist> {
   late Future<List<PlaylistModel>> futurePlaylist;
+  final TextEditingController textFieldController = TextEditingController();
+  late var valueText;
+  late var codeDialog;
 
   @override
   void initState() {
@@ -32,6 +37,12 @@ class _PlaylistState extends State<Playlist> {
       opacity: true,
       child: Scaffold(
         backgroundColor: Colors.transparent,
+        floatingActionButton: FloatingActionButton(
+            onPressed: (){
+              playlistForm(context);
+            },
+            child: Icon(Icons.add, size: 40.0,),
+        ),
         body: SafeArea(
           child: Padding(
             padding: EdgeInsets.symmetric(horizontal: 20.0),
@@ -89,7 +100,6 @@ class _PlaylistState extends State<Playlist> {
       ),
     );
   }
-}
 
   void navigateToPlaylistTracks(BuildContext context, int num) {
     Navigator.push(
@@ -99,3 +109,68 @@ class _PlaylistState extends State<Playlist> {
       }),
     );
   }
+
+  Future<void> playlistForm (BuildContext context) async {
+    return showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            title: Text('Playlist name'),
+            content: TextField(
+              onChanged: (value) {
+                setState(() {
+                  valueText = value;
+                });
+              },
+              controller: textFieldController,
+              decoration: InputDecoration(hintText: "Input name of new playlist"),
+            ),
+            actions: <Widget>[
+              TextButton(
+                style: TextButton.styleFrom(
+                  backgroundColor: Colors.red,
+                  primary: Colors.white,
+                ),
+                child: Text('CANCEL'),
+                onPressed: () {
+                  setState(() {
+                    Navigator.pop(context);
+                  });
+                },
+              ),
+              TextButton(
+                child: Text('CREATE'),
+                style: TextButton.styleFrom(
+                  backgroundColor: Colors.teal,
+                  primary: Colors.white,
+                ),
+                onPressed: () {
+                  setState(() {
+                    createPlaylist(valueText);
+                    Navigator.pop(context);
+                  });
+                },
+              ),
+
+            ],
+          );
+        });
+  }
+
+  Future<void> createPlaylist(String value) async {
+    final response = await http.post(
+      Uri.parse('https://openwhyd.org/api/playlist'),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+        "Accept": "application/json",
+        "followRedirects": "false",
+      },
+      body: jsonEncode(<String, String>{
+        'action': "create",
+        'name': value,
+      }),
+    );
+  }
+
+} //build
+

@@ -7,7 +7,7 @@ class PlaylistTracksList {
 
   factory PlaylistTracksList.fromJson(var parsedJson) {
     List<TrackModel> allPlaylists = new List.empty(growable: true);
-    for (var i = 0; i < parsedJson.length; i++) {
+    for(var i=0; i<parsedJson.length; i++){
       var object = parsedJson[i];
       TrackModel newPlaylist = new TrackModel(
         trackName: object["name"],
