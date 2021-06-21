@@ -23,18 +23,17 @@ Future<List<TrackModel>> fetchHotTracks() async {
   }
 }
 
-Future<List<PlaylistTracksModel>> fetchLikedTracks() async {
+Future<List<TrackModel>> fetchLikedTracks() async {
   var findUser = "https://openwhyd.org/api/user?id=" + globals.id;
 
-  final result = await http.get(
-      Uri.parse(findUser));
+  final result = await http.get(Uri.parse(findUser));
 
   if (result.statusCode == 200) {
     var res = jsonDecode(result.body);
-    var findURL = "https://openwhyd.org/u/" + res["id"].toString() + "/likes?format=json";
+    var findURL =
+        "https://openwhyd.org/u/" + res["id"].toString() + "/likes?format=json";
 
-    final response =
-    await http.get(Uri.parse(findURL));
+    final response = await http.get(Uri.parse(findURL));
     if (response.statusCode == 200) {
       return PlaylistTracksList.fromJson(jsonDecode(response.body)).song;
     } else {

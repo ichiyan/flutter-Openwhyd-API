@@ -2,9 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:openwhyd_api_music_app/api/openwhyd.dart';
 import 'package:openwhyd_api_music_app/custom_widgets/gradient_containers.dart';
 import 'package:openwhyd_api_music_app/custom_widgets/playlist_tracks_item.dart';
-import 'package:openwhyd_api_music_app/custom_widgets/track_list_item.dart';
-import 'package:openwhyd_api_music_app/models/playlist_model.dart';
-import 'package:openwhyd_api_music_app/models/playlist_tracks_model.dart';
 import 'package:openwhyd_api_music_app/models/track_model.dart';
 import 'package:openwhyd_api_music_app/views/player.dart';
 import 'package:openwhyd_api_music_app/widgets/logout_button.dart';
@@ -18,7 +15,7 @@ class Likes extends StatefulWidget {
 }
 
 class _LikesState extends State<Likes> {
-  late Future<List<PlaylistTracksModel>> futureTrack;
+  late Future<List<TrackModel>> futureTrack;
 
   @override
   void initState() {
@@ -56,27 +53,27 @@ class _LikesState extends State<Likes> {
                   ],
                 ),
                 Expanded(
-                  child: FutureBuilder<List<PlaylistTracksModel>>(
+                  child: FutureBuilder<List<TrackModel>>(
                     future: futureTrack,
                     builder: (BuildContext context,
-                        AsyncSnapshot<List<PlaylistTracksModel>> snapshot) {
+                        AsyncSnapshot<List<TrackModel>> snapshot) {
                       if (snapshot.hasData) {
                         return ListView.builder(
                           itemCount: snapshot.data!.length,
                           itemBuilder: (context, index) => GestureDetector(
                             child: PlaylistTracksItem(
-                              songTitle: snapshot.data![index].songTitle,
+                              songTitle: snapshot.data![index].trackName,
                               image: snapshot.data![index].image,
-                              name: snapshot.data![index].name,
+                              name: snapshot.data![index].userName,
                               playlistName: snapshot.data![index].playlistName,
                             ),
                             onTap: () {
-                              // Navigator.push(
-                              //   context,
-                              //   MaterialPageRoute(
-                              //       builder: (context) =>
-                              //           Player(track: snapshot.data![index])),
-                              // );
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        Player(track: snapshot.data![index])),
+                              );
                             },
                           ),
                         );
