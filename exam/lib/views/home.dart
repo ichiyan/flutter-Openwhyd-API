@@ -114,29 +114,6 @@ class _HomeState extends State<Home> {
             ),
           ),
         ),
-        // bottomNavigationBar: SalomonBottomBar(
-        //   currentIndex: _selectedIndex,
-        //   onTap: (index) {
-        //     _onItemTapped(index);
-        //   },
-        //   items: [
-        //     SalomonBottomBarItem(
-        //       icon: Icon(Icons.home_rounded),
-        //       title: Text("Home"),
-        //       selectedColor: Theme.of(context).accentColor,
-        //     ),
-        //     SalomonBottomBarItem(
-        //       icon: Icon(Icons.favorite_border_rounded),
-        //       title: Text("Likes"),
-        //       selectedColor: Theme.of(context).accentColor,
-        //     ),
-        //     SalomonBottomBarItem(
-        //       icon: Icon(Icons.queue_music_rounded),
-        //       title: Text("Playlist"),
-        //       selectedColor: Theme.of(context).accentColor,
-        //     ),
-        //   ],
-        // ),
       ),
     );
   }
