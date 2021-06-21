@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:openwhyd_api_music_app/custom_widgets/horizontal_playlist_item.dart';
+import 'package:openwhyd_api_music_app/views/playlist_tracks.dart';
+import 'package:openwhyd_api_music_app/widgets/gradient_containers.dart';
+import 'package:openwhyd_api_music_app/widgets/horizontal_playlist_item.dart';
 import 'package:openwhyd_api_music_app/globals.dart' as globals;
 import 'package:openwhyd_api_music_app/api/openwhyd.dart';
 import 'package:openwhyd_api_music_app/app_colors.dart';
 import 'package:openwhyd_api_music_app/models/playlist_model.dart';
 import 'package:openwhyd_api_music_app/views/player.dart';
-import 'package:openwhyd_api_music_app/views/playlist.dart';
 import 'package:openwhyd_api_music_app/widgets/logout_button.dart';
-import 'package:openwhyd_api_music_app/widgets/gradient_containers.dart';
-import 'package:openwhyd_api_music_app/widgets/track_list_item.dart';
 import 'package:openwhyd_api_music_app/models/track_model.dart';
+import 'package:openwhyd_api_music_app/widgets/track_list_item.dart';
 
 class Home extends StatefulWidget {
   static const String routeName = "home";
@@ -115,8 +115,8 @@ class _HomeState extends State<Home> {
                       height: 10.0,
                     ),
                     Container(
-                      height: 0.30 * size.height,
-                      width: size.width * 0.8,
+                      height: 0.28 * size.height,
+                      width: size.width * 0.9,
                       child: FutureBuilder<List<PlaylistModel>>(
                         future: futurePlaylist,
                         builder: (BuildContext context,
@@ -159,7 +159,7 @@ class _HomeState extends State<Home> {
                     ),
                     Container(
                       height: 0.35 * size.height,
-                      width: size.width * 0.8,
+                      width: size.width,
                       child: FutureBuilder<List<TrackModel>>(
                         future: futureTrack,
                         builder: (BuildContext context,
@@ -172,6 +172,8 @@ class _HomeState extends State<Home> {
                                   trackName: snapshot.data![index].trackName,
                                   image: snapshot.data![index].image,
                                   userName: snapshot.data![index].userName,
+                                  id: snapshot.data![index].id,
+                                  like: snapshot.data![index].like,
                                 ),
                                 onTap: () {
                                   Navigator.push(
@@ -193,49 +195,22 @@ class _HomeState extends State<Home> {
                     ),
                   ],
                 ),
-<<<<<<< Updated upstream
-                Expanded(
-                  child: FutureBuilder<List<TrackModel>>(
-                    future: futureTrack,
-                    builder: (BuildContext context,
-                        AsyncSnapshot<List<TrackModel>> snapshot) {
-                      if (snapshot.hasData) {
-                        return ListView.builder(
-                          itemCount: snapshot.data!.length,
-                          itemBuilder: (context, index) => GestureDetector(
-                            child: TrackListItem(
-                              trackName: snapshot.data![index].trackName,
-                              image: snapshot.data![index].image,
-                              userName: snapshot.data![index].userName,
-                              id: snapshot.data![index].id,
-                              like: snapshot.data![index].like,
-                            ),
-                            onTap: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) =>
-                                        Player(track: snapshot.data![index])),
-                              );
-                            },
-                          ),
-                        );
-                      } else if (snapshot.hasError) {
-                        return Text("${snapshot.error}");
-                      } else {
-                        return Center(child: CircularProgressIndicator());
-                      }
-                    },
-                  ),
-                ),
-              ],
-=======
               ),
->>>>>>> Stashed changes
             ),
           ),
         ),
       ),
+    );
+  }
+
+  void navigateToPlaylistTracks(BuildContext context, int num) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) {
+        return PlaylistTracks(
+          showPlaylistNum: num,
+        );
+      }),
     );
   }
 }

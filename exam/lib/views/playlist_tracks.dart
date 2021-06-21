@@ -2,16 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:openwhyd_api_music_app/api/openwhyd.dart';
 import 'package:openwhyd_api_music_app/widgets/playlist_tracks_item.dart';
 import 'package:openwhyd_api_music_app/models/track_model.dart';
-import 'package:openwhyd_api_music_app/models/playlist_tracks_model.dart';
-import 'package:openwhyd_api_music_app/models/track_model.dart';
-import 'package:openwhyd_api_music_app/views/home.dart';
-import 'package:openwhyd_api_music_app/views/likes.dart';
 import 'package:openwhyd_api_music_app/views/player.dart';
 import 'package:openwhyd_api_music_app/widgets/logout_button.dart';
 import 'package:openwhyd_api_music_app/widgets/gradient_containers.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-
 
 class PlaylistTracks extends StatefulWidget {
   static const String routeName = "playlist_tracks";
@@ -48,10 +43,13 @@ class _PlaylistTracksState extends State<PlaylistTracks> {
       child: Scaffold(
         backgroundColor: Colors.transparent,
         floatingActionButton: FloatingActionButton(
-          onPressed: (){
+          onPressed: () {
             trackForm(context);
           },
-          child: Icon(Icons.add, size: 40.0,),
+          child: Icon(
+            Icons.add,
+            size: 40.0,
+          ),
         ),
         body: SafeArea(
           child: Padding(
@@ -118,7 +116,7 @@ class _PlaylistTracksState extends State<PlaylistTracks> {
     );
   }
 
-  Future<void> trackForm (BuildContext context) async {
+  Future<void> trackForm(BuildContext context) async {
     return showDialog(
         context: context,
         builder: (context) {
@@ -131,7 +129,8 @@ class _PlaylistTracksState extends State<PlaylistTracks> {
                 });
               },
               controller: textFieldController,
-              decoration: InputDecoration(hintText: "Input name of new playlist"),
+              decoration:
+                  InputDecoration(hintText: "Input name of new playlist"),
             ),
             actions: <Widget>[
               TextButton(
@@ -159,13 +158,12 @@ class _PlaylistTracksState extends State<PlaylistTracks> {
                   });
                 },
               ),
-
             ],
           );
         });
   }
 
-  Future<void> addTrack (String value) async {
+  Future<void> addTrack(String value) async {
     final response = await http.post(
       Uri.parse('https://openwhyd.org/api/playlist'),
       headers: <String, String>{
@@ -179,5 +177,4 @@ class _PlaylistTracksState extends State<PlaylistTracks> {
       }),
     );
   }
-
 }
