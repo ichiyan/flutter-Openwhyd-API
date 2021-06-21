@@ -25,11 +25,14 @@ class TrackModel {
       this.userName});
 
   factory TrackModel.fromJson(Map<String, dynamic> parsedjson) {
+    String link = parsedjson['eId'];
+    // link = 'https://www.youtube.com/watch?v=' + link.substring(4);
+    link = link.substring(4);
     return TrackModel(
       trackName: parsedjson['name'],
       userName: parsedjson['uNm'] ?? 'unknown',
       image: parsedjson['img'],
-      audio: parsedjson['eId'],
+      audio: link,
     );
   }
 }

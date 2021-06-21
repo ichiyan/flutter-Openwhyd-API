@@ -4,6 +4,7 @@ import 'package:openwhyd_api_music_app/models/playlist_model.dart';
 import 'package:openwhyd_api_music_app/views/likes.dart';
 import 'package:openwhyd_api_music_app/views/playlist.dart';
 import 'package:openwhyd_api_music_app/views/player.dart';
+import 'package:openwhyd_api_music_app/views/video_player.dart';
 import 'package:openwhyd_api_music_app/widgets/logout_button.dart';
 import 'package:openwhyd_api_music_app/custom_widgets/gradient_containers.dart';
 import 'package:openwhyd_api_music_app/custom_widgets/track_list_item.dart';
@@ -94,7 +95,7 @@ class _HomeState extends State<Home> {
                                 context,
                                 MaterialPageRoute(
                                     builder: (context) =>
-                                        Player(track: snapshot.data![index])),
+                                        VideoPlayer(track: snapshot.data![index])),
                               );
                             },
                           ),

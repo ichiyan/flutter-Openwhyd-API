@@ -6,24 +6,35 @@ import 'package:openwhyd_api_music_app/custom_widgets/gradient_containers.dart';
 import 'package:openwhyd_api_music_app/custom_widgets/neumorphic_element.dart';
 import 'package:openwhyd_api_music_app/models/track_model.dart';
 import 'package:openwhyd_api_music_app/views/audio.dart';
+import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
-class Player extends StatefulWidget {
+class VideoPlayer extends StatefulWidget {
   final TrackModel track;
   // const Player({Key? key}) : super(key: key);
 
-  Player({required this.track});
+  VideoPlayer({required this.track});
 
   @override
-  _PlayerState createState() => _PlayerState();
+  _VideoPlayerState createState() => _VideoPlayerState();
 }
 
-class _PlayerState extends State<Player> {
-  late AudioPlayer advancedPlayer;
+class _VideoPlayerState extends State<VideoPlayer> {
+  // late AudioPlayer advancedPlayer;
+  late YoutubePlayerController _controller;
 
   @override
   void initState() {
+    // advancedPlayer = AudioPlayer();
+    _controller = YoutubePlayerController(
+        initialVideoId: widget.track.audio,
+        flags: YoutubePlayerFlags(
+            autoPlay: false,
+            mute: false,
+            disableDragSeek: true,
+            loop: false,
+            enableCaption: false),
+    )..addListener(() {print(_controller.value.playerState);});
     super.initState();
-    advancedPlayer = AudioPlayer();
   }
 
   @override
@@ -35,21 +46,6 @@ class _PlayerState extends State<Player> {
       child: SafeArea(
         child: Scaffold(
           backgroundColor: Colors.transparent,
-          // appBar: AppBar(
-          //   toolbarHeight: 40.0,
-          //   elevation: 0,
-          //   backgroundColor: Colors.transparent,
-          //   title: Text(
-          //     "Playing Now",
-          //     style: TextStyle(
-          //       color: Colors.grey,
-          //     ),
-          //   ),
-          //   centerTitle: true,
-          //   leading: IconButton(
-          //     icon: Icon(Icons.expand_more_rounded),
-          //     onPressed: () {},
-          //   ),
           body: Column(
             children: <Widget>[
               SizedBox(
@@ -67,7 +63,7 @@ class _PlayerState extends State<Player> {
                         color: AppColors.styleColor,
                       ),
                       onPress: () {
-                        advancedPlayer.stop();
+                        // advancedPlayer.stop();
                         Navigator.of(context).pop();
                       },
                     ),
@@ -90,12 +86,21 @@ class _PlayerState extends State<Player> {
                   ],
                 ),
               ),
-              NeumorphicElement(
-                size: MediaQuery.of(context).size.width * .7,
-                borderWidth: 5,
-                image: widget.track.image,
-                onPress: () {},
+              YoutubePlayer(
+                  controller: _controller,
+                  showVideoProgressIndicator: true,
+                  progressIndicatorColor: Colors.teal,
+                  onReady: () {
+                  print('Player is ready.');
+              },
               ),
+              // NeumorphicElement(
+              //   size: MediaQuery.of(context).size.width * .7,
+              //   borderWidth: 5,
+
+              //   image: widget.track.image,
+              //   onPress: () {},
+              // ),
               SizedBox(
                 height: 35.0,
               ),
@@ -125,10 +130,10 @@ class _PlayerState extends State<Player> {
               SizedBox(
                 height: 25.0,
               ),
-              Audio(
-                advancedPlayer: advancedPlayer,
-                audioPath: widget.track.audio,
-              ),
+              // Audio(
+              //   advancedPlayer: advancedPlayer,
+              //   audioPath: widget.track.audio,
+              // ),
             ],
           ),
         ),
