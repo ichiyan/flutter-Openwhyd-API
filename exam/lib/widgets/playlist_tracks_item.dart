@@ -19,8 +19,8 @@ class PlaylistTracksItem extends StatelessWidget {
       child: Row(
         children: [
           Container(
-            height: 85.0,
-            width: 85.0,
+            height: 90.0,
+            width: 90.0,
             decoration: BoxDecoration(
               image: DecorationImage(
                 image: NetworkImage(image),
@@ -37,7 +37,7 @@ class PlaylistTracksItem extends StatelessWidget {
                 Text(
                   songTitle,
                   style: TextStyle(
-                    fontSize: 14.0,
+                    fontSize: 16.0,
                     fontWeight: FontWeight.w600,
                   ),
                 ),

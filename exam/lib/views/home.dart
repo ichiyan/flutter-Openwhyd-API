@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:openwhyd_api_music_app/custom_widgets/horizontal_playlist_item.dart';
+import 'package:openwhyd_api_music_app/globals.dart' as globals;
 import 'package:openwhyd_api_music_app/api/openwhyd.dart';
+import 'package:openwhyd_api_music_app/app_colors.dart';
 import 'package:openwhyd_api_music_app/models/playlist_model.dart';
 import 'package:openwhyd_api_music_app/views/player.dart';
+import 'package:openwhyd_api_music_app/views/playlist.dart';
 import 'package:openwhyd_api_music_app/widgets/logout_button.dart';
 import 'package:openwhyd_api_music_app/widgets/gradient_containers.dart';
 import 'package:openwhyd_api_music_app/widgets/track_list_item.dart';
@@ -9,7 +13,6 @@ import 'package:openwhyd_api_music_app/models/track_model.dart';
 
 class Home extends StatefulWidget {
   static const String routeName = "home";
-  //final User user;
   const Home({Key? key}) : super(key: key);
   // const Home({
   //   Key? key,
@@ -42,37 +45,155 @@ class _HomeState extends State<Home> {
   void initState() {
     super.initState();
     futureTrack = fetchHotTracks();
+    futurePlaylist = fetchPlaylist();
   }
 
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
     return GradientContainer(
       opacity: true,
       child: Scaffold(
         backgroundColor: Colors.transparent,
-        body: SafeArea(
-          child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 20.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        body: SingleChildScrollView(
+          child: ConstrainedBox(
+            constraints: BoxConstraints(),
+            child: SafeArea(
+              child: Padding(
+                padding: EdgeInsets.symmetric(horizontal: 20.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Padding(
-                      padding: EdgeInsets.symmetric(vertical: 20.0),
-                      child: Text(
-                        "Hot Tracks",
-                        style: TextStyle(
-                          fontSize: 18.0,
-                          fontWeight: FontWeight.bold,
-                          color: Theme.of(context).accentColor,
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        Padding(
+                          padding: EdgeInsets.symmetric(vertical: 20.0),
                         ),
+                        LogoutButton(),
+                      ],
+                    ),
+                    SizedBox(
+                      height: 5.0,
+                    ),
+                    Row(
+                      children: [
+                        Text(
+                          'Hi There,',
+                          style: TextStyle(
+                              letterSpacing: 2,
+                              color: Theme.of(context).accentColor,
+                              fontSize: 30,
+                              fontWeight: FontWeight.bold),
+                        ),
+                      ],
+                    ),
+                    Row(
+                      children: [
+                        Text(
+                          globals.userName,
+                          style: TextStyle(
+                              letterSpacing: 2,
+                              color: Colors.white,
+                              fontSize: 25,
+                              fontWeight: FontWeight.w500),
+                        ),
+                      ],
+                    ),
+                    SizedBox(
+                      height: 30.0,
+                    ),
+                    Text(
+                      'Your Playlists',
+                      style: TextStyle(
+                          letterSpacing: 2,
+                          color: AppColors.styleColor,
+                          fontSize: 18,
+                          fontWeight: FontWeight.w500),
+                    ),
+                    SizedBox(
+                      height: 10.0,
+                    ),
+                    Container(
+                      height: 0.30 * size.height,
+                      width: size.width * 0.8,
+                      child: FutureBuilder<List<PlaylistModel>>(
+                        future: futurePlaylist,
+                        builder: (BuildContext context,
+                            AsyncSnapshot<List<PlaylistModel>> snapshot) {
+                          if (snapshot.hasData) {
+                            return ListView.builder(
+                              scrollDirection: Axis.horizontal,
+                              itemCount: snapshot.data!.length,
+                              itemBuilder: (context, index) => GestureDetector(
+                                child: HorizontalPlaylistItem(
+                                  playlist: snapshot.data![index].playlist,
+                                  image: snapshot.data![index].image,
+                                ),
+                                onTap: () {
+                                  navigateToPlaylistTracks(context, index);
+                                },
+                              ),
+                            );
+                          } else if (snapshot.hasError) {
+                            return Text("${snapshot.error}");
+                          } else {
+                            return Center(child: CircularProgressIndicator());
+                          }
+                        },
                       ),
                     ),
-                    LogoutButton(),
+                    SizedBox(
+                      height: 10.0,
+                    ),
+                    Text(
+                      'Popular Tracks',
+                      style: TextStyle(
+                          letterSpacing: 2,
+                          color: AppColors.styleColor,
+                          fontSize: 18,
+                          fontWeight: FontWeight.w500),
+                    ),
+                    SizedBox(
+                      height: 10.0,
+                    ),
+                    Container(
+                      height: 0.35 * size.height,
+                      width: size.width * 0.8,
+                      child: FutureBuilder<List<TrackModel>>(
+                        future: futureTrack,
+                        builder: (BuildContext context,
+                            AsyncSnapshot<List<TrackModel>> snapshot) {
+                          if (snapshot.hasData) {
+                            return ListView.builder(
+                              itemCount: snapshot.data!.length,
+                              itemBuilder: (context, index) => GestureDetector(
+                                child: TrackListItem(
+                                  trackName: snapshot.data![index].trackName,
+                                  image: snapshot.data![index].image,
+                                  userName: snapshot.data![index].userName,
+                                ),
+                                onTap: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => Player(
+                                            track: snapshot.data![index])),
+                                  );
+                                },
+                              ),
+                            );
+                          } else if (snapshot.hasError) {
+                            return Text("${snapshot.error}");
+                          } else {
+                            return Center(child: CircularProgressIndicator());
+                          }
+                        },
+                      ),
+                    ),
                   ],
                 ),
+<<<<<<< Updated upstream
                 Expanded(
                   child: FutureBuilder<List<TrackModel>>(
                     future: futureTrack,
@@ -108,6 +229,9 @@ class _HomeState extends State<Home> {
                   ),
                 ),
               ],
+=======
+              ),
+>>>>>>> Stashed changes
             ),
           ),
         ),

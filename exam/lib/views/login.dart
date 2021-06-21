@@ -1,14 +1,11 @@
-import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:openwhyd_api_music_app/api/openwhyd.dart';
 import 'package:openwhyd_api_music_app/mixins/validation_mixin.dart';
-import 'package:http/http.dart' as http;
-import 'package:crypto/crypto.dart' as crypto;
 import 'package:openwhyd_api_music_app/widgets/custom_text_form_field.dart';
 import 'package:openwhyd_api_music_app/widgets/password_field.dart';
 import 'package:openwhyd_api_music_app/widgets/primary_button.dart';
 import 'package:openwhyd_api_music_app/widgets/secondary_button.dart';
 import 'package:openwhyd_api_music_app/widgets/forgot_password.dart';
-import 'package:openwhyd_api_music_app/globals.dart' as globals;
 import 'bottom_nav.dart';
 import 'registration.dart';
 
@@ -123,38 +120,6 @@ class _LoginState extends State<Login> with ValidationMixin {
         ),
       ),
     );
-  }
-
-  Future<dynamic> signIn(String email, String password) async {
-    print(password);
-    password = crypto.md5.convert(utf8.encode(password)).toString();
-    final res = await http.get(Uri.parse(
-        'https://openwhyd.org/login?action=login&ajax=true&email=$email&md5=$password&includeUser=true'));
-
-
-    print(res.statusCode);
-    print(res.request);
-    print(res.headers);
-
-    if (res.statusCode == 200) {
-      final jsonData = jsonDecode(res.body);
-      // return User.fromJson(jsonDecode(res.body));
-      // return type = dynamic; returning a json object from res.body due to loggin in succesfully return only a redirection url;
-      print(jsonData);
-
-      globals.id = jsonData["user"]["_id"];
-      print(globals.id);
-
-      if (jsonData["redirect"] != null) {
-        return jsonData;
-      }
-      throw Exception(jsonData["error"]);
-    } else {
-      // If the server did not return a 200 OK response,
-      // then throw an exception.
-      throw Exception('Failed to login.');
-    }
-    print('4');
   }
 
   // void login() {

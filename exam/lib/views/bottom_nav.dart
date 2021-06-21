@@ -7,7 +7,6 @@ import 'home.dart';
 import 'likes.dart';
 
 class BottomNavBar extends StatefulWidget {
-  // final User user;
   const BottomNavBar({Key? key}) : super(key: key);
 
   @override
