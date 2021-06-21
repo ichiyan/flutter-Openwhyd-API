@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:openwhyd_api_music_app/api/openwhyd.dart';
 import 'package:openwhyd_api_music_app/custom_widgets/playlist_item.dart';
 import 'package:openwhyd_api_music_app/models/playlist_model.dart';
+import 'package:openwhyd_api_music_app/views/home.dart';
+import 'package:openwhyd_api_music_app/views/likes.dart';
+import 'package:openwhyd_api_music_app/views/playlist_tracks.dart';
 import 'package:openwhyd_api_music_app/custom_widgets/gradient_containers.dart';
 
 class Playlist extends StatefulWidget {
@@ -62,12 +65,7 @@ class _PlaylistState extends State<Playlist> {
                               trackNum: snapshot.data![index].trackNum,
                             ),
                             onTap: () {
-                              // Navigator.push(
-                              //   context,
-                              //   MaterialPageRoute(
-                              //       builder: (context) =>
-                              //           Player(track: snapshot.data![index])),
-                              // );
+                              navigateToPlaylistTracks(context, index);
                             },
                           ),
                         );
@@ -87,3 +85,30 @@ class _PlaylistState extends State<Playlist> {
     );
   }
 }
+
+  void navigateToHome(BuildContext context) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) {
+        return Home();
+      }),
+    );
+  }
+
+  void navigateToPlaylistTracks(BuildContext context, int num) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) {
+        return PlaylistTracks(showPlaylistNum: num,);
+      }),
+    );
+  }
+
+  void navigateToLike(BuildContext context) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) {
+        return Likes();
+      }),
+    );
+  }

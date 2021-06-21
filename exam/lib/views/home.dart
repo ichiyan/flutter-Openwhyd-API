@@ -1,16 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:openwhyd_api_music_app/api/openwhyd.dart';
 import 'package:openwhyd_api_music_app/models/playlist_model.dart';
-import 'package:openwhyd_api_music_app/models/user_model.dart';
-<<<<<<< HEAD
-=======
 import 'package:openwhyd_api_music_app/views/likes.dart';
 import 'package:openwhyd_api_music_app/views/playlist.dart';
-import 'package:openwhyd_api_music_app/views/registration.dart';
->>>>>>> 38a94389c67a185adfe20effc9773b1935b91948
 import 'package:openwhyd_api_music_app/views/player.dart';
 import 'package:openwhyd_api_music_app/widgets/logout_button.dart';
-import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
 import 'package:openwhyd_api_music_app/custom_widgets/gradient_containers.dart';
 import 'package:openwhyd_api_music_app/custom_widgets/track_list_item.dart';
 import 'package:openwhyd_api_music_app/models/track_model.dart';
@@ -143,27 +137,12 @@ class _HomeState extends State<Home> {
       ),
     );
   }
-<<<<<<< HEAD
-}
-=======
-
-  void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
-    if(index == 1){
-      navigateToLike(context);
-    }
-    if(index == 2){
-      navigateToPlaylist(context);
-    }
-  }
 
   void navigateToPlaylist(BuildContext context) {
     Navigator.push(
       context,
       MaterialPageRoute(builder: (context) {
-      return Playlist(user: User(email: "annethere_paulo@yahoo.com", password: "7300227paulo"));
+      return Playlist();
     }),);
   }
 
@@ -176,4 +155,3 @@ class _HomeState extends State<Home> {
     );
   }
 }
->>>>>>> 38a94389c67a185adfe20effc9773b1935b91948

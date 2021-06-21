@@ -10,6 +10,8 @@ class Likes extends StatefulWidget {
 class _LikesState extends State<Likes> {
   @override
   Widget build(BuildContext context) {
-    return Text("Likes");
+    return Center(
+      child: Text("Likes"),
+    );
   }
 }
