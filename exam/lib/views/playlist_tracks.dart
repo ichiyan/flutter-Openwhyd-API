@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:openwhyd_api_music_app/api/openwhyd.dart';
-import 'package:openwhyd_api_music_app/custom_widgets/playlist_tracks_item.dart';
+import 'package:openwhyd_api_music_app/widgets/playlist_tracks_item.dart';
 import 'package:openwhyd_api_music_app/models/track_model.dart';
 import 'package:openwhyd_api_music_app/models/playlist_tracks_model.dart';
 import 'package:openwhyd_api_music_app/models/track_model.dart';
@@ -8,7 +8,7 @@ import 'package:openwhyd_api_music_app/views/home.dart';
 import 'package:openwhyd_api_music_app/views/likes.dart';
 import 'package:openwhyd_api_music_app/views/player.dart';
 import 'package:openwhyd_api_music_app/widgets/logout_button.dart';
-import 'package:openwhyd_api_music_app/custom_widgets/gradient_containers.dart';
+import 'package:openwhyd_api_music_app/widgets/gradient_containers.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 
@@ -154,7 +154,7 @@ class _PlaylistTracksState extends State<PlaylistTracks> {
                 ),
                 onPressed: () {
                   setState(() {
-                    createPlaylist(valueText);
+                    addTrack(valueText);
                     Navigator.pop(context);
                   });
                 },
@@ -165,7 +165,7 @@ class _PlaylistTracksState extends State<PlaylistTracks> {
         });
   }
 
-  Future<void> createPlaylist(String value) async {
+  Future<void> addTrack (String value) async {
     final response = await http.post(
       Uri.parse('https://openwhyd.org/api/playlist'),
       headers: <String, String>{

@@ -1,7 +1,7 @@
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:openwhyd_api_music_app/app_colors.dart';
-import 'package:openwhyd_api_music_app/custom_widgets/neumorphic_element.dart';
+import 'package:openwhyd_api_music_app/widgets/neumorphic_element.dart';
 
 class Audio extends StatefulWidget {
   final AudioPlayer advancedPlayer;

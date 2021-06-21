@@ -2,10 +2,10 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:openwhyd_api_music_app/api/openwhyd.dart';
-import 'package:openwhyd_api_music_app/custom_widgets/playlist_item.dart';
+import 'package:openwhyd_api_music_app/widgets/playlist_item.dart';
 import 'package:openwhyd_api_music_app/models/playlist_model.dart';
 import 'package:openwhyd_api_music_app/views/playlist_tracks.dart';
-import 'package:openwhyd_api_music_app/custom_widgets/gradient_containers.dart';
+import 'package:openwhyd_api_music_app/widgets/gradient_containers.dart';
 import 'package:openwhyd_api_music_app/widgets/logout_button.dart';
 
 class Playlist extends StatefulWidget {

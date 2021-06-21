@@ -118,14 +118,15 @@ class _RegistrationState extends State<Registration> with ValidationMixin {
                       text: "Sign up",
                       iconData: Icons.app_registration,
                         onPress: () {
-                          createUser(fullNameTextController.text, emailTextController.text, passwordTextController.text)
+                          print('done typing');
+                          signUp(context, fullNameTextController.text, emailTextController.text, passwordTextController.text)
                               .then((value) {
                                 print('pushing');
                               }).catchError((error) {
                                 print(error);
                           });
-
                         },
+
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -133,7 +134,14 @@ class _RegistrationState extends State<Registration> with ValidationMixin {
                         SecondaryButton(
                           text: "Already have an account? Login",
                           onPress: () {
-                            navigateToLogin(context);
+                            //navigateToLogin(context);
+                            //PLEASE DON'T CHANGE THIS CAUSE THE NAMED ROUTED HAVEN'T BEEN WORKING IN MINE
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(builder: (context) {
+                                return Login();
+                              }),
+                            );
                           },
                         ),
                       ],
@@ -157,8 +165,7 @@ class _RegistrationState extends State<Registration> with ValidationMixin {
     );
   }
 
-  void signUp(BuildContext context, name, email, password)
-  {
+  Future<void> signUp(BuildContext context, name, email, password) async {
     if (formKey.currentState!.validate()) {
       print("Valid Inputs");
       print(password);

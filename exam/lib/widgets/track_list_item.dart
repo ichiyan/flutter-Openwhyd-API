@@ -1,11 +1,16 @@
 import 'package:flutter/material.dart';
+import 'dart:convert';
+import 'package:http/http.dart' as http;
 
 class TrackListItem extends StatelessWidget {
   final String trackName;
   final String? userName;
   final String image;
+  final String id;
+  final String? like;
 
-  TrackListItem({required this.trackName, required this.image, this.userName});
+  TrackListItem({required this.trackName, required this.image,
+    required this.id, this.like, this.userName});
 
   @override
   Widget build(BuildContext context) {
@@ -47,11 +52,50 @@ class TrackListItem extends StatelessWidget {
                     fontSize: 14.0,
                   ),
                 ),
+                Text(
+                  like.toString(),
+                  style: TextStyle(
+                    color: Colors.grey,
+                    fontSize: 14.0,
+                  ),
+                ),
               ],
             ),
+          ),
+          IconButton(
+              onPressed: (){
+                likeTrack(context, id);
+              },
+              icon: Icon(
+                Icons.favorite_border_rounded,
+                color: like=="true"?Colors.red:Colors.white24 ,
+              ),
           ),
         ],
       ),
     );
   }
+
+  Future<void> likeTrack (BuildContext context, String id) async {
+    var url = 'https://openwhyd.org/api/post?action=toggleLovePost&pId=' + id;
+    final response = await http.get(Uri.parse(url));
+
+    print(id);
+    print(response.statusCode);
+    if (response.statusCode == 200) {
+      return showDialog(
+          context: context,
+          builder: (context){
+            Future.delayed(Duration(seconds: 2), (){
+              Navigator.of(context).pop(true);
+            });
+            return AlertDialog(
+              title: Text("Track liked!"),
+            );
+          });
+    } else {
+      throw Exception('Failed to like track');
+    }
+  }
+
 }

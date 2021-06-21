@@ -15,6 +15,8 @@ class PlaylistTracksList {
         userName: object["uNm"],
         playlistName: object['pl']['name'],
         audio: object['eId'],
+        id: object['_id'],
+        like: object['isLoved'],
       );
       allPlaylists.add(newPlaylist);
     }

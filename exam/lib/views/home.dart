@@ -3,8 +3,8 @@ import 'package:openwhyd_api_music_app/api/openwhyd.dart';
 import 'package:openwhyd_api_music_app/models/playlist_model.dart';
 import 'package:openwhyd_api_music_app/views/player.dart';
 import 'package:openwhyd_api_music_app/widgets/logout_button.dart';
-import 'package:openwhyd_api_music_app/custom_widgets/gradient_containers.dart';
-import 'package:openwhyd_api_music_app/custom_widgets/track_list_item.dart';
+import 'package:openwhyd_api_music_app/widgets/gradient_containers.dart';
+import 'package:openwhyd_api_music_app/widgets/track_list_item.dart';
 import 'package:openwhyd_api_music_app/models/track_model.dart';
 
 class Home extends StatefulWidget {
@@ -86,6 +86,8 @@ class _HomeState extends State<Home> {
                               trackName: snapshot.data![index].trackName,
                               image: snapshot.data![index].image,
                               userName: snapshot.data![index].userName,
+                              id: snapshot.data![index].id,
+                              like: snapshot.data![index].like,
                             ),
                             onTap: () {
                               Navigator.push(

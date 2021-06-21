@@ -134,6 +134,7 @@ class _LoginState extends State<Login> with ValidationMixin {
 
     print(res.statusCode);
     print(res.request);
+    print(res.headers);
 
     if (res.statusCode == 200) {
       final jsonData = jsonDecode(res.body);
@@ -172,6 +173,13 @@ class _LoginState extends State<Login> with ValidationMixin {
   }
 
   void navigateToRegistration(BuildContext context) {
-    Navigator.pushNamed(context, Registration.routeName);
+    //Navigator.pushNamed(context, Registration.routeName);
+    //PLEASE DON'T CHANGE THIS CAUSE THE NAMED ROUTED HAVEN'T BEEN WORKING IN MINE
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) {
+        return Registration();
+      }),
+    );
   }
 }
