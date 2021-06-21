@@ -4,6 +4,7 @@ import 'package:openwhyd_api_music_app/custom_widgets/playlist_item.dart';
 import 'package:openwhyd_api_music_app/models/playlist_model.dart';
 import 'package:openwhyd_api_music_app/views/playlist_tracks.dart';
 import 'package:openwhyd_api_music_app/custom_widgets/gradient_containers.dart';
+import 'package:openwhyd_api_music_app/widgets/logout_button.dart';
 
 class Playlist extends StatefulWidget {
   static const String routeName = "Playlist";
@@ -37,16 +38,22 @@ class _PlaylistState extends State<Playlist> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Padding(
-                  padding: EdgeInsets.symmetric(vertical: 20.0),
-                  child: Text(
-                    "Playlist",
-                    style: TextStyle(
-                      fontSize: 18.0,
-                      fontWeight: FontWeight.bold,
-                      color: Theme.of(context).accentColor,
-                    ),
-                  ),
+                Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Padding(
+                        padding: EdgeInsets.symmetric(vertical: 20.0),
+                        child: Text(
+                          "Playlist",
+                          style: TextStyle(
+                            fontSize: 18.0,
+                            fontWeight: FontWeight.bold,
+                            color: Theme.of(context).accentColor,
+                          ),
+                        ),
+                      ),
+                      LogoutButton(),
+                    ],
                 ),
                 Expanded(
                   child: FutureBuilder<List<PlaylistModel>>(
