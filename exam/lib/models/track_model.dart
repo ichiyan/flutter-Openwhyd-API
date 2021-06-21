@@ -1,20 +1,7 @@
-class HotTracks {
-  final List<TrackModel> tracks;
-
-  HotTracks({required this.tracks});
-
-  factory HotTracks.fromJson(Map<String, dynamic> parsedJson) {
-    var list = parsedJson['tracks'] as List;
-    List<TrackModel> tracksList =
-        list.map((i) => TrackModel.fromJson(i)).toList();
-
-    return HotTracks(tracks: tracksList);
-  }
-}
-
 class TrackModel {
   late String trackName;
   late String? userName;
+  late String? playlistName;
   late String image;
   late String audio;
 
@@ -22,14 +9,25 @@ class TrackModel {
       {required this.trackName,
       required this.image,
       required this.audio,
+      this.playlistName,
       this.userName});
 
   factory TrackModel.fromJson(Map<String, dynamic> parsedjson) {
-    return TrackModel(
-      trackName: parsedjson['name'],
-      userName: parsedjson['uNm'] ?? 'unknown',
-      image: parsedjson['img'],
-      audio: parsedjson['eId'],
-    );
+    if (parsedjson.containsKey('pl')) {
+      return TrackModel(
+        trackName: parsedjson['name'] as String,
+        userName: parsedjson['uNm'] ?? 'unknown',
+        playlistName: parsedjson['pl']['name'],
+        image: parsedjson['img'] as String,
+        audio: parsedjson['eId'],
+      );
+    } else {
+      return TrackModel(
+        trackName: parsedjson['name'] as String,
+        userName: parsedjson['uNm'] ?? 'unknown',
+        image: parsedjson['img'] as String,
+        audio: parsedjson['eId'],
+      );
+    }
   }
 }

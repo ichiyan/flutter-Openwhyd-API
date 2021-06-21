@@ -2,11 +2,15 @@ import 'package:flutter/material.dart';
 
 class PlaylistTracksItem extends StatelessWidget {
   final String songTitle;
-  final String name;
+  final String? name;
   final String image;
-  final String playlistName;
+  final String? playlistName;
 
-  PlaylistTracksItem({required this.songTitle, required this.image, required this.name, required this.playlistName});
+  PlaylistTracksItem(
+      {required this.songTitle,
+      required this.image,
+      this.name,
+      this.playlistName});
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +45,7 @@ class PlaylistTracksItem extends StatelessWidget {
                   height: 5.0,
                 ),
                 Text(
-                  playlistName,
+                  playlistName ?? 'unknown',
                   style: TextStyle(
                     color: Colors.grey,
                     fontSize: 14.0,
@@ -60,7 +64,7 @@ class PlaylistTracksItem extends StatelessWidget {
                       ),
                     ),
                     Text(
-                      name,
+                      name ?? 'unknown',
                       style: TextStyle(
                         color: Colors.grey,
                         fontSize: 14.0,

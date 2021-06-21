@@ -1,19 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:openwhyd_api_music_app/api/openwhyd.dart';
 import 'package:openwhyd_api_music_app/custom_widgets/playlist_tracks_item.dart';
-import 'package:openwhyd_api_music_app/models/playlist_tracks_model.dart';
-import 'package:openwhyd_api_music_app/views/home.dart';
-import 'package:openwhyd_api_music_app/views/likes.dart';
+import 'package:openwhyd_api_music_app/models/track_model.dart';
 import 'package:openwhyd_api_music_app/views/player.dart';
 import 'package:openwhyd_api_music_app/widgets/logout_button.dart';
 import 'package:openwhyd_api_music_app/custom_widgets/gradient_containers.dart';
-
 
 class PlaylistTracks extends StatefulWidget {
   static const String routeName = "playlist_tracks";
   //final User user;
   final int showPlaylistNum;
-  const PlaylistTracks({Key? key, required this.showPlaylistNum}) : super(key: key);
+  const PlaylistTracks({Key? key, required this.showPlaylistNum})
+      : super(key: key);
 
   //int getShowPlaylistNum (){return this.showPlaylistNum; }
 
@@ -22,7 +20,8 @@ class PlaylistTracks extends StatefulWidget {
 }
 
 class _PlaylistTracksState extends State<PlaylistTracks> {
-  late Future<List<PlaylistTracksModel>> futurePlaylistTracks;
+  // late Future<List<PlaylistTracksModel>> futurePlaylistTracks;
+  late Future<List<TrackModel>> futurePlaylistTracks;
   final int showNum;
 
   _PlaylistTracksState(this.showNum);
@@ -32,7 +31,6 @@ class _PlaylistTracksState extends State<PlaylistTracks> {
     super.initState();
     futurePlaylistTracks = fetchPlaylistTracks(showNum);
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -65,27 +63,27 @@ class _PlaylistTracksState extends State<PlaylistTracks> {
                   ],
                 ),
                 Expanded(
-                  child: FutureBuilder<List<PlaylistTracksModel>>(
+                  child: FutureBuilder<List<TrackModel>>(
                     future: futurePlaylistTracks,
                     builder: (BuildContext context,
-                        AsyncSnapshot<List<PlaylistTracksModel>> snapshot) {
+                        AsyncSnapshot<List<TrackModel>> snapshot) {
                       if (snapshot.hasData) {
                         return ListView.builder(
                           itemCount: snapshot.data!.length,
                           itemBuilder: (context, index) => GestureDetector(
                             child: PlaylistTracksItem(
-                              songTitle: snapshot.data![index].songTitle,
+                              songTitle: snapshot.data![index].trackName,
                               image: snapshot.data![index].image,
-                              name: snapshot.data![index].name,
+                              name: snapshot.data![index].userName,
                               playlistName: snapshot.data![index].playlistName,
                             ),
                             onTap: () {
-                              // Navigator.push(
-                              //   context,
-                              //   MaterialPageRoute(
-                              //       builder: (context) =>
-                              //           Player(track: snapshot.data![index])),
-                              // );
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        Player(track: snapshot.data![index])),
+                              );
                             },
                           ),
                         );

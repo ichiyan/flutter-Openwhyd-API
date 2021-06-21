@@ -9,6 +9,8 @@ import 'package:openwhyd_api_music_app/views/audio.dart';
 
 class Player extends StatefulWidget {
   final TrackModel track;
+  // final PlaylistTracksModel? playlistTrack;
+  // final bool isPlaylist;
   // const Player({Key? key}) : super(key: key);
 
   Player({required this.track});
@@ -98,14 +100,19 @@ class _PlayerState extends State<Player> {
               SizedBox(
                 height: 35.0,
               ),
-              Text(
-                widget.track.trackName,
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  color: Colors.white70,
-                  letterSpacing: 0.5,
-                  fontSize: 25,
-                  fontWeight: FontWeight.w500,
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                child: Text(
+                  widget.track.trackName,
+                  textAlign: TextAlign.center,
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
+                  style: TextStyle(
+                    color: Colors.white70,
+                    letterSpacing: 0.5,
+                    fontSize: 25,
+                    fontWeight: FontWeight.w500,
+                  ),
                 ),
               ),
               SizedBox(
@@ -124,9 +131,12 @@ class _PlayerState extends State<Player> {
               SizedBox(
                 height: 25.0,
               ),
-              Audio(
-                advancedPlayer: advancedPlayer,
-                audioPath: widget.track.audio,
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                child: Audio(
+                  advancedPlayer: advancedPlayer,
+                  audioPath: widget.track.audio,
+                ),
               ),
             ],
           ),
