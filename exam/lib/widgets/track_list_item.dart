@@ -94,7 +94,7 @@ class TrackListItem extends StatelessWidget {
         return showDialog(
             context: context,
             builder: (context) {
-              Future.delayed(Duration(seconds: 2), () {
+              Future.delayed(Duration(seconds: 1), () {
                 Navigator.of(context).pop(true);
               });
               return AlertDialog(
@@ -108,12 +108,12 @@ class TrackListItem extends StatelessWidget {
         return showDialog(
             context: context,
             builder: (context) {
-              Future.delayed(Duration(seconds: 2), () {
+              Future.delayed(Duration(seconds: 1), () {
                 Navigator.of(context).pop(true);
               });
               return AlertDialog(
                 title: Text(
-                  "Removed ike from track :(",
+                  "Removed like from track :(",
                   textAlign: TextAlign.center,
                 ),
               );

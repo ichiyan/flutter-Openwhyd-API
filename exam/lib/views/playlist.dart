@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:openwhyd_api_music_app/api/openwhyd.dart';
+import 'package:openwhyd_api_music_app/views/bottom_nav.dart';
 import 'package:openwhyd_api_music_app/widgets/playlist_item.dart';
 import 'package:openwhyd_api_music_app/models/playlist_model.dart';
 import 'package:openwhyd_api_music_app/views/playlist_tracks.dart';
@@ -150,10 +151,33 @@ class _PlaylistState extends State<Playlist> {
                     print(valueText);
                     createPlaylist(valueText);
                     Navigator.pop(context);
+                    showDialog(
+                        context: context,
+                        builder: (context) {
+                          Future.delayed(Duration(seconds: 1), () {
+                            Navigator.of(context).pop(true);
+                          });
+                          return AlertDialog(
+                            title: Column(
+                              children: [
+                                Text(
+                                  "Playlist created!",
+                                  textAlign: TextAlign.center,
+                                ),
+                                SizedBox(
+                                  height: 10,
+                                ),
+                                Text(
+                                  "Refresh page to see new playlist",
+                                  textAlign: TextAlign.center,
+                                ),
+                              ],
+                            ),
+                          );
+                        });
                   });
                 },
               ),
-
             ],
           );
         });
