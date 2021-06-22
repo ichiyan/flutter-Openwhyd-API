@@ -24,7 +24,7 @@ class TrackModel {
           userName: parsedjson['uNm'] ?? 'unknown',
           playlistName: parsedjson['pl']['name'],
           image: parsedjson['img'] as String,
-          audio: parsedjson['eId'].substring(4),
+          audio: parsedjson['eId'],
           id: parsedjson['_id'],
           like: parsedjson['isLoved'],
         );
@@ -34,7 +34,7 @@ class TrackModel {
           userName: parsedjson['uNm'] ?? 'unknown',
           playlistName: parsedjson['pl']['name'],
           image: parsedjson['img'] as String,
-          audio: parsedjson['eId'].substring(4),
+          audio: parsedjson['eId'],
           id: parsedjson['_id'],
           like: "false",
         );
@@ -45,7 +45,7 @@ class TrackModel {
           trackName: parsedjson['name'] as String,
           userName: parsedjson['uNm'] ?? 'unknown',
           image: parsedjson['img'] as String,
-          audio: parsedjson['eId'].substring(4),
+          audio: parsedjson['eId'],
           id: parsedjson['_id'],
           like: parsedjson['isLoved'],
         );
@@ -54,7 +54,7 @@ class TrackModel {
           trackName: parsedjson['name'] as String,
           userName: parsedjson['uNm'] ?? 'unknown',
           image: parsedjson['img'] as String,
-          audio: parsedjson['eId'].substring(4),
+          audio: parsedjson['eId'],
           id: parsedjson['_id'],
           like: "true",
         );

@@ -23,7 +23,7 @@ class _VideoPlayerState extends State<VideoPlayer> {
   @override
   void initState() {
     _controller = YoutubePlayerController(
-      initialVideoId: widget.track.audio,
+      initialVideoId: widget.track.audio.substring(4),
       flags: YoutubePlayerFlags(
           autoPlay: false,
           mute: false,
@@ -41,7 +41,7 @@ class _VideoPlayerState extends State<VideoPlayer> {
   Widget build(BuildContext context) {
     return GradientContainer(
       //color: Colors.white,
-      opacity: true,
+      opacity: false,
       child: SafeArea(
         child: Scaffold(
           backgroundColor: Colors.transparent,
