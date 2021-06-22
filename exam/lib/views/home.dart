@@ -26,20 +26,6 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   late Future<List<TrackModel>> futureTrack;
   late Future<List<PlaylistModel>> futurePlaylist;
-  // PageController pageController = PageController(initialPage: 0);
-  // int _selectedIndex = 0;
-
-  // void _onItemTapped(int index) {
-  //   setState(() {
-  //     _selectedIndex = index;
-  //     WidgetsBinding.instance!.addPostFrameCallback((_) {
-  //       if (pageController.hasClients) {
-  //         pageController.animateToPage(index,
-  //             duration: Duration(milliseconds: 400), curve: Curves.ease);
-  //       }
-  //     });
-  //   });
-  // }
 
   @override
   void initState() {

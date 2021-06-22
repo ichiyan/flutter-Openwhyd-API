@@ -35,7 +35,6 @@ class _VideoPlayerState extends State<VideoPlayer> {
       });
     super.initState();
     // print('track.audio');
-    print(widget.track.audio);
   }
 
   @override

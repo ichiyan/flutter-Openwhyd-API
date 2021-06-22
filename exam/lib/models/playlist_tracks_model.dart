@@ -14,7 +14,7 @@ class PlaylistTracksList {
         image: object["img"],
         userName: object["uNm"],
         playlistName: object['pl']['name'],
-        audio: object['eId'],
+        audio: object['eId'].substring(4),
         id: object['_id'],
         like: object['isLoved'],
       );
