@@ -7,6 +7,7 @@ import 'package:openwhyd_api_music_app/models/playlist_model.dart';
 import 'package:openwhyd_api_music_app/views/playlist_tracks.dart';
 import 'package:openwhyd_api_music_app/widgets/gradient_containers.dart';
 import 'package:openwhyd_api_music_app/widgets/logout_button.dart';
+import 'package:openwhyd_api_music_app/globals.dart' as globals;
 
 class Playlist extends StatefulWidget {
   static const String routeName = "Playlist";
@@ -146,6 +147,7 @@ class _PlaylistState extends State<Playlist> {
                 ),
                 onPressed: () {
                   setState(() {
+                    print(valueText);
                     createPlaylist(valueText);
                     Navigator.pop(context);
                   });
@@ -161,15 +163,20 @@ class _PlaylistState extends State<Playlist> {
     final response = await http.post(
       Uri.parse('https://openwhyd.org/api/playlist'),
       headers: <String, String>{
-        'Content-Type': 'application/json; charset=UTF-8',
-        "Accept": "application/json",
-        "followRedirects": "false",
+        "Cookie": globals.cookieChange[0],
       },
       body: jsonEncode(<String, String>{
         'action': "create",
         'name': value,
       }),
     );
+    print(response.statusCode);
+    print(response);
+    if (response.statusCode == 200){
+      print("Success!");
+    }else {
+      throw Exception('Failed to create playlist');
+    }
   }
 
 } //build

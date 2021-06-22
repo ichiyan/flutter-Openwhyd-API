@@ -4,6 +4,7 @@ import 'package:http/http.dart' as http;
 // import 'package:webdriver/sync_io.dart';
 // import 'package:cookie_jar/cookie_jar.dart';
 import 'package:openwhyd_api_music_app/globals.dart' as globals;
+import 'package:openwhyd_api_music_app/views/bottom_nav.dart';
 import 'package:openwhyd_api_music_app/views/home.dart';
 
 // ignore: must_be_immutable
@@ -53,7 +54,7 @@ class TrackListItem extends StatelessWidget {
           Navigator.push(
             context,
             MaterialPageRoute(builder: (context) {
-              return Home();
+              return BottomNavBar();
             }),
           );
         },

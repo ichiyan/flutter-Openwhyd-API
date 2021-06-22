@@ -1,5 +1,3 @@
-import 'package:openwhyd_api_music_app/globals.dart' as globals;
-
 class TrackModel {
   late String trackName;
   late String? userName;
