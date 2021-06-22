@@ -16,7 +16,6 @@ import 'package:openwhyd_api_music_app/models/user_playlist.dart';
 // }
 
 Future<dynamic> signIn(String email, String password) async {
-  //print(password);
   password = crypto.md5.convert(utf8.encode(password)).toString();
   final res = await http.get(Uri.parse(
       'https://openwhyd.org/login?action=login&ajax=true&email=$email&md5=$password&includeUser=true'));
@@ -47,7 +46,6 @@ Future<dynamic> signIn(String email, String password) async {
     // await jar.saveFromResponse(
     //     Uri.parse('https://openwhyd.org/login?action=login&ajax=true&email=$email&md5=$password&includeUser=true'),
     //     res.headers['set-cookie']);
-
     // globals.cream = new Cookie.fromJson(res.headers);
     // print(globals.cream);
 
@@ -66,7 +64,9 @@ Future<dynamic> signIn(String email, String password) async {
 Future<List<TrackModel>> fetchHotTracks() async {
   final response =
       await http.get(Uri.parse("https://openwhyd.org/hot/1?format=json"));
+
   if (response.statusCode == 200) {
+    print(jsonDecode(response.body));
     return HotTracks.fromJson(jsonDecode(response.body)).tracks;
   } else {
     throw Exception('Failed to load tracks');
@@ -74,24 +74,24 @@ Future<List<TrackModel>> fetchHotTracks() async {
 }
 
 Future<List<TrackModel>> fetchLikedTracks() async {
-  var findUser = "https://openwhyd.org/api/user?id=" + globals.id;
+  //var findUser = "https://openwhyd.org/api/user?id=" + globals.id;
+  //final result = await http.get(Uri.parse(findUser));
 
-  final result = await http.get(Uri.parse(findUser));
-
-  if (result.statusCode == 200) {
-    var res = jsonDecode(result.body);
+  // if (result.statusCode == 200) {
+    //var res = jsonDecode(result.body);
     var findURL =
-        "https://openwhyd.org/u/" + res["id"].toString() + "/likes?format=json";
+        "https://openwhyd.org/u/" + globals.id + "/likes?format=json";
 
     final response = await http.get(Uri.parse(findURL));
     if (response.statusCode == 200) {
+      //print(response.body);
       return PlaylistTracksList.fromJson(jsonDecode(response.body)).song;
     } else {
       throw Exception('Failed to load liked tracks');
     }
-  } else {
-    throw Exception('Failed to find user');
-  }
+  // } else {
+  //   throw Exception('Failed to find user');
+  // }
 }
 
 Future<List<PlaylistModel>> fetchPlaylist() async {
@@ -99,14 +99,13 @@ Future<List<PlaylistModel>> fetchPlaylist() async {
   //, headers: {HttpHeaders.authorizationHeader: chip}
 
   print(globals.id);
-  var findUser = "https://openwhyd.org/api/user?id=" + globals.id;
+  // var findUser = "https://openwhyd.org/api/user?id=" + globals.id;
+  // final result = await http.get(Uri.parse(findUser));
 
-  final result = await http.get(Uri.parse(findUser));
-
-  if (result.statusCode == 200) {
-    var res = jsonDecode(result.body);
+  // if (result.statusCode == 200) {
+  //   var res = jsonDecode(result.body);
     var findURL = "https://openwhyd.org/u/" +
-        res["id"].toString() +
+        globals.id +
         "/playlists?format=json";
 
     final response = await http.get(Uri.parse(findURL));
@@ -115,20 +114,19 @@ Future<List<PlaylistModel>> fetchPlaylist() async {
     } else {
       throw Exception('Failed to load playlists');
     }
-  } else {
-    throw Exception('Failed to find user');
-  }
+  // } else {
+  //   throw Exception('Failed to find user');
+  // }
 }
 
 Future<List<TrackModel>> fetchPlaylistTracks(int num) async {
-  var findUser = "https://openwhyd.org/api/user?id=" + globals.id;
+  //var findUser = "https://openwhyd.org/api/user?id=" + globals.id;
+  //final result = await http.get(Uri.parse(findUser));
 
-  final result = await http.get(Uri.parse(findUser));
-
-  if (result.statusCode == 200) {
-    var res = jsonDecode(result.body);
+  // if (result.statusCode == 200) {
+  //   var res = jsonDecode(result.body);
     var findURL = "https://openwhyd.org/u/" +
-        res["id"].toString() +
+        globals.id +
         "/playlist/" +
         num.toString() +
         "?format=json";
@@ -139,7 +137,7 @@ Future<List<TrackModel>> fetchPlaylistTracks(int num) async {
     } else {
       throw Exception('Failed to load playlist tracks');
     }
-  } else {
-    throw Exception('Failed to find user');
-  }
+  // } else {
+  //   throw Exception('Failed to find user');
+  // }
 }

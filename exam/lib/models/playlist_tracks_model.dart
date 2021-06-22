@@ -16,7 +16,6 @@ class PlaylistTracksList {
         playlistName: object['pl']['name'],
         audio: object['eId'].substring(4),
         id: object['_id'],
-        like: object['isLoved'],
       );
       allPlaylists.add(newPlaylist);
     }

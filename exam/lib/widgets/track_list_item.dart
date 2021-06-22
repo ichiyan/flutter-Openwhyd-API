@@ -1,23 +1,25 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:webdriver/sync_io.dart';
-import 'package:cookie_jar/cookie_jar.dart';
+// import 'package:webdriver/sync_io.dart';
+// import 'package:cookie_jar/cookie_jar.dart';
 import 'package:openwhyd_api_music_app/globals.dart' as globals;
 
+// ignore: must_be_immutable
 class TrackListItem extends StatelessWidget {
   final String trackName;
   final String? userName;
   final String image;
   final String id;
-  final String? like;
+  final String? heartColor;
 
   TrackListItem(
       {required this.trackName,
       required this.image,
       required this.id,
-      this.like,
-      this.userName});
+      this.userName,
+      required this.heartColor,
+      });
 
   @override
   Widget build(BuildContext context) {
@@ -49,10 +51,10 @@ class TrackListItem extends StatelessWidget {
           likeTrack(context, id);
         },
         icon: Icon(
-          like == "true"
+          heartColor == "red"
               ? Icons.favorite_rounded
               : Icons.favorite_border_rounded,
-          color: like == "true" ? Colors.redAccent : Colors.white24,
+          color: heartColor == "red" ? Colors.redAccent : Colors.white24,
           size: 22,
         ),
       ),
@@ -61,7 +63,6 @@ class TrackListItem extends StatelessWidget {
 
   Future<void> likeTrack(BuildContext context, String id) async {
     var url = 'https://openwhyd.org/api/post?action=toggleLovePost&pId=' + id;
-
     print(id);
     // Cookies? ex;
     // List<Cookie> ret;
@@ -75,13 +76,12 @@ class TrackListItem extends StatelessWidget {
         "Cookie": globals.cookieChange[0],
       },
     );
-
     print(response.statusCode);
     print(response.body);
 
-    final jsonData = jsonDecode(response.body);
-
     if (response.statusCode == 200) {
+      final jsonData = jsonDecode(response.body);
+
       if(jsonData["loved"] == true){
         return showDialog(
             context: context,
@@ -111,7 +111,6 @@ class TrackListItem extends StatelessWidget {
               );
             });
       }
-
     } else {
       throw Exception('Failed to like track');
     }

@@ -1,3 +1,5 @@
+import 'dart:convert';
+import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:openwhyd_api_music_app/views/playlist_tracks.dart';
 import 'package:openwhyd_api_music_app/views/video_player.dart';
@@ -159,7 +161,7 @@ class _HomeState extends State<Home> {
                                   image: snapshot.data![index].image,
                                   userName: snapshot.data![index].userName,
                                   id: snapshot.data![index].id,
-                                  like: snapshot.data![index].like,
+                                  heartColor: snapshot.data![index].heartColor,
                                 ),
                                 onTap: () {
                                   Navigator.push(

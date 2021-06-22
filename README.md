@@ -15,5 +15,6 @@ Website: https://openwhyd.org/
 CAUTION:
 - Can't like tracks that have been remove
     (Openwhyd's Hot Tracks continues to display tracks that have been removed)
+- Heart won't change color
 - Registration is not connected to the API
 - 
