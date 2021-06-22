@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:core';
 import 'package:http/http.dart' as http;
 import 'package:crypto/crypto.dart' as crypto;
 import 'package:openwhyd_api_music_app/models/hot_tracks.dart';
@@ -7,6 +8,7 @@ import 'package:openwhyd_api_music_app/models/playlist_tracks_model.dart';
 import 'package:openwhyd_api_music_app/models/track_model.dart';
 import 'package:openwhyd_api_music_app/globals.dart' as globals;
 import 'package:openwhyd_api_music_app/models/user_playlist.dart';
+import 'package:webdriver/sync_io.dart';
 
 // Future<List<dynamic>> getHotTracks() async {
 //   var response = await http.get(Uri.parse(apiUrl));
@@ -22,9 +24,11 @@ Future<dynamic> signIn(String email, String password) async {
 
   print(res.statusCode);
   print(res.request);
+  print(res.headers);
 
   if (res.statusCode == 200) {
     final jsonData = jsonDecode(res.body);
+    //final head = jsonDecode(res.headers);
     // return User.fromJson(jsonDecode(res.body));
     // return type = dynamic; returning a json object from res.body due to loggin in succesfully return only a redirection url;
     print(jsonData);
@@ -33,6 +37,20 @@ Future<dynamic> signIn(String email, String password) async {
     globals.userName = jsonData["user"]["name"];
     print(globals.id);
     print(globals.userName);
+
+    globals.cookieFind = res.headers['set-cookie'];
+    globals.cookieFind!.split(RegExp(r"; "));
+    globals.cookieChange = globals.cookieFind![0];
+    print(globals.cookieFind);
+    print(globals.cookieChange);
+
+    // var jar = CookieJar();
+    // await jar.saveFromResponse(
+    //     Uri.parse('https://openwhyd.org/login?action=login&ajax=true&email=$email&md5=$password&includeUser=true'),
+    //     res.headers['set-cookie']);
+
+    globals.cream = new Cookie.fromJson(res.headers);
+    print(globals.cream);
 
     if (jsonData["redirect"] != null) {
       return jsonData;

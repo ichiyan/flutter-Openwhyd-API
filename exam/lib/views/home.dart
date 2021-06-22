@@ -65,7 +65,7 @@ class _HomeState extends State<Home> {
                     Row(
                       children: [
                         Text(
-                          'Hi There,',
+                          'Hi there,',
                           style: TextStyle(
                               letterSpacing: 2,
                               color: Theme.of(context).accentColor,

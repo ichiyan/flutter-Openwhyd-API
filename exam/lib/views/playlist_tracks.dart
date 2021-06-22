@@ -121,7 +121,7 @@ class _PlaylistTracksState extends State<PlaylistTracks> {
         context: context,
         builder: (context) {
           return AlertDialog(
-            title: Text('Playlist name'),
+            title: Text('Track'),
             content: TextField(
               onChanged: (value) {
                 setState(() {
@@ -130,7 +130,7 @@ class _PlaylistTracksState extends State<PlaylistTracks> {
               },
               controller: textFieldController,
               decoration:
-                  InputDecoration(hintText: "Input name of new playlist"),
+                  InputDecoration(hintText: "Input track link"),
             ),
             actions: <Widget>[
               TextButton(

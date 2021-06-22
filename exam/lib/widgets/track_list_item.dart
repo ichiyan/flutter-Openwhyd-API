@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:webdriver/sync_io.dart';
+import 'package:cookie_jar/cookie_jar.dart';
+import '../globals.dart';
 
 class TrackListItem extends StatelessWidget {
   final String trackName;
@@ -57,10 +60,25 @@ class TrackListItem extends StatelessWidget {
 
   Future<void> likeTrack(BuildContext context, String id) async {
     var url = 'https://openwhyd.org/api/post?action=toggleLovePost&pId=' + id;
-    final response = await http.get(Uri.parse(url));
 
     print(id);
+    // Cookies? ex;
+    // List<Cookie> ret;
+    // chip = ex!.getCookie("whydSid");
+    // print(chip);
+
+    final response = await http.get(
+      Uri.parse(url),
+      headers: <String, String>{
+        //"Accept" : "*/*",
+        "Cookie": "whydSid=s%3A3PID3DkFHDT2AOhxbEfmHY3oHRyVHEGl.6RmUyEO8RrPcbAJ1Sn0AuIjm2oPMn0B9%2Brj%2F8NZz0mA",
+      },
+    );
+
     print(response.statusCode);
+    print(response.request);
+    print(response.body);
+
     if (response.statusCode == 200) {
       return showDialog(
           context: context,

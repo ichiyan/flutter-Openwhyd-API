@@ -34,6 +34,7 @@ dependencies:
   intl: ^0.17.0
   youtube_player_flutter: ^8.0.0
   webdriver: ^3.0.0
+  cookie_jar: ^3.0.1
 
 
 dev_dependencies:
