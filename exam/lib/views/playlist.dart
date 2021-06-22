@@ -164,6 +164,8 @@ class _PlaylistState extends State<Playlist> {
       Uri.parse('https://openwhyd.org/api/playlist'),
       headers: <String, String>{
         "Cookie": globals.cookieChange[0],
+        'Content-Type': 'application/json; charset=utf-8',
+        "Accept": "*/*",
       },
       body: jsonEncode(<String, String>{
         'action': "create",
@@ -171,7 +173,7 @@ class _PlaylistState extends State<Playlist> {
       }),
     );
     print(response.statusCode);
-    print(response);
+    print(response.body);
     if (response.statusCode == 200){
       print("Success!");
     }else {
