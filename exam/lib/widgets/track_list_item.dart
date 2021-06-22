@@ -4,6 +4,7 @@ import 'package:http/http.dart' as http;
 // import 'package:webdriver/sync_io.dart';
 // import 'package:cookie_jar/cookie_jar.dart';
 import 'package:openwhyd_api_music_app/globals.dart' as globals;
+import 'package:openwhyd_api_music_app/views/home.dart';
 
 // ignore: must_be_immutable
 class TrackListItem extends StatelessWidget {
@@ -11,7 +12,7 @@ class TrackListItem extends StatelessWidget {
   final String? userName;
   final String image;
   final String id;
-  final String? heartColor;
+  final bool heartColor;
 
   TrackListItem(
       {required this.trackName,
@@ -49,12 +50,18 @@ class TrackListItem extends StatelessWidget {
       trailing: IconButton(
         onPressed: () {
           likeTrack(context, id);
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) {
+              return Home();
+            }),
+          );
         },
         icon: Icon(
-          heartColor == "red"
+          heartColor
               ? Icons.favorite_rounded
               : Icons.favorite_border_rounded,
-          color: heartColor == "red" ? Colors.redAccent : Colors.white24,
+          color: heartColor? Colors.redAccent : Colors.white24,
           size: 22,
         ),
       ),

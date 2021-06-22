@@ -63,7 +63,12 @@ Future<dynamic> signIn(String email, String password) async {
 
 Future<List<TrackModel>> fetchHotTracks() async {
   final response =
-      await http.get(Uri.parse("https://openwhyd.org/hot/1?format=json"));
+      await http.get(
+        Uri.parse("https://openwhyd.org/hot/1?format=json"),
+        headers: <String, String>{
+          "Cookie": globals.cookieChange[0],
+        },
+      );
 
   if (response.statusCode == 200) {
     print(jsonDecode(response.body));

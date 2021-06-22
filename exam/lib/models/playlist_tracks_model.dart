@@ -16,6 +16,7 @@ class PlaylistTracksList {
         playlistName: object['pl']['name'],
         audio: object['eId'].substring(4),
         id: object['_id'],
+        heartColor: false,
       );
       allPlaylists.add(newPlaylist);
     }

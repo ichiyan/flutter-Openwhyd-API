@@ -7,14 +7,14 @@ class TrackModel {
   late String image;
   late String audio;
   late String id;
-  late String? heartColor;
+  late bool heartColor;
 
   TrackModel(
       {required this.trackName,
       required this.image,
       required this.audio,
       required this.id,
-      this.heartColor,
+      required this.heartColor,
       this.playlistName,
       this.userName});
 
@@ -27,7 +27,7 @@ class TrackModel {
           image: parsedjson['img'] as String,
           audio: parsedjson['eId'],
           id: parsedjson['_id'],
-          heartColor: globals.heartColorG,
+          heartColor: parsedjson['isLoved'],
         );
     } else {
       return TrackModel(
@@ -36,7 +36,7 @@ class TrackModel {
           image: parsedjson['img'] as String,
           audio: parsedjson['eId'],
           id: parsedjson['_id'],
-          heartColor: globals.heartColorG,
+          heartColor: parsedjson['isLoved'],
         );
     }
   }
