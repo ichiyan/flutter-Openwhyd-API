@@ -7,7 +7,6 @@ import 'package:openwhyd_api_music_app/globals.dart' as globals;
 import 'package:openwhyd_api_music_app/api/openwhyd.dart';
 import 'package:openwhyd_api_music_app/app_colors.dart';
 import 'package:openwhyd_api_music_app/models/playlist_model.dart';
-import 'package:openwhyd_api_music_app/views/player.dart';
 import 'package:openwhyd_api_music_app/widgets/logout_button.dart';
 import 'package:openwhyd_api_music_app/models/track_model.dart';
 import 'package:openwhyd_api_music_app/widgets/track_list_item.dart';

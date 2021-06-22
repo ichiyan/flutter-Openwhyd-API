@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:openwhyd_api_music_app/api/openwhyd.dart';
+import 'package:openwhyd_api_music_app/views/video_player.dart';
 import 'package:openwhyd_api_music_app/widgets/gradient_containers.dart';
 import 'package:openwhyd_api_music_app/widgets/playlist_tracks_item.dart';
 import 'package:openwhyd_api_music_app/models/track_model.dart';
-import 'package:openwhyd_api_music_app/views/player.dart';
 import 'package:openwhyd_api_music_app/widgets/logout_button.dart';
 
 class Likes extends StatefulWidget {
@@ -71,8 +71,8 @@ class _LikesState extends State<Likes> {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) =>
-                                        Player(track: snapshot.data![index])),
+                                    builder: (context) => VideoPlayer(
+                                        track: snapshot.data![index])),
                               );
                             },
                           ),

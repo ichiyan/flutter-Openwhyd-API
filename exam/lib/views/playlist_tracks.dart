@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:openwhyd_api_music_app/api/openwhyd.dart';
+import 'package:openwhyd_api_music_app/views/video_player.dart';
 import 'package:openwhyd_api_music_app/widgets/playlist_tracks_item.dart';
 import 'package:openwhyd_api_music_app/models/track_model.dart';
-import 'package:openwhyd_api_music_app/views/player.dart';
 import 'package:openwhyd_api_music_app/widgets/logout_button.dart';
 import 'package:openwhyd_api_music_app/widgets/gradient_containers.dart';
 import 'dart:convert';
@@ -94,8 +94,8 @@ class _PlaylistTracksState extends State<PlaylistTracks> {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) =>
-                                        Player(track: snapshot.data![index])),
+                                    builder: (context) => VideoPlayer(
+                                        track: snapshot.data![index])),
                               );
                             },
                           ),
