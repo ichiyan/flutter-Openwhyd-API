@@ -7,7 +7,6 @@ import 'package:openwhyd_api_music_app/api/openwhyd.dart';
 import 'package:openwhyd_api_music_app/app_colors.dart';
 import 'package:openwhyd_api_music_app/models/playlist_model.dart';
 import 'package:openwhyd_api_music_app/views/player.dart';
-import 'package:openwhyd_api_music_app/views/player2.dart';
 import 'package:openwhyd_api_music_app/widgets/logout_button.dart';
 import 'package:openwhyd_api_music_app/models/track_model.dart';
 import 'package:openwhyd_api_music_app/widgets/track_list_item.dart';
@@ -180,8 +179,8 @@ class _HomeState extends State<Home> {
                                   Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                        builder: (context) => MyHomePage(
-                                            url: snapshot.data![index].audio.substring(4))),
+                                        builder: (context) => Player(
+                                            track: snapshot.data![index])),
                                   );
                                 },
                               ),

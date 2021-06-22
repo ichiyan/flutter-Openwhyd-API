@@ -58,10 +58,9 @@ Future<List<TrackModel>> fetchHotTracks() async {
 
 Future<List<TrackModel>> fetchLikedTracks() async {
   var findUser = "https://openwhyd.org/api/user?id=" + globals.id;
-  print(globals.id);
+
   final result = await http.get(Uri.parse(findUser));
-  print(result.statusCode);
-  print(result);
+
   if (result.statusCode == 200) {
     var res = jsonDecode(result.body);
     var findURL =
