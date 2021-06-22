@@ -39,10 +39,10 @@ Future<dynamic> signIn(String email, String password) async {
     print(globals.userName);
 
     globals.cookieFind = res.headers['set-cookie'];
-    globals.cookieFind!.split(RegExp(r"; "));
-    globals.cookieChange = globals.cookieFind![0];
+    globals.cookieChange = globals.cookieFind.split(RegExp(r"; "));
     print(globals.cookieFind);
     print(globals.cookieChange);
+    print(globals.cookieChange[0]);
 
     // var jar = CookieJar();
     // await jar.saveFromResponse(

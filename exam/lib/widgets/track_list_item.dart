@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:webdriver/sync_io.dart';
@@ -79,17 +81,40 @@ class TrackListItem extends StatelessWidget {
     print(response.request);
     print(response.body);
 
+    final jsonData = jsonDecode(response.body);
+    print(jsonData["loved"]);
+
     if (response.statusCode == 200) {
-      return showDialog(
-          context: context,
-          builder: (context) {
-            Future.delayed(Duration(seconds: 2), () {
-              Navigator.of(context).pop(true);
+      if(jsonData["loved"] == true){
+        return showDialog(
+            context: context,
+            builder: (context) {
+              Future.delayed(Duration(seconds: 2), () {
+                Navigator.of(context).pop(true);
+              });
+              return AlertDialog(
+                title: Text(
+                  "Track liked!",
+                  textAlign: TextAlign.center,
+                ),
+              );
             });
-            return AlertDialog(
-              title: Text("Track liked!"),
-            );
-          });
+      } else {
+        return showDialog(
+            context: context,
+            builder: (context) {
+              Future.delayed(Duration(seconds: 2), () {
+                Navigator.of(context).pop(true);
+              });
+              return AlertDialog(
+                title: Text(
+                  "Removed ike from track :(",
+                  textAlign: TextAlign.center,
+                ),
+              );
+            });
+      }
+
     } else {
       throw Exception('Failed to like track');
     }
