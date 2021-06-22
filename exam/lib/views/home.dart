@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:openwhyd_api_music_app/views/playlist_tracks.dart';
+import 'package:openwhyd_api_music_app/views/video_player.dart';
 import 'package:openwhyd_api_music_app/widgets/gradient_containers.dart';
 import 'package:openwhyd_api_music_app/widgets/horizontal_playlist_item.dart';
 import 'package:openwhyd_api_music_app/globals.dart' as globals;
@@ -179,7 +180,7 @@ class _HomeState extends State<Home> {
                                   Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                        builder: (context) => Player(
+                                        builder: (context) => VideoPlayer(
                                             track: snapshot.data![index])),
                                   );
                                 },
