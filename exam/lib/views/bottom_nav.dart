@@ -25,6 +25,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
 
   void _onItemTapped(int index) {
     setState(() {
+      print(index);
       _selectedIndex = index;
       WidgetsBinding.instance!.addPostFrameCallback((_) {
         if (pageController.hasClients) {

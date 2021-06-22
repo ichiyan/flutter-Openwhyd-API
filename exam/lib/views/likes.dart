@@ -25,6 +25,7 @@ class _LikesState extends State<Likes> {
 
   @override
   Widget build(BuildContext context) {
+    print(futureTrack);
     return GradientContainer(
       opacity: true,
       child: Scaffold(
@@ -58,6 +59,7 @@ class _LikesState extends State<Likes> {
                     builder: (BuildContext context,
                         AsyncSnapshot<List<TrackModel>> snapshot) {
                       if (snapshot.hasData) {
+                        print('hello');
                         return ListView.builder(
                           itemCount: snapshot.data!.length,
                           itemBuilder: (context, index) => GestureDetector(

@@ -121,7 +121,7 @@ class _RegistrationState extends State<Registration> with ValidationMixin {
                           print('done typing');
                           signUp(context, fullNameTextController.text, emailTextController.text, passwordTextController.text)
                               .then((value) {
-                                print('pushing');
+                                print('Successfully registered');
                               }).catchError((error) {
                                 print(error);
                           });
@@ -167,11 +167,7 @@ class _RegistrationState extends State<Registration> with ValidationMixin {
 
   Future<void> signUp(BuildContext context, name, email, password) async {
     if (formKey.currentState!.validate()) {
-      print("Valid Inputs");
-      print(password);
-      password = crypto.md5.convert(utf8.encode(password)).toString();
-      print(password);
-      print("Registering...");
+      // password = crypto.md5.convert(utf8.encode(password)).toString();
       Future<User> user = createUser(name, email, password);
       user.then((data) { print(data.name);});
 
@@ -195,7 +191,7 @@ class _RegistrationState extends State<Registration> with ValidationMixin {
 
 Future<User> createUser(String name, String email, String password) async{
   final response = await http.post(
-    Uri.parse('https://openwhyd.org/register'),
+    Uri.parse('https://openwhyd.org/register?name=$name&email=$email&password=$password'),
     headers: <String, String>{
       'Content-Type': 'application/json; charset=UTF-8',
       "Accept" : "application/json",
