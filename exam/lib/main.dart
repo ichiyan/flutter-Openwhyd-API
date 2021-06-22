@@ -6,6 +6,7 @@ void main() {
   runApp(MaterialApp(
     theme: ThemeData(
       brightness: Brightness.dark,
+      hintColor: Colors.grey[400],
     ),
     home: Login(),
   ));
