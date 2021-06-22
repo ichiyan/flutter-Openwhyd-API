@@ -8,7 +8,6 @@ import 'package:openwhyd_api_music_app/models/playlist_tracks_model.dart';
 import 'package:openwhyd_api_music_app/models/track_model.dart';
 import 'package:openwhyd_api_music_app/globals.dart' as globals;
 import 'package:openwhyd_api_music_app/models/user_playlist.dart';
-import 'package:webdriver/sync_io.dart';
 
 // Future<List<dynamic>> getHotTracks() async {
 //   var response = await http.get(Uri.parse(apiUrl));
@@ -49,8 +48,8 @@ Future<dynamic> signIn(String email, String password) async {
     //     Uri.parse('https://openwhyd.org/login?action=login&ajax=true&email=$email&md5=$password&includeUser=true'),
     //     res.headers['set-cookie']);
 
-    globals.cream = new Cookie.fromJson(res.headers);
-    print(globals.cream);
+    // globals.cream = new Cookie.fromJson(res.headers);
+    // print(globals.cream);
 
     if (jsonData["redirect"] != null) {
       return jsonData;
@@ -61,7 +60,7 @@ Future<dynamic> signIn(String email, String password) async {
     // then throw an exception.
     throw Exception('Failed to login.');
   }
-  print('4');
+  //print('4');
 }
 
 Future<List<TrackModel>> fetchHotTracks() async {
