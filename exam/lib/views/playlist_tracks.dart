@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:openwhyd_api_music_app/api/openwhyd.dart';
 import 'package:openwhyd_api_music_app/views/video_player.dart';
+import 'package:openwhyd_api_music_app/widgets/full_screen_dialog.dart';
 import 'package:openwhyd_api_music_app/widgets/playlist_tracks_item.dart';
 import 'package:openwhyd_api_music_app/models/track_model.dart';
 import 'package:openwhyd_api_music_app/widgets/logout_button.dart';
@@ -44,7 +45,13 @@ class _PlaylistTracksState extends State<PlaylistTracks> {
         backgroundColor: Colors.transparent,
         floatingActionButton: FloatingActionButton(
           onPressed: () {
-            trackForm(context);
+            Navigator.push(
+              context,
+              MaterialPageRoute<void>(
+                builder: (context) => FullScreenDialog(),
+                fullscreenDialog: true,
+              ),
+            );
           },
           child: Icon(
             Icons.add,
@@ -113,68 +120,6 @@ class _PlaylistTracksState extends State<PlaylistTracks> {
           ),
         ),
       ),
-    );
-  }
-
-  Future<void> trackForm(BuildContext context) async {
-    return showDialog(
-        context: context,
-        builder: (context) {
-          return AlertDialog(
-            title: Text('Track'),
-            content: TextField(
-              onChanged: (value) {
-                setState(() {
-                  valueText = value;
-                });
-              },
-              controller: textFieldController,
-              decoration:
-                  InputDecoration(hintText: "Input track link"),
-            ),
-            actions: <Widget>[
-              TextButton(
-                style: TextButton.styleFrom(
-                  backgroundColor: Colors.red,
-                  primary: Colors.white,
-                ),
-                child: Text('CANCEL'),
-                onPressed: () {
-                  setState(() {
-                    Navigator.pop(context);
-                  });
-                },
-              ),
-              TextButton(
-                child: Text('CREATE'),
-                style: TextButton.styleFrom(
-                  backgroundColor: Colors.teal,
-                  primary: Colors.white,
-                ),
-                onPressed: () {
-                  setState(() {
-                    addTrack(valueText);
-                    Navigator.pop(context);
-                  });
-                },
-              ),
-            ],
-          );
-        });
-  }
-
-  Future<void> addTrack(String value) async {
-    final response = await http.post(
-      Uri.parse('https://openwhyd.org/api/playlist'),
-      headers: <String, String>{
-        'Content-Type': 'application/json; charset=UTF-8',
-        "Accept": "application/json",
-        "followRedirects": "false",
-      },
-      body: jsonEncode(<String, String>{
-        'action': "create",
-        'name': value,
-      }),
     );
   }
 }

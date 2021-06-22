@@ -26,14 +26,15 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  late Future<List<TrackModel>> futureTrackList;
   late Future<List<TrackModel>> futureTrack;
-  late Future<List<PlaylistModel>> futurePlaylist;
+
 
   @override
   void initState() {
     super.initState();
+    futureTrackList = fetchTrackList();
     futureTrack = fetchHotTracks();
-    futurePlaylist = fetchPlaylist();
   }
 
   @override
@@ -92,7 +93,7 @@ class _HomeState extends State<Home> {
                       height: 30.0,
                     ),
                     Text(
-                      'Your Playlists',
+                      'Your Tracks',
                       style: TextStyle(
                           letterSpacing: 2,
                           color: AppColors.styleColor,
@@ -105,17 +106,17 @@ class _HomeState extends State<Home> {
                     Container(
                       height: 0.28 * size.height,
                       width: size.width * 0.9,
-                      child: FutureBuilder<List<PlaylistModel>>(
-                        future: futurePlaylist,
+                      child: FutureBuilder<List<TrackModel>>(
+                        future: futureTrackList,
                         builder: (BuildContext context,
-                            AsyncSnapshot<List<PlaylistModel>> snapshot) {
+                            AsyncSnapshot<List<TrackModel>> snapshot) {
                           if (snapshot.hasData) {
                             return ListView.builder(
                               scrollDirection: Axis.horizontal,
                               itemCount: snapshot.data!.length,
                               itemBuilder: (context, index) => GestureDetector(
                                 child: HorizontalPlaylistItem(
-                                  playlist: snapshot.data![index].playlist,
+                                  title: snapshot.data![index].trackName,
                                   image: snapshot.data![index].image,
                                 ),
                                 onTap: () {

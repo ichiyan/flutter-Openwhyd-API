@@ -78,6 +78,23 @@ Future<List<TrackModel>> fetchHotTracks() async {
   }
 }
 
+Future<List<TrackModel>> fetchTrackList() async {
+  final response =
+  await http.get(
+    Uri.parse("https://openwhyd.org/stream?format=json"),
+    headers: <String, String>{
+      "Cookie": globals.cookieChange[0],
+    },
+  );
+
+  if (response.statusCode == 200) {
+    print(jsonDecode(response.body));
+    return PlaylistTracksList.fromJson(jsonDecode(response.body)).song;
+  } else {
+    throw Exception('Failed to load tracks');
+  }
+}
+
 Future<List<TrackModel>> fetchLikedTracks() async {
   //var findUser = "https://openwhyd.org/api/user?id=" + globals.id;
   //final result = await http.get(Uri.parse(findUser));
@@ -138,6 +155,7 @@ Future<List<TrackModel>> fetchPlaylistTracks(int num) async {
 
     final response = await http.get(Uri.parse(findURL));
     if (response.statusCode == 200) {
+      print(response.body);
       return PlaylistTracksList.fromJson(jsonDecode(response.body)).song;
     } else {
       throw Exception('Failed to load playlist tracks');
