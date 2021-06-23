@@ -25,6 +25,7 @@ class PlaylistTracksItem extends StatelessWidget {
               image: DecorationImage(
                 image: NetworkImage(image),
               ),
+              //borderRadius: BorderRadius.circular(16.0),
             ),
           ),
           SizedBox(
@@ -71,6 +72,9 @@ class PlaylistTracksItem extends StatelessWidget {
                       ),
                     ),
                   ],
+                ),
+                SizedBox(
+                  height: 20.0,
                 ),
               ],
             ),

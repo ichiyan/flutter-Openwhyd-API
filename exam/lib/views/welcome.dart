@@ -59,7 +59,7 @@ class Welcome extends StatelessWidget {
                     ),
                   ),
                   Positioned.fill(
-                    top: 450,
+                    top: 480,
                     child: Align(
                       alignment: Alignment.bottomCenter,
                       child: Column(

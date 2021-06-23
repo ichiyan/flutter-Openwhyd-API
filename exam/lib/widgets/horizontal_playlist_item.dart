@@ -45,7 +45,7 @@ class HorizontalPlaylistItem extends StatelessWidget {
                 child: Text(
                   title,
                   maxLines: 2,
-                  overflow: TextOverflow.fade,
+                  overflow: TextOverflow.ellipsis,
                   style: TextStyle(
                     color: Colors.white,
                     fontWeight: FontWeight.bold,

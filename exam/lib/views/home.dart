@@ -157,6 +157,7 @@ class _HomeState extends State<Home> {
                           fontWeight: FontWeight.w500),
                     ),
                     Container(
+                      color: Colors.transparent,
                       height: 0.95 * size.height,
                       width: size.width,
                       child: FutureBuilder<List<TrackModel>>(
@@ -164,44 +165,58 @@ class _HomeState extends State<Home> {
                         builder: (BuildContext context,
                             AsyncSnapshot<List<TrackModel>> snapshot) {
                           if (snapshot.hasData) {
-                            return DraggableScrollableSheet(initialChildSize: .85,maxChildSize: .9  ,builder: (context, ScrollController sc) {
-                              return Container(
-                                  color: Colors.black12,
-                                  child: ListView.builder(
-                                    itemCount: snapshot.data!.length,
-                                    itemBuilder: (context, index) => GestureDetector(
-                                        child: TrackListItem(
-                                          trackName: snapshot.data![index].trackName,
-                                          image: snapshot.data![index].image,
-                                          userName: snapshot.data![index].userName,
-                                          id: snapshot.data![index].id,
-                                          heartColor:
-                                          snapshot.data![index].heartColor,
-                                        ),
-                                        onTap: () {
-                                          if (snapshot.data![index].audio
-                                              .substring(1, 3) ==
-                                              'yt') {
-                                            Navigator.push(
-                                              context,
-                                              MaterialPageRoute(
-                                                  builder: (context) => VideoPlayer(
-                                                    track: snapshot.data![index],
-                                                    isYTFormat: true,
-                                                  )),
-                                            );
-                                          } else {
-                                            Navigator.push(
-                                              context,
-                                              MaterialPageRoute(
-                                                  builder: (context) => Player(
-                                                      track: snapshot.data![index])),
-                                            );
-                                          }
-                                        }),
-                                  )
-                              );
-                            });
+                            return DraggableScrollableSheet(
+                                initialChildSize: .98,
+                                maxChildSize: .999,
+                                builder: (context, ScrollController sc) {
+                                  return Container(
+                                      color: Colors.transparent,
+                                      child: ListView.builder(
+                                        itemCount: snapshot.data!.length,
+                                        itemBuilder: (context, index) =>
+                                            GestureDetector(
+                                                child: TrackListItem(
+                                                  trackName: snapshot
+                                                      .data![index].trackName,
+                                                  image: snapshot
+                                                      .data![index].image,
+                                                  userName: snapshot
+                                                      .data![index].userName,
+                                                  id: snapshot.data![index].id,
+                                                  heartColor: snapshot
+                                                      .data![index].heartColor,
+                                                ),
+                                                onTap: () {
+                                                  if (snapshot
+                                                          .data![index].audio
+                                                          .substring(1, 3) ==
+                                                      'yt') {
+                                                    Navigator.push(
+                                                      context,
+                                                      MaterialPageRoute(
+                                                          builder: (context) =>
+                                                              VideoPlayer(
+                                                                track: snapshot
+                                                                        .data![
+                                                                    index],
+                                                                isYTFormat:
+                                                                    true,
+                                                              )),
+                                                    );
+                                                  } else {
+                                                    Navigator.push(
+                                                      context,
+                                                      MaterialPageRoute(
+                                                          builder: (context) =>
+                                                              Player(
+                                                                  track: snapshot
+                                                                          .data![
+                                                                      index])),
+                                                    );
+                                                  }
+                                                }),
+                                      ));
+                                });
                           } else if (snapshot.hasError) {
                             return Text("${snapshot.error}");
                           } else {
