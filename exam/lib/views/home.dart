@@ -156,50 +156,52 @@ class _HomeState extends State<Home> {
                           fontSize: 18,
                           fontWeight: FontWeight.w500),
                     ),
-                    SizedBox(
-                      height: 10.0,
-                    ),
                     Container(
-                      height: 0.35 * size.height,
+                      height: 0.95 * size.height,
                       width: size.width,
                       child: FutureBuilder<List<TrackModel>>(
                         future: futureTrack,
                         builder: (BuildContext context,
                             AsyncSnapshot<List<TrackModel>> snapshot) {
                           if (snapshot.hasData) {
-                            return ListView.builder(
-                              itemCount: snapshot.data!.length,
-                              itemBuilder: (context, index) => GestureDetector(
-                                  child: TrackListItem(
-                                    trackName: snapshot.data![index].trackName,
-                                    image: snapshot.data![index].image,
-                                    userName: snapshot.data![index].userName,
-                                    id: snapshot.data![index].id,
-                                    heartColor:
-                                        snapshot.data![index].heartColor,
-                                  ),
-                                  onTap: () {
-                                    if (snapshot.data![index].audio
-                                            .substring(1, 3) ==
-                                        'yt') {
-                                      Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) => VideoPlayer(
-                                                  track: snapshot.data![index],
-                                                  isYTFormat: true,
-                                                )),
-                                      );
-                                    } else {
-                                      Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) => Player(
-                                                track: snapshot.data![index])),
-                                      );
-                                    }
-                                  }),
-                            );
+                            return DraggableScrollableSheet(initialChildSize: .85,maxChildSize: .9  ,builder: (context, ScrollController sc) {
+                              return Container(
+                                  color: Colors.black12,
+                                  child: ListView.builder(
+                                    itemCount: snapshot.data!.length,
+                                    itemBuilder: (context, index) => GestureDetector(
+                                        child: TrackListItem(
+                                          trackName: snapshot.data![index].trackName,
+                                          image: snapshot.data![index].image,
+                                          userName: snapshot.data![index].userName,
+                                          id: snapshot.data![index].id,
+                                          heartColor:
+                                          snapshot.data![index].heartColor,
+                                        ),
+                                        onTap: () {
+                                          if (snapshot.data![index].audio
+                                              .substring(1, 3) ==
+                                              'yt') {
+                                            Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: (context) => VideoPlayer(
+                                                    track: snapshot.data![index],
+                                                    isYTFormat: true,
+                                                  )),
+                                            );
+                                          } else {
+                                            Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: (context) => Player(
+                                                      track: snapshot.data![index])),
+                                            );
+                                          }
+                                        }),
+                                  )
+                              );
+                            });
                           } else if (snapshot.hasError) {
                             return Text("${snapshot.error}");
                           } else {
