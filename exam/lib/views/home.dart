@@ -9,6 +9,7 @@ import 'package:openwhyd_api_music_app/app_colors.dart';
 import 'package:openwhyd_api_music_app/widgets/logout_button.dart';
 import 'package:openwhyd_api_music_app/models/track_model.dart';
 import 'package:openwhyd_api_music_app/widgets/track_list_item.dart';
+import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 class Home extends StatefulWidget {
   static const String routeName = "home";
@@ -116,11 +117,23 @@ class _HomeState extends State<Home> {
                                   image: snapshot.data![index].image,
                                 ),
                                 onTap: () {
-                                  Navigator.push(
+                                  if (YoutubePlayer.convertUrlToId(
+                                          snapshot.data![index].audio) !=
+                                      null) {
+                                    Navigator.push(
                                       context,
                                       MaterialPageRoute(
                                           builder: (context) => VideoPlayer(
-                                              track: snapshot.data![index])));
+                                              track: snapshot.data![index])),
+                                    );
+                                  } else {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => Player(
+                                              track: snapshot.data![index])),
+                                    );
+                                  }
                                 },
                               ),
                             );
@@ -157,34 +170,35 @@ class _HomeState extends State<Home> {
                             return ListView.builder(
                               itemCount: snapshot.data!.length,
                               itemBuilder: (context, index) => GestureDetector(
-                                child: TrackListItem(
-                                  trackName: snapshot.data![index].trackName,
-                                  image: snapshot.data![index].image,
-                                  userName: snapshot.data![index].userName,
-                                  id: snapshot.data![index].id,
-                                  heartColor: snapshot.data![index].heartColor,
-                                ),
-                                onTap: () {
-                                  if (snapshot.data![index].audio
-                                          .substring(1, 3) ==
-                                      'yt') {
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) => VideoPlayer(
-                                              track: snapshot.data![index],
-                                              isYTFormat: true)),
-                                    );
-                                  } else {
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) => Player(
-                                              track: snapshot.data![index])),
-                                    );
-                                  }
-                                },
-                              ),
+                                  child: TrackListItem(
+                                    trackName: snapshot.data![index].trackName,
+                                    image: snapshot.data![index].image,
+                                    userName: snapshot.data![index].userName,
+                                    id: snapshot.data![index].id,
+                                    heartColor:
+                                        snapshot.data![index].heartColor,
+                                  ),
+                                  onTap: () {
+                                    if (snapshot.data![index].audio
+                                            .substring(1, 3) ==
+                                        'yt') {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) => VideoPlayer(
+                                                  track: snapshot.data![index],
+                                                  isYTFormat: true,
+                                                )),
+                                      );
+                                    } else {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) => Player(
+                                                track: snapshot.data![index])),
+                                      );
+                                    }
+                                  }),
                             );
                           } else if (snapshot.hasError) {
                             return Text("${snapshot.error}");
