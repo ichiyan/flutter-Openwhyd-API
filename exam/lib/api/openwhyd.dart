@@ -63,13 +63,12 @@ Future<dynamic> signIn(String email, String password) async {
 }
 
 Future<List<TrackModel>> fetchHotTracks() async {
-  final response =
-      await http.get(
-        Uri.parse("https://openwhyd.org/hot/1?format=json"),
-        headers: <String, String>{
-          "Cookie": globals.cookieChange[0],
-        },
-      );
+  final response = await http.get(
+    Uri.parse("https://openwhyd.org/hot/1?format=json"),
+    headers: <String, String>{
+      "Cookie": globals.cookieChange[0],
+    },
+  );
 
   if (response.statusCode == 200) {
     //print(jsonDecode(response.body));
@@ -80,8 +79,7 @@ Future<List<TrackModel>> fetchHotTracks() async {
 }
 
 Future<List<TrackModel>> fetchTrackList() async {
-  final response =
-  await http.get(
+  final response = await http.get(
     Uri.parse("https://openwhyd.org/stream?format=json"),
     headers: <String, String>{
       "Cookie": globals.cookieChange[0],
@@ -146,21 +144,7 @@ Future<List<TrackModel>> fetchPlaylistTracks(int num) async {
 
   // if (result.statusCode == 200) {
   //   var res = jsonDecode(result.body);
-<<<<<<< Updated upstream
-    var findURL = "https://openwhyd.org/u/" +
-        globals.id +
-        "/playlist/" +
-        num.toString() +
-        "?format=json";
 
-    final response = await http.get(Uri.parse(findURL));
-    if (response.statusCode == 200) {
-      print(response.body);
-      return PlaylistTracksList.fromJson(jsonDecode(response.body)).song;
-    } else {
-      throw Exception('Failed to load playlist tracks');
-    }
-=======
   var findURL = "https://openwhyd.org/u/" +
       globals.id +
       "/playlist/" +
@@ -173,8 +157,4 @@ Future<List<TrackModel>> fetchPlaylistTracks(int num) async {
   } else {
     throw Exception('Failed to load playlist tracks');
   }
->>>>>>> Stashed changes
-  // } else {
-  //   throw Exception('Failed to find user');
-  // }
 }
