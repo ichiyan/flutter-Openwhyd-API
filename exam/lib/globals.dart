@@ -1,4 +1,5 @@
 library my_prj.globals;
+
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:webdriver/sync_core.dart';
@@ -12,16 +13,17 @@ var cream;
 var vanilla;
 String heartColorG = "";
 String userName = "";
+bool isValid = false;
 
 Future<void> trackStatus(String id) async {
-  var url = "https://openwhyd.org/api/post?action=lovers&pId="+id;
+  var url = "https://openwhyd.org/api/post?action=lovers&pId=" + id;
   final response = await http.get(Uri.parse(url));
 
   if (response.statusCode == 200) {
     var result = jsonDecode(response.body);
 
-    for (var i = 0; i < result.length; i++){
-      if(result[i]["id"].toString() == globals.id){
+    for (var i = 0; i < result.length; i++) {
+      if (result[i]["id"].toString() == globals.id) {
         // print("result:");
         // print(result);
         globals.heartColorG = "red";

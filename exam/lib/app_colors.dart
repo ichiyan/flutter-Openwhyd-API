@@ -6,7 +6,7 @@ class AppColors {
   static const styleColor = Colors.white38;
   static const lightShadow = Color(0xF404040); //lighter shade of black
 
-  //login/register
+  //login/register/welcome
   static const Color kBgColor = Color(0xFFFEDCE0);
   static const Color kTextColor = Color(0xFF3D0007);
   // static const Color kBtnColorStart = Color(0xFF20bf55);

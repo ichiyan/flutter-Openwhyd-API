@@ -20,27 +20,28 @@ Future<dynamic> signIn(String email, String password) async {
   final res = await http.get(Uri.parse(
       'https://openwhyd.org/login?action=login&ajax=true&email=$email&md5=$password&includeUser=true'));
 
-  print(res.statusCode);
-  print(res.request);
-  print(res.headers);
+  // print(res.statusCode);
+  // print(res.request);
+  // print(res.headers);
 
   if (res.statusCode == 200) {
     final jsonData = jsonDecode(res.body);
     //final head = jsonDecode(res.headers);
     // return User.fromJson(jsonDecode(res.body));
     // return type = dynamic; returning a json object from res.body due to loggin in succesfully return only a redirection url;
-    print(jsonData);
+    //print(jsonData);
 
     globals.id = jsonData["user"]["_id"];
     globals.userName = jsonData["user"]["name"];
+    globals.isValid = true;
     print(globals.id);
     print(globals.userName);
 
     globals.cookieFind = res.headers['set-cookie'];
     globals.cookieChange = globals.cookieFind.split(RegExp(r"; "));
-    print(globals.cookieFind);
-    print(globals.cookieChange);
-    print(globals.cookieChange[0]);
+    // print(globals.cookieFind);
+    // print(globals.cookieChange);
+    // print(globals.cookieChange[0]);
 
     // var jar = CookieJar();
     // await jar.saveFromResponse(
@@ -100,17 +101,16 @@ Future<List<TrackModel>> fetchLikedTracks() async {
   //final result = await http.get(Uri.parse(findUser));
 
   // if (result.statusCode == 200) {
-    //var res = jsonDecode(result.body);
-    var findURL =
-        "https://openwhyd.org/u/" + globals.id + "/likes?format=json";
+  //var res = jsonDecode(result.body);
+  var findURL = "https://openwhyd.org/u/" + globals.id + "/likes?format=json";
 
-    final response = await http.get(Uri.parse(findURL));
-    if (response.statusCode == 200) {
-      //print(response.body);
-      return PlaylistTracksList.fromJson(jsonDecode(response.body)).song;
-    } else {
-      throw Exception('Failed to load liked tracks');
-    }
+  final response = await http.get(Uri.parse(findURL));
+  if (response.statusCode == 200) {
+    //print(response.body);
+    return PlaylistTracksList.fromJson(jsonDecode(response.body)).song;
+  } else {
+    throw Exception('Failed to load liked tracks');
+  }
   // } else {
   //   throw Exception('Failed to find user');
   // }
@@ -126,16 +126,15 @@ Future<List<PlaylistModel>> fetchPlaylist() async {
 
   // if (result.statusCode == 200) {
   //   var res = jsonDecode(result.body);
-    var findURL = "https://openwhyd.org/u/" +
-        globals.id +
-        "/playlists?format=json";
+  var findURL =
+      "https://openwhyd.org/u/" + globals.id + "/playlists?format=json";
 
-    final response = await http.get(Uri.parse(findURL));
-    if (response.statusCode == 200) {
-      return UserPlaylist.fromJson(jsonDecode(response.body)).playlists;
-    } else {
-      throw Exception('Failed to load playlists');
-    }
+  final response = await http.get(Uri.parse(findURL));
+  if (response.statusCode == 200) {
+    return UserPlaylist.fromJson(jsonDecode(response.body)).playlists;
+  } else {
+    throw Exception('Failed to load playlists');
+  }
   // } else {
   //   throw Exception('Failed to find user');
   // }
@@ -147,6 +146,7 @@ Future<List<TrackModel>> fetchPlaylistTracks(int num) async {
 
   // if (result.statusCode == 200) {
   //   var res = jsonDecode(result.body);
+<<<<<<< Updated upstream
     var findURL = "https://openwhyd.org/u/" +
         globals.id +
         "/playlist/" +
@@ -160,6 +160,20 @@ Future<List<TrackModel>> fetchPlaylistTracks(int num) async {
     } else {
       throw Exception('Failed to load playlist tracks');
     }
+=======
+  var findURL = "https://openwhyd.org/u/" +
+      globals.id +
+      "/playlist/" +
+      num.toString() +
+      "?format=json";
+
+  final response = await http.get(Uri.parse(findURL));
+  if (response.statusCode == 200) {
+    return PlaylistTracksList.fromJson(jsonDecode(response.body)).song;
+  } else {
+    throw Exception('Failed to load playlist tracks');
+  }
+>>>>>>> Stashed changes
   // } else {
   //   throw Exception('Failed to find user');
   // }

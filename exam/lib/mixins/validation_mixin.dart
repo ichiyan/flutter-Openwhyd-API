@@ -14,36 +14,7 @@ class ValidationMixin {
     RegExp regExp = RegExp(pattern);
 
     if (regExp.hasMatch(value!)) return null;
-    return "User a correct name.";
-  }
-
-  String? validateBirth(String? value) {
-    dynamic input = "Enter date.";
-    if (value!.length != 0) return null;
-
-    return input;
-  }
-
-  String? validatePhone(String? value) {
-    dynamic input = "Input a correct phone number.";
-    if (value!.length == 11) {
-      input = null;
-    }
-
-    return input;
-  }
-
-  String? validateAddress(String? value) {
-    dynamic input = "Address must at least have 8 characters";
-    if (value!.length >= 8) input = null;
-    return input;
-  }
-
-  String? validateHome(String? value) {
-    dynamic input = "Enter a correct address";
-    if (value!.length > 7) input = null;
-
-    return input;
+    return "Incorrect name format";
   }
 
   String? validatePassword(String? value) {
@@ -54,7 +25,7 @@ class ValidationMixin {
     if (regExp.hasMatch(value!)) {
       return null;
     }
-    return "Password should have at least 1 uppercase, lowercase, digit, special char. and at least 8 chars.";
+    return "Password should have at least 1 uppercase, lowercase, and digit and at least 8 chars.";
   }
 
   String? validateConfirmPassword(String? password) {
