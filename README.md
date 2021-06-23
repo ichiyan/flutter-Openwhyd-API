@@ -18,8 +18,9 @@ FUNCTIONALITIES
 - Forget Password? (connected to API)
 - Register (validated through validation_mixin)
 - Hot Tracks (show tracks & like tracks)
-- Playlist (show playlists, show tracks in playlist, create new playlist)
-- Tracks (show liked tracks, play tracks)
+- Playlist (show playlists, show tracks in playlist, create new playlist, add track in playlist)
+- Tracks (show liked tracks, play tracks, add new track)
+- Player (plays YT videos and mp3 audio)
 
 CAUTION:
 - Can't like tracks that have been remove
