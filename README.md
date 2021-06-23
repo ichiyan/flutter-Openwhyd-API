@@ -24,7 +24,7 @@ FUNCTIONALITIES
 - Hot Tracks (show hot tracks & like tracks)
 - Playlist (show playlists, show tracks in playlist, create new playlist, add track in playlist)
 - Tracks (show liked tracks, play tracks, add new track)
-- Player (plays YT videos and mp3 audio)
+- Player (plays video of tracks from YT and mp3 audio)
 
 NOTE:
 - user can't like tracks that have been removed
