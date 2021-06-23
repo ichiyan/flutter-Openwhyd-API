@@ -5,7 +5,8 @@ class AppColors {
   static const mainAccentColor = Colors.tealAccent;
   static const styleColor = Colors.white38;
   static const lightShadow = Color(0xF404040); //lighter shade of black
-
+  static const success = Color(0XFF39db80);
+  static const danger = Colors.deepOrange;
   //login/register/welcome
   static const Color kBgColor = Color(0xFFFEDCE0);
   static const Color kTextColor = Color(0xFF3D0007);

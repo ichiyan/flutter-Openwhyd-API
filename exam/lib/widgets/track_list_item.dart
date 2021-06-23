@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:openwhyd_api_music_app/app_colors.dart';
 // import 'package:webdriver/sync_io.dart';
 // import 'package:cookie_jar/cookie_jar.dart';
 import 'package:openwhyd_api_music_app/globals.dart' as globals;
@@ -89,33 +90,70 @@ class TrackListItem extends StatelessWidget {
       final jsonData = jsonDecode(response.body);
 
       if (jsonData["loved"] == true) {
-        return showDialog(
-            context: context,
-            builder: (context) {
-              Future.delayed(Duration(seconds: 1), () {
-                Navigator.of(context).pop(true);
-              });
-              return AlertDialog(
-                title: Text(
-                  "Track liked!",
-                  textAlign: TextAlign.center,
-                ),
-              );
-            });
+        // return showDialog(
+        //     context: context,
+        //     builder: (context) {
+        //       Future.delayed(Duration(seconds: 1), () {
+        //         Navigator.of(context).pop(true);
+        //       });
+        //       return AlertDialog(
+        //         title: Text(
+        //           "Track liked!",
+        //           textAlign: TextAlign.center,
+        //         ),
+        //       );
+        //     });
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+            duration: Duration(seconds: 2),
+            backgroundColor: AppColors.success,
+            content: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  //Icon(Icons.check),
+                  Flexible(
+                    child: Padding(
+                      padding: const EdgeInsets.only(left: 8.0),
+                      child: Text(
+                        'Track liked!',
+                        style: TextStyle(color: Colors.white),
+                        textAlign: TextAlign.center,
+                      ),
+                    ),
+                  )
+                ])));
       } else {
-        return showDialog(
-            context: context,
-            builder: (context) {
-              Future.delayed(Duration(seconds: 1), () {
-                Navigator.of(context).pop(true);
-              });
-              return AlertDialog(
-                title: Text(
-                  "Removed like from track :(",
-                  textAlign: TextAlign.center,
-                ),
-              );
-            });
+        // return showDialog(
+        //     context: context,
+        //     builder: (context) {
+        //       Future.delayed(Duration(seconds: 1), () {
+        //         Navigator.of(context).pop(true);
+        //       });
+        //       return AlertDialog(
+        //         title: Text(
+        //           "Removed like from track :(",
+        //           textAlign: TextAlign.center,
+        //         ),
+        //       );
+        //     });
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+            duration: Duration(seconds: 2),
+            backgroundColor: AppColors.danger,
+            content: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  //Icon(Icons.),
+                  Flexible(
+                    child: Padding(
+                      padding: const EdgeInsets.only(left: 8.0),
+                      child: Text(
+                        'Track unliked :(',
+                        style: TextStyle(color: Colors.white),
+                      ),
+                    ),
+                  )
+                ])));
       }
     } else {
       throw Exception('Failed to like track');

@@ -92,38 +92,42 @@ class _LoginState extends State<Login> with ValidationMixin {
                             onPress: () {
                               if (formKey.currentState!.validate()) {
                                 final res = signIn(emailTextController.text,
-                                    passwordTextController.text)
+                                        passwordTextController.text)
                                     .then((data) {
-                                      print(data);
-                                      log('Logging In...');
-                                      if (data['error'] != null) {
-                                        ScaffoldMessenger.of(context)
-                                            .showSnackBar(SnackBar(
-                                                  duration: Duration(seconds: 2),
-                                                  backgroundColor: Colors.deepOrange,
-                                                  content: Row(
-                                                  children: [
-                                                    Icon(Icons.error_outline_rounded),
-                                                      Flexible(child: Padding(
-                                                        padding: const EdgeInsets.only(left: 8.0),
-                                                        child: Text(
-                                                          data['error'],
-                                                          style: TextStyle(color: Colors.white),
-                                                        ),
-                                                      ),)
-                                                  ])));
-                                      } else {
-                                        Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                                builder: (context) =>
-                                                    BottomNavBar()));
-                                        formKey.currentState!.reset();
-                                      }
-                                    }).onError((error, stackTrace) {
-                                      print(error);
-                                      return null;
-                                    });
+                                  print(data);
+                                  log('Logging In...');
+                                  if (data['error'] != null) {
+                                    ScaffoldMessenger.of(context)
+                                        .showSnackBar(SnackBar(
+                                            duration: Duration(seconds: 2),
+                                            backgroundColor: AppColors.danger,
+                                            content: Row(children: [
+                                              Icon(Icons.error_outline_rounded),
+                                              Flexible(
+                                                child: Padding(
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          left: 8.0),
+                                                  child: Text(
+                                                    data['error'],
+                                                    style: TextStyle(
+                                                        color: Colors.white),
+                                                  ),
+                                                ),
+                                              )
+                                            ])));
+                                  } else {
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                BottomNavBar()));
+                                    formKey.currentState!.reset();
+                                  }
+                                }).onError((error, stackTrace) {
+                                  print(error);
+                                  return null;
+                                });
                               }
                             },
                           ),
