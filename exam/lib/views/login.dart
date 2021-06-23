@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:openwhyd_api_music_app/api/openwhyd.dart';
 import 'package:openwhyd_api_music_app/app_style.dart';
@@ -21,8 +23,6 @@ class _LoginState extends State<Login> with ValidationMixin {
   final TextEditingController emailTextController = TextEditingController();
   final TextEditingController passwordTextController = TextEditingController();
   bool obscureText = true;
-  bool isValid = false;
-  String? err;
 
   @override
   Widget build(BuildContext context) {
@@ -91,39 +91,38 @@ class _LoginState extends State<Login> with ValidationMixin {
                             iconData: Icons.login,
                             onPress: () {
                               if (formKey.currentState!.validate()) {
-                                try {
-                                  final res = signIn(emailTextController.text,
-                                          passwordTextController.text)
-                                      .then((data) {
-                                    print('Logging In...');
-                                    Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) =>
-                                                BottomNavBar()));
-                                    formKey.currentState!.reset();
-                                  });
-                                } catch (err) {
-                                  print(err);
-                                  ScaffoldMessenger.of(context)
-                                      .showSnackBar(SnackBar(
-                                    backgroundColor: Colors.deepOrange,
-                                    content: Row(
-                                      children: [
-                                        Icon(Icons.error_outline_rounded),
-                                        Padding(
-                                          padding:
-                                              const EdgeInsets.only(left: 8.0),
-                                          child: Text(
-                                            'Incorrect email or password',
-                                            style:
-                                                TextStyle(color: Colors.white),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ));
-                                }
+                                final res = signIn(emailTextController.text,
+                                    passwordTextController.text)
+                                    .then((data) {
+                                      print(data);
+                                      log('Logging In...');
+                                      if (data['error'] != null) {
+                                        ScaffoldMessenger.of(context)
+                                            .showSnackBar(SnackBar(
+                                                  backgroundColor: Colors.deepOrange,
+                                                  content: Row(
+                                                  children: [
+                                                    Icon(Icons.error_outline_rounded),
+                                                      Flexible(child: Padding(
+                                                        padding: const EdgeInsets.only(left: 8.0),
+                                                        child: Text(
+                                                          data['error'],
+                                                          style: TextStyle(color: Colors.white),
+                                                        ),
+                                                      ),)
+                                                  ])));
+                                      } else {
+                                        Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    BottomNavBar()));
+                                        formKey.currentState!.reset();
+                                      }
+                                    }).onError((error, stackTrace) {
+                                      print(error);
+                                      return null;
+                                    });
                               }
                             },
                           ),
