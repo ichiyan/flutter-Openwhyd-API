@@ -99,6 +99,7 @@ class _LoginState extends State<Login> with ValidationMixin {
                                       if (data['error'] != null) {
                                         ScaffoldMessenger.of(context)
                                             .showSnackBar(SnackBar(
+                                                  duration: Duration(seconds: 2),
                                                   backgroundColor: Colors.deepOrange,
                                                   content: Row(
                                                   children: [
