@@ -28,7 +28,7 @@ Future<dynamic> signIn(String email, String password) async {
     final jsonData = jsonDecode(res.body);
     //final head = jsonDecode(res.headers);
     // return User.fromJson(jsonDecode(res.body));
-    // return type = dynamic; returning a json object from res.body due to loggin in succesfully return only a redirection url;
+    // return type = dynamic; returning a json object from res.body due to log in in successfully return only a redirection url;
     //print(jsonData);
 
     globals.id = jsonData["user"]["_id"];
