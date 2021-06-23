@@ -93,7 +93,7 @@ class _PlayerState extends State<Player> {
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
                   style: TextStyle(
-                    color: Colors.white70,
+                    color: Colors.white,
                     letterSpacing: 0.5,
                     fontSize: 25,
                     fontWeight: FontWeight.w500,
