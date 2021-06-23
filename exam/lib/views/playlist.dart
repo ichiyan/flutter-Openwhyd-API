@@ -83,7 +83,7 @@ class _PlaylistState extends State<Playlist> {
                               trackNum: snapshot.data![index].trackNum,
                             ),
                             onTap: () {
-                              navigateToPlaylistTracks(context, index);
+                              navigateToPlaylistTracks(context, index, snapshot.data![index].playlist);
                             },
                           ),
                         );
@@ -103,11 +103,11 @@ class _PlaylistState extends State<Playlist> {
     );
   }
 
-  void navigateToPlaylistTracks(BuildContext context, int num) {
+  void navigateToPlaylistTracks(BuildContext context, int num, String plName) {
     Navigator.push(
       context,
       MaterialPageRoute(builder: (context) {
-        return PlaylistTracks(showPlaylistNum: num, plName: "",);
+        return PlaylistTracks(showPlaylistNum: num, plName: plName);
       }),
     );
   }

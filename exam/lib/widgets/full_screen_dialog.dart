@@ -112,13 +112,18 @@ class FullScreenDialog extends StatelessWidget {
   Future<void> addTrack(BuildContext context, int pl, String plName) async {
     var link = linkTextFieldController.text;
     var trimmed = link.split(RegExp(r"v="));
+    
+    Map<String, String> play = {
+      "name": plName,
+      "id": pl.toString(),
+    };
+    
     var findURL = "https://openwhyd.org/api/post?action=insert" +
         "&name=" + nameTextFieldController.text +
         " - " + artistTextFieldController.text +
         "&eId=/yt/" + trimmed[1] +
         "&img=https://i.ytimg.com/vi/" + trimmed[1] + "/default.jpg" +
-        "&pl={name=" + plName.toString() +
-        "&id=" + pl.toString() + "}" ;
+        "&pl=" + json.encode(play);
 
     final response = await http.get(
         Uri.parse(findURL),
@@ -127,12 +132,14 @@ class FullScreenDialog extends StatelessWidget {
       },
     );
 
+    print("NEW TRACK");
     print(response.statusCode);
+
     if (response.statusCode == 200) {
       print(response.body);
       //jsonDecode(response.body);
 
-      return showDialog(
+      showDialog(
           context: context,
           builder: (context) {
             Future.delayed(Duration(seconds: 2), () {
@@ -143,6 +150,13 @@ class FullScreenDialog extends StatelessWidget {
                 children: [
                   Text(
                     "Track Added!",
+                    textAlign: TextAlign.center,
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  Text(
+                    "Refresh page to see new track",
                     textAlign: TextAlign.center,
                   ),
                 ],
