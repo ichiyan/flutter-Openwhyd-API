@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:openwhyd_api_music_app/views/login.dart';
 import 'package:openwhyd_api_music_app/views/welcome.dart';
 
 class LogoutButton extends StatelessWidget {

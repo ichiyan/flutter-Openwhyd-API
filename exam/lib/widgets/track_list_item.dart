@@ -5,7 +5,6 @@ import 'package:http/http.dart' as http;
 // import 'package:cookie_jar/cookie_jar.dart';
 import 'package:openwhyd_api_music_app/globals.dart' as globals;
 import 'package:openwhyd_api_music_app/views/bottom_nav.dart';
-import 'package:openwhyd_api_music_app/views/home.dart';
 
 // ignore: must_be_immutable
 class TrackListItem extends StatelessWidget {
@@ -15,13 +14,13 @@ class TrackListItem extends StatelessWidget {
   final String id;
   final bool heartColor;
 
-  TrackListItem(
-      {required this.trackName,
-      required this.image,
-      required this.id,
-      this.userName,
-      required this.heartColor,
-      });
+  TrackListItem({
+    required this.trackName,
+    required this.image,
+    required this.id,
+    this.userName,
+    required this.heartColor,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -59,10 +58,8 @@ class TrackListItem extends StatelessWidget {
           );
         },
         icon: Icon(
-          heartColor
-              ? Icons.favorite_rounded
-              : Icons.favorite_border_rounded,
-          color: heartColor? Colors.redAccent : Colors.white24,
+          heartColor ? Icons.favorite_rounded : Icons.favorite_border_rounded,
+          color: heartColor ? Colors.redAccent : Colors.white24,
           size: 22,
         ),
       ),
@@ -90,7 +87,7 @@ class TrackListItem extends StatelessWidget {
     if (response.statusCode == 200) {
       final jsonData = jsonDecode(response.body);
 
-      if(jsonData["loved"] == true){
+      if (jsonData["loved"] == true) {
         return showDialog(
             context: context,
             builder: (context) {

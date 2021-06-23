@@ -2,7 +2,6 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:openwhyd_api_music_app/api/openwhyd.dart';
-import 'package:openwhyd_api_music_app/views/bottom_nav.dart';
 import 'package:openwhyd_api_music_app/widgets/playlist_item.dart';
 import 'package:openwhyd_api_music_app/models/playlist_model.dart';
 import 'package:openwhyd_api_music_app/views/playlist_tracks.dart';
@@ -40,10 +39,13 @@ class _PlaylistState extends State<Playlist> {
       child: Scaffold(
         backgroundColor: Colors.transparent,
         floatingActionButton: FloatingActionButton(
-            onPressed: (){
-              playlistForm(context);
-            },
-            child: Icon(Icons.add, size: 40.0,),
+          onPressed: () {
+            playlistForm(context);
+          },
+          child: Icon(
+            Icons.add,
+            size: 40.0,
+          ),
         ),
         body: SafeArea(
           child: Padding(
@@ -52,21 +54,21 @@ class _PlaylistState extends State<Playlist> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Padding(
-                        padding: EdgeInsets.symmetric(vertical: 20.0),
-                        child: Text(
-                          "Playlist",
-                          style: TextStyle(
-                            fontSize: 18.0,
-                            fontWeight: FontWeight.bold,
-                            color: Theme.of(context).accentColor,
-                          ),
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Padding(
+                      padding: EdgeInsets.symmetric(vertical: 20.0),
+                      child: Text(
+                        "Playlist",
+                        style: TextStyle(
+                          fontSize: 18.0,
+                          fontWeight: FontWeight.bold,
+                          color: Theme.of(context).accentColor,
                         ),
                       ),
-                      LogoutButton(),
-                    ],
+                    ),
+                    LogoutButton(),
+                  ],
                 ),
                 Expanded(
                   child: FutureBuilder<List<PlaylistModel>>(
@@ -83,7 +85,8 @@ class _PlaylistState extends State<Playlist> {
                               trackNum: snapshot.data![index].trackNum,
                             ),
                             onTap: () {
-                              navigateToPlaylistTracks(context, index, snapshot.data![index].playlist);
+                              navigateToPlaylistTracks(context, index,
+                                  snapshot.data![index].playlist);
                             },
                           ),
                         );
@@ -112,7 +115,7 @@ class _PlaylistState extends State<Playlist> {
     );
   }
 
-  Future<void> playlistForm (BuildContext context) async {
+  Future<void> playlistForm(BuildContext context) async {
     return showDialog(
         context: context,
         builder: (context) {
@@ -125,7 +128,8 @@ class _PlaylistState extends State<Playlist> {
                 });
               },
               controller: textFieldController,
-              decoration: InputDecoration(hintText: "Input name of new playlist"),
+              decoration:
+                  InputDecoration(hintText: "Input name of new playlist"),
             ),
             actions: <Widget>[
               TextButton(
@@ -198,12 +202,11 @@ class _PlaylistState extends State<Playlist> {
     );
     print(response.statusCode);
     print(response.body);
-    if (response.statusCode == 200){
+    if (response.statusCode == 200) {
       print("Success!");
-    }else {
+    } else {
       throw Exception('Failed to create playlist');
     }
   }
-
 } //build
 

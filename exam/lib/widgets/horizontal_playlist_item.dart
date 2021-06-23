@@ -16,7 +16,8 @@ class HorizontalPlaylistItem extends StatelessWidget {
         maxWidth: 210.0,
       ),
       margin: EdgeInsets.symmetric(horizontal: 10.0, vertical: 15.0),
-      width: 215,
+      height: 500,
+      //width: 215,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(20.0),
         image: DecorationImage(
@@ -24,25 +25,38 @@ class HorizontalPlaylistItem extends StatelessWidget {
           fit: BoxFit.fill,
         ),
       ),
+      // child: OverflowBox(
+      //   minWidth: 0.0,
+      //   minHeight: 0.0,
+      //   maxWidth: 500,
+      //   maxHeight: 400,
+      //   child: Image(
+      //     image: NetworkImage(image),
+      //     fit: BoxFit.cover,
+      //   ),
+      // ),
       child: Align(
         alignment: Alignment.bottomCenter,
         child: Row(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Text(
-                      title,
-                      overflow: TextOverflow.fade,
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 20,
-                      ),
-                    ),
+          children: [
+            Flexible(
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text(
+                  title,
+                  maxLines: 2,
+                  overflow: TextOverflow.fade,
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 20,
                   ),
-              ],
+                ),
+              ),
             ),
+          ],
         ),
+      ),
     );
   }
 }

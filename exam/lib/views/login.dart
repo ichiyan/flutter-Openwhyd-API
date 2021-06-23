@@ -5,8 +5,6 @@ import 'package:openwhyd_api_music_app/mixins/validation_mixin.dart';
 import 'package:openwhyd_api_music_app/routes.dart';
 import 'package:openwhyd_api_music_app/widgets/clipper.dart';
 import 'package:openwhyd_api_music_app/widgets/custom_text_form_field.dart';
-import 'package:openwhyd_api_music_app/widgets/neumorphic_element.dart';
-import 'package:openwhyd_api_music_app/globals.dart' as globals;
 import 'package:openwhyd_api_music_app/widgets/password_field.dart';
 import 'package:openwhyd_api_music_app/widgets/primary_button.dart';
 import '../app_colors.dart';
@@ -56,7 +54,9 @@ class _LoginState extends State<Login> with ValidationMixin {
                           SizedBox(height: 20),
                           Text(
                             'Your Email',
-                            style: kBodyTextStyle,
+                            style: kBodyTextStyle.copyWith(
+                              fontWeight: FontWeight.w400,
+                            ),
                           ),
                           SizedBox(height: 5),
                           CustomTextFormField(
@@ -67,10 +67,6 @@ class _LoginState extends State<Login> with ValidationMixin {
                             textInputType: TextInputType.emailAddress,
                             validation: validateEmail,
                           ),
-                          // LoginInput(
-                          //   hintText: 'Email',
-                          //   prefixIcon: 'assets/icons/icon_email.png',
-                          // ),
                           SizedBox(height: 16),
                           Text(
                             'Your Password',
@@ -89,11 +85,6 @@ class _LoginState extends State<Login> with ValidationMixin {
                             textEditingController: passwordTextController,
                             validation: validatePassword,
                           ),
-                          // LoginInput(
-                          //   hintText: 'Password',
-                          //   prefixIcon: 'assets/icons/icon_pwd.png',
-                          //   obscureText: true,
-                          // ),
                           SizedBox(height: 32),
                           PrimaryButton(
                             text: "Login",

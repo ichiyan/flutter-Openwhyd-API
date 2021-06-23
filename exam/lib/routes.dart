@@ -20,6 +20,7 @@ void navigateToWelcome(BuildContext context) {
 
 void navigateToLogin(BuildContext context) {
   //Navigator.pushNamed(context, Login.routeName);
+  //PLEASE DON'T CHANGE THIS CAUSE THE NAMED ROUTED HAVEN'T BEEN WORKING IN MINE
   Navigator.push(
     context,
     MaterialPageRoute(builder: (context) {

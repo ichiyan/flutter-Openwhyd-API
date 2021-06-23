@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:openwhyd_api_music_app/app_colors.dart';
 import 'package:openwhyd_api_music_app/widgets/forgot_password.dart';
 import 'package:openwhyd_api_music_app/widgets/gradient_button.dart';
 

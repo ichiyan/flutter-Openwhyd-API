@@ -1,5 +1,4 @@
 import 'package:openwhyd_api_music_app/models/track_model.dart';
-import 'package:openwhyd_api_music_app/globals.dart' as globals;
 
 class HotTracks {
   final List<TrackModel> tracks;

@@ -1,14 +1,10 @@
-import 'dart:convert';
-import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
-import 'package:openwhyd_api_music_app/views/playlist_tracks.dart';
 import 'package:openwhyd_api_music_app/views/video_player.dart';
 import 'package:openwhyd_api_music_app/widgets/gradient_containers.dart';
 import 'package:openwhyd_api_music_app/widgets/horizontal_playlist_item.dart';
 import 'package:openwhyd_api_music_app/globals.dart' as globals;
 import 'package:openwhyd_api_music_app/api/openwhyd.dart';
 import 'package:openwhyd_api_music_app/app_colors.dart';
-import 'package:openwhyd_api_music_app/models/playlist_model.dart';
 import 'package:openwhyd_api_music_app/widgets/logout_button.dart';
 import 'package:openwhyd_api_music_app/models/track_model.dart';
 import 'package:openwhyd_api_music_app/widgets/track_list_item.dart';
@@ -28,7 +24,6 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   late Future<List<TrackModel>> futureTrackList;
   late Future<List<TrackModel>> futureTrack;
-
 
   @override
   void initState() {

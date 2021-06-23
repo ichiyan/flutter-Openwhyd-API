@@ -107,7 +107,7 @@ class _VideoPlayerState extends State<VideoPlayer> {
                 widget.track.trackName,
                 textAlign: TextAlign.center,
                 style: TextStyle(
-                  color: Colors.white70,
+                  color: Colors.white,
                   letterSpacing: 0.5,
                   fontSize: 25,
                   fontWeight: FontWeight.w500,

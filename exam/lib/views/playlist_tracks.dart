@@ -6,21 +6,21 @@ import 'package:openwhyd_api_music_app/widgets/playlist_tracks_item.dart';
 import 'package:openwhyd_api_music_app/models/track_model.dart';
 import 'package:openwhyd_api_music_app/widgets/logout_button.dart';
 import 'package:openwhyd_api_music_app/widgets/gradient_containers.dart';
-import 'dart:convert';
-import 'package:http/http.dart' as http;
 
 class PlaylistTracks extends StatefulWidget {
   static const String routeName = "playlist_tracks";
   //final User user;
   final int showPlaylistNum;
   final String plName;
-  const PlaylistTracks({Key? key, required this.showPlaylistNum, required this.plName})
+  const PlaylistTracks(
+      {Key? key, required this.showPlaylistNum, required this.plName})
       : super(key: key);
 
   //int getShowPlaylistNum (){return this.showPlaylistNum; }
 
   @override
-  _PlaylistTracksState createState() => _PlaylistTracksState(showPlaylistNum, plName);
+  _PlaylistTracksState createState() =>
+      _PlaylistTracksState(showPlaylistNum, plName);
 }
 
 class _PlaylistTracksState extends State<PlaylistTracks> {
@@ -50,7 +50,10 @@ class _PlaylistTracksState extends State<PlaylistTracks> {
             Navigator.push(
               context,
               MaterialPageRoute<void>(
-                builder: (context) => FullScreenDialog(numPL: this.showNum, plName: plName,),
+                builder: (context) => FullScreenDialog(
+                  numPL: this.showNum,
+                  plName: plName,
+                ),
                 fullscreenDialog: true,
               ),
             );

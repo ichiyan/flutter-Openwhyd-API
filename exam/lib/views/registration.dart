@@ -8,7 +8,6 @@ import 'package:openwhyd_api_music_app/widgets/clipper.dart';
 import 'package:openwhyd_api_music_app/widgets/custom_text_form_field.dart';
 import 'package:openwhyd_api_music_app/widgets/password_field.dart';
 import 'package:openwhyd_api_music_app/widgets/primary_button.dart';
-import 'package:openwhyd_api_music_app/widgets/secondary_button.dart';
 import 'package:http/http.dart' as http;
 import 'package:crypto/crypto.dart' as crypto;
 
@@ -176,7 +175,7 @@ class _RegistrationState extends State<Registration> with ValidationMixin {
       body: SingleChildScrollView(
         child: Stack(
           children: [
-            Image.asset('bg5.jpg'),
+            Image.asset('assets/bg1.jpg'),
             Form(
               key: formKey,
               child: Column(
@@ -199,7 +198,9 @@ class _RegistrationState extends State<Registration> with ValidationMixin {
                           SizedBox(height: 20),
                           Text(
                             'Your Full Name',
-                            style: kBodyTextStyle,
+                            style: kBodyTextStyle.copyWith(
+                              fontWeight: FontWeight.w400,
+                            ),
                           ),
                           SizedBox(height: 5),
                           CustomTextFormField(
@@ -213,7 +214,13 @@ class _RegistrationState extends State<Registration> with ValidationMixin {
                           SizedBox(height: 16),
                           Text(
                             'Your Email',
-                            style: kBodyTextStyle,
+                            style: kBodyTextStyle
+                                .copyWith(
+                                  fontWeight: FontWeight.w400,
+                                )
+                                .copyWith(
+                                  fontWeight: FontWeight.w400,
+                                ),
                           ),
                           SizedBox(height: 5),
                           CustomTextFormField(
