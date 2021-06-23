@@ -35,5 +35,5 @@ NOTE:
 - Non-YT links play a sample audio from the internet for demo only since Openwhyd doesn't provide direct links to audio streams 
 - To play audio, tap on non-YT tracks:
     - Kobasolo - 【MV】ラブレター Feat. 春茶 コバソロ found in "Your Tracks" in the Home page and in the Kobasolo Playlist 
-    - SOTTOH - Training Day [FREE DOWNLOAD] found in Hot Tracks (at least as of 06/23/21)
+    - SOTTOH - Training Day [FREE DOWNLOAD] found in "Popular Tracks" in Home (at least as of 06/23/21)
 
