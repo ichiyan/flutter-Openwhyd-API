@@ -172,7 +172,8 @@ class _HomeState extends State<Home> {
                                       context,
                                       MaterialPageRoute(
                                           builder: (context) => VideoPlayer(
-                                              track: snapshot.data![index])),
+                                              track: snapshot.data![index],
+                                              isYTFormat: true)),
                                     );
                                   } else {
                                     Navigator.push(
