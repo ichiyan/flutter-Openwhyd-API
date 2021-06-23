@@ -36,21 +36,6 @@ class _PlayerState extends State<Player> {
       child: SafeArea(
         child: Scaffold(
           backgroundColor: Colors.transparent,
-          // appBar: AppBar(
-          //   toolbarHeight: 40.0,
-          //   elevation: 0,
-          //   backgroundColor: Colors.transparent,
-          //   title: Text(
-          //     "Playing Now",
-          //     style: TextStyle(
-          //       color: Colors.grey,
-          //     ),
-          //   ),
-          //   centerTitle: true,
-          //   leading: IconButton(
-          //     icon: Icon(Icons.expand_more_rounded),
-          //     onPressed: () {},
-          //   ),
           body: Column(
             children: <Widget>[
               SizedBox(
@@ -135,7 +120,6 @@ class _PlayerState extends State<Player> {
                 padding: const EdgeInsets.symmetric(horizontal: 10.0),
                 child: Audio(
                   advancedPlayer: advancedPlayer,
-                  audioPath: widget.track.audio,
                 ),
               ),
             ],

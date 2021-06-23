@@ -5,11 +5,11 @@ import 'package:openwhyd_api_music_app/widgets/neumorphic_element.dart';
 
 class Audio extends StatefulWidget {
   final AudioPlayer advancedPlayer;
-  final String audioPath;
+  //final String audioPath;
   // const Audio({Key? key, required this.advancedPlayer}) : super(key: key);
-  const Audio({Key? key, required this.advancedPlayer, required this.audioPath})
-      : super(key: key);
-  //const Audio({Key? key, required this.advancedPlayer}) : super(key: key);
+  //const Audio({Key? key, required this.advancedPlayer, required this.audioPath})
+  //  : super(key: key);
+  const Audio({Key? key, required this.advancedPlayer}) : super(key: key);
 
   @override
   _AudioState createState() => _AudioState();
@@ -20,7 +20,9 @@ class _AudioState extends State<Audio> {
   Duration _position = new Duration();
   // final String path =
   //     "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-13.mp3";
-  bool isPlaying = false;
+  final String path =
+      "https://assets.mixkit.co/music/preview/mixkit-summer-fun-13.mp3";
+  bool isPlaying = true;
   bool isPaused = false;
   bool isRepeat = false;
   Color controllerIconColor = AppColors.styleColor;
@@ -50,7 +52,7 @@ class _AudioState extends State<Audio> {
     // var stream = yt.videos.streamsClient.get(streamInfo);
     // print(manifest);
 
-    this.widget.advancedPlayer.play(this.widget.audioPath);
+    this.widget.advancedPlayer.play(path);
 
     this.widget.advancedPlayer.onPlayerCompletion.listen((event) {
       setState(() {
@@ -74,10 +76,9 @@ class _AudioState extends State<Audio> {
       ),
       isActive: true,
       onPress: () {
-        this.widget.advancedPlayer.play(this.widget.audioPath);
+        this.widget.advancedPlayer.play(path);
         if (isPlaying == false) {
-          this.widget.advancedPlayer.play(this.widget.audioPath);
-          // this.widget.advancedPlayer.play(path);
+          this.widget.advancedPlayer.play(path);
           setState(() {
             isPlaying = true;
           });

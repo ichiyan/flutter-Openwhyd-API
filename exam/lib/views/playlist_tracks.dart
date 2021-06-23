@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:openwhyd_api_music_app/api/openwhyd.dart';
+import 'package:openwhyd_api_music_app/views/player.dart';
 import 'package:openwhyd_api_music_app/views/video_player.dart';
 import 'package:openwhyd_api_music_app/widgets/full_screen_dialog.dart';
 import 'package:openwhyd_api_music_app/widgets/playlist_tracks_item.dart';
@@ -103,12 +104,22 @@ class _PlaylistTracksState extends State<PlaylistTracks> {
                               playlistName: snapshot.data![index].playlistName,
                             ),
                             onTap: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => VideoPlayer(
-                                        track: snapshot.data![index])),
-                              );
+                              if (snapshot.data![index].audio.substring(1, 3) ==
+                                  'yt') {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => VideoPlayer(
+                                          track: snapshot.data![index])),
+                                );
+                              } else {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          Player(track: snapshot.data![index])),
+                                );
+                              }
                             },
                           ),
                         );
