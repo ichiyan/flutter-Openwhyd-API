@@ -7,7 +7,10 @@ class FullScreenDialog extends StatelessWidget {
   final TextEditingController nameTextFieldController = TextEditingController();
   final TextEditingController artistTextFieldController = TextEditingController();
   final TextEditingController linkTextFieldController = TextEditingController();
-  //final int showNum;
+  final int numPL;
+  final String plName;
+
+  FullScreenDialog({Key? key, required this.numPL, required this.plName}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -92,7 +95,7 @@ class FullScreenDialog extends StatelessWidget {
                     ),
                     child: Text('ADD'),
                     onPressed: () {
-                      addTrack (context);
+                      addTrack (context, numPL, plName);
                       Navigator.pop(context);
                     },
                   ),
@@ -106,14 +109,16 @@ class FullScreenDialog extends StatelessWidget {
     );
   }
 
-  Future<void> addTrack(BuildContext context) async {
+  Future<void> addTrack(BuildContext context, int pl, String plName) async {
+    var link = linkTextFieldController.text;
+    var trimmed = link.split(RegExp(r"v="));
     var findURL = "https://openwhyd.org/api/post?action=insert" +
         "&name=" + nameTextFieldController.text +
         " - " + artistTextFieldController.text +
-        "&eId=" + linkTextFieldController.text //+
-        // "&pl={name=" + +
-        // "&id=" +  + "}"
-    ;
+        "&eId=/yt/" + trimmed[1] +
+        "&img=https://i.ytimg.com/vi/" + trimmed[1] + "/default.jpg" +
+        "&pl={name=" + plName.toString() +
+        "&id=" + pl.toString() + "}" ;
 
     final response = await http.get(
         Uri.parse(findURL),
@@ -122,6 +127,7 @@ class FullScreenDialog extends StatelessWidget {
       },
     );
 
+    print(response.statusCode);
     if (response.statusCode == 200) {
       print(response.body);
       //jsonDecode(response.body);

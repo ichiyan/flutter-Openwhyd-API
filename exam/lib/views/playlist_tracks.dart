@@ -13,23 +13,25 @@ class PlaylistTracks extends StatefulWidget {
   static const String routeName = "playlist_tracks";
   //final User user;
   final int showPlaylistNum;
-  const PlaylistTracks({Key? key, required this.showPlaylistNum})
+  final String plName;
+  const PlaylistTracks({Key? key, required this.showPlaylistNum, required this.plName})
       : super(key: key);
 
   //int getShowPlaylistNum (){return this.showPlaylistNum; }
 
   @override
-  _PlaylistTracksState createState() => _PlaylistTracksState(showPlaylistNum);
+  _PlaylistTracksState createState() => _PlaylistTracksState(showPlaylistNum, plName);
 }
 
 class _PlaylistTracksState extends State<PlaylistTracks> {
   late Future<List<TrackModel>> futurePlaylistTracks;
   final TextEditingController textFieldController = TextEditingController();
   final int showNum;
+  final String plName;
   late var valueText;
   late var codeDialog;
 
-  _PlaylistTracksState(this.showNum);
+  _PlaylistTracksState(this.showNum, this.plName);
 
   @override
   void initState() {
@@ -48,7 +50,7 @@ class _PlaylistTracksState extends State<PlaylistTracks> {
             Navigator.push(
               context,
               MaterialPageRoute<void>(
-                builder: (context) => FullScreenDialog(),
+                builder: (context) => FullScreenDialog(numPL: this.showNum, plName: plName,),
                 fullscreenDialog: true,
               ),
             );

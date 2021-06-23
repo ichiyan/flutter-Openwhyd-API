@@ -107,7 +107,7 @@ class _PlaylistState extends State<Playlist> {
     Navigator.push(
       context,
       MaterialPageRoute(builder: (context) {
-        return PlaylistTracks(showPlaylistNum: num,);
+        return PlaylistTracks(showPlaylistNum: num, plName: "",);
       }),
     );
   }

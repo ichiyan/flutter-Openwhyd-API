@@ -12,26 +12,25 @@ class HorizontalPlaylistItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      constraints: BoxConstraints(
+        maxWidth: 210.0,
+      ),
       margin: EdgeInsets.symmetric(horizontal: 10.0, vertical: 15.0),
       width: 215,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(20.0),
         image: DecorationImage(
-          image: NetworkImage("https://openwhyd.org" + image),
+          image: NetworkImage(image),
           fit: BoxFit.fill,
         ),
       ),
       child: Align(
         alignment: Alignment.bottomCenter,
-        child: Flexible(
-          flex: 1,
-            child: Row(
+        child: Row(
               children: [
                 Padding(
-                  padding: const EdgeInsets.all(12.0),
-                  child: Flexible(
-                    flex: 1,
-                    child: Text(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text(
                       title,
                       overflow: TextOverflow.fade,
                       style: TextStyle(
@@ -41,13 +40,9 @@ class HorizontalPlaylistItem extends StatelessWidget {
                       ),
                     ),
                   ),
-
-                ),
               ],
             ),
         ),
-
-      ),
     );
   }
 }

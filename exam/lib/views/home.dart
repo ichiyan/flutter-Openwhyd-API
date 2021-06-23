@@ -120,7 +120,12 @@ class _HomeState extends State<Home> {
                                   image: snapshot.data![index].image,
                                 ),
                                 onTap: () {
-                                  navigateToPlaylistTracks(context, index);
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => VideoPlayer(
+                                            track: snapshot.data![index])),
+                                  );
                                 },
                               ),
                             );
@@ -192,14 +197,15 @@ class _HomeState extends State<Home> {
     );
   }
 
-  void navigateToPlaylistTracks(BuildContext context, int num) {
-    Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) {
-        return PlaylistTracks(
-          showPlaylistNum: num,
-        );
-      }),
-    );
-  }
+  // void navigateToPlaylistTracks(BuildContext context, int num) {
+  //   Navigator.push(
+  //     context,
+  //     MaterialPageRoute(builder: (context) {
+  //       return PlaylistTracks(
+  //         showPlaylistNum: num,
+  //         plName: ,
+  //       );
+  //     }),
+  //   );
+  // }
 }

@@ -9,18 +9,30 @@ class PlaylistTracksList {
     List<TrackModel> allPlaylists = new List.empty(growable: true);
     for(var i=0; i<parsedJson.length; i++){
       var object = parsedJson[i];
-      TrackModel newPlaylist = new TrackModel(
-        trackName: object["name"],
-        image: object["img"],
-        userName: object["uNm"],
-        playlistName: object['pl']['name'],
-        audio: object['eId'].substring(4),
-        id: object['_id'],
-        heartColor: false,
-      );
-      allPlaylists.add(newPlaylist);
-    }
 
+      if (object.containsKey('pl')) {
+        TrackModel newPlaylist = new TrackModel(
+          trackName: object["name"],
+          image: object["img"],
+          userName: object["uNm"],
+          playlistName: object['pl']['name'],
+          audio: object['eId'].substring(4),
+          id: object['_id'],
+          heartColor: false,
+        );
+        allPlaylists.add(newPlaylist);
+      } else {
+        TrackModel newPlaylist = new TrackModel(
+          trackName: object["name"],
+          image: object["img"],
+          userName: object["uNm"],
+          audio: object['eId'].substring(4),
+          id: object['_id'],
+          heartColor: false,
+        );
+        allPlaylists.add(newPlaylist);
+      }
+    }
     return PlaylistTracksList(song: allPlaylists);
   }
 }

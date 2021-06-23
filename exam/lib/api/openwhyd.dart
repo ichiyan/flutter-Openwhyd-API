@@ -71,7 +71,7 @@ Future<List<TrackModel>> fetchHotTracks() async {
       );
 
   if (response.statusCode == 200) {
-    print(jsonDecode(response.body));
+    //print(jsonDecode(response.body));
     return HotTracks.fromJson(jsonDecode(response.body)).tracks;
   } else {
     throw Exception('Failed to load tracks');
