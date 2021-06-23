@@ -32,5 +32,5 @@ NOTE:
 - users can't like tracks that have been removed
     (Openwhyd's Hot Tracks continues to display tracks that have been removed)
 - Registration is not connected to the API
-- Non-YT links play a sample audio from the internet since Openwhyd doesn't directly provide links to audio streams
+- Non-YT links play a sample audio from the internet for demo only since Openwhyd doesn't provide direct links to audio streams 
 
