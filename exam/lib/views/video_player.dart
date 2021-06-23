@@ -7,9 +7,10 @@ import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 class VideoPlayer extends StatefulWidget {
   final TrackModel track;
+  final bool isYTFormat;
   // const Player({Key? key}) : super(key: key);
 
-  VideoPlayer({required this.track});
+  VideoPlayer({required this.track, this.isYTFormat = false});
 
   @override
   _VideoPlayerState createState() => _VideoPlayerState();
@@ -20,10 +21,19 @@ class _VideoPlayerState extends State<VideoPlayer> {
 
   late YoutubePlayerController _controller;
 
+  String getId() {
+    if (widget.isYTFormat) {
+      return widget.track.audio.substring(4);
+    } else {
+      return YoutubePlayer.convertUrlToId(widget.track.audio) ?? '';
+    }
+  }
+
   @override
   void initState() {
     _controller = YoutubePlayerController(
-      initialVideoId: widget.track.audio.substring(4),
+      // initialVideoId: widget.track.audio.substring(4),
+      initialVideoId: getId(),
       flags: YoutubePlayerFlags(
           autoPlay: false,
           mute: false,
@@ -116,16 +126,34 @@ class _VideoPlayerState extends State<VideoPlayer> {
               SizedBox(
                 height: 10.0,
               ),
-              Text(
-                widget.track.userName ?? 'unknown',
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  color: Colors.white54,
-                  letterSpacing: 0.5,
-                  fontSize: 16,
-                  fontWeight: FontWeight.w300,
-                ),
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    'Curated by ',
+                    style: TextStyle(
+                      color: Colors.white54,
+                      letterSpacing: 0.5,
+                      fontSize: 16,
+                      fontWeight: FontWeight.w300,
+                    ),
+                  ),
+                  SizedBox(
+                    height: 10.0,
+                  ),
+                  Text(
+                    widget.track.userName ?? 'unknown',
+                    style: TextStyle(
+                      color: Colors.white54,
+                      letterSpacing: 0.5,
+                      fontSize: 16,
+                      fontWeight: FontWeight.w300,
+                    ),
+                  ),
+                ],
               ),
+
               SizedBox(
                 height: 25.0,
               ),

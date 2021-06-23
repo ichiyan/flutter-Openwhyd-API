@@ -25,7 +25,7 @@ class ValidationMixin {
     if (regExp.hasMatch(value!)) {
       return null;
     }
-    return "Password should have at least 1 uppercase, lowercase, and digit and at least 8 chars.";
+    return "Password should be at least 8 characters with an uppercase, lowercase, and a number.";
   }
 
   String? validateConfirmPassword(String? password) {

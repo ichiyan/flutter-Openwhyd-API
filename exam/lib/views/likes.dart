@@ -6,6 +6,7 @@ import 'package:openwhyd_api_music_app/widgets/gradient_containers.dart';
 import 'package:openwhyd_api_music_app/widgets/playlist_tracks_item.dart';
 import 'package:openwhyd_api_music_app/models/track_model.dart';
 import 'package:openwhyd_api_music_app/widgets/logout_button.dart';
+import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 class Likes extends StatefulWidget {
   static const String routeName = "likes";
@@ -69,8 +70,9 @@ class _LikesState extends State<Likes> {
                               playlistName: snapshot.data![index].playlistName,
                             ),
                             onTap: () {
-                              if (snapshot.data![index].audio.substring(1, 3) ==
-                                  'yt') {
+                              if (YoutubePlayer.convertUrlToId(
+                                      snapshot.data![index].audio) !=
+                                  null) {
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(

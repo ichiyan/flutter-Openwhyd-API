@@ -31,14 +31,6 @@ Future<dynamic> signIn(String email, String password) async {
     // return type = dynamic; returning a json object from res.body due to log in in successfully return only a redirection url;
     //print(jsonData);
 
-    globals.id = jsonData["user"]["_id"];
-    globals.userName = jsonData["user"]["name"];
-    globals.isValid = true;
-    print(globals.id);
-    print(globals.userName);
-
-    globals.cookieFind = res.headers['set-cookie'];
-    globals.cookieChange = globals.cookieFind.split(RegExp(r"; "));
     // print(globals.cookieFind);
     // print(globals.cookieChange);
     // print(globals.cookieChange[0]);
@@ -51,9 +43,17 @@ Future<dynamic> signIn(String email, String password) async {
     // print(globals.cream);
 
     if (jsonData["redirect"] != null) {
-      return jsonData;
+      globals.id = jsonData["user"]["_id"];
+      globals.userName = jsonData["user"]["name"];
+      globals.isValid = true;
+      print(globals.id);
+      print(globals.userName);
+
+      globals.cookieFind = res.headers['set-cookie'];
+      globals.cookieChange = globals.cookieFind.split(RegExp(r"; "));
     }
-    throw Exception(jsonData["error"]);
+    return jsonData;
+
   } else {
     // If the server did not return a 200 OK response,
     // then throw an exception.

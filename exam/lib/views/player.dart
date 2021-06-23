@@ -93,7 +93,7 @@ class _PlayerState extends State<Player> {
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
                   style: TextStyle(
-                    color: Colors.white70,
+                    color: Colors.white,
                     letterSpacing: 0.5,
                     fontSize: 25,
                     fontWeight: FontWeight.w500,
@@ -103,15 +103,33 @@ class _PlayerState extends State<Player> {
               SizedBox(
                 height: 10.0,
               ),
-              Text(
-                widget.track.userName ?? 'unknown',
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  color: Colors.white54,
-                  letterSpacing: 0.5,
-                  fontSize: 16,
-                  fontWeight: FontWeight.w300,
-                ),
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    'Curated by ',
+                    style: TextStyle(
+                      color: Colors.white54,
+                      letterSpacing: 0.5,
+                      fontSize: 16,
+                      fontWeight: FontWeight.w300,
+                    ),
+                  ),
+                  SizedBox(
+                    height: 10.0,
+                  ),
+                  Text(
+                    widget.track.userName ?? 'unknown',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      color: Colors.white54,
+                      letterSpacing: 0.5,
+                      fontSize: 16,
+                      fontWeight: FontWeight.w300,
+                    ),
+                  ),
+                ],
               ),
               SizedBox(
                 height: 25.0,
