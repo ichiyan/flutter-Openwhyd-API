@@ -21,7 +21,7 @@ FUNCTIONALITIES
 - Log Out (connected to API)
 - Forget Password? (connected to API)
 - Register (validated through validation_mixin)
-- Hot Tracks (show hot tracks & like tracks)
+- Hot Tracks (show hot tracks & liked tracks)
 - Playlist (show playlists, show tracks in playlist, create new playlist, add track in playlist)
 - Tracks (show liked tracks, play tracks, add new track)
 - Player (plays video of tracks from YT and mp3 audio)
