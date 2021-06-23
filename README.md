@@ -5,10 +5,11 @@ Created by:
 - Garay, Idan
 - Paulo, Anne Therese
 
-API Used: OpenwhydAPI
-Website: https://openwhyd.org/
+API
+- API Used: OpenwhydAPI
+- Website: https://openwhyd.org/
 
-Suggested Login
+Suggested Login Credentials
 - Email: annetherese_paulo@yahoo.com
 - Password: passwordTEST123
 
@@ -21,13 +22,15 @@ FUNCTIONALITIES
 - Log Out (connected to API)
 - Forget Password? (connected to API)
 - Register (validated through validation_mixin)
-- Hot Tracks (show hot tracks & liked tracks)
+- Hot Tracks (show hot tracks and liked tracks)
 - Playlist (show playlists, show tracks in playlist, create new playlist, add track in playlist)
 - Tracks (show liked tracks, play tracks, add new track)
-- Player (plays video of tracks from YT and mp3 audio)
+- Video Player (plays video of tracks from YouTube)
+- Audio Player (plays audio, supports play/pause, fast forward, fast rewind, and repeat)
 
 NOTE:
-- user can't like tracks that have been removed
+- users can't like tracks that have been removed
     (Openwhyd's Hot Tracks continues to display tracks that have been removed)
 - Registration is not connected to the API
+- Non-YT links play a sample audio from the internet since Openwhyd doesn't directly provide links to audio streams
 
