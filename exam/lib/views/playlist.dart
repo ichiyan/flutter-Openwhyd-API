@@ -170,13 +170,6 @@ class _PlaylistState extends State<Playlist> {
                                   "Playlist created!",
                                   textAlign: TextAlign.center,
                                 ),
-                                SizedBox(
-                                  height: 10,
-                                ),
-                                Text(
-                                  "Refresh page to see new playlist",
-                                  textAlign: TextAlign.center,
-                                ),
                               ],
                             ),
                           );

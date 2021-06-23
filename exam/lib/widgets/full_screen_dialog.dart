@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:openwhyd_api_music_app/globals.dart' as globals;
+import 'package:openwhyd_api_music_app/views/bottom_nav.dart';
 
 class FullScreenDialog extends StatelessWidget {
   final TextEditingController nameTextFieldController = TextEditingController();
@@ -96,7 +97,30 @@ class FullScreenDialog extends StatelessWidget {
                     child: Text('ADD'),
                     onPressed: () {
                       addTrack (context, numPL, plName);
+                      showDialog(
+                          context: context,
+                          builder: (context) {
+                            Future.delayed(Duration(seconds: 2), () {
+                              Navigator.of(context).pop(true);
+                            });
+                            return AlertDialog(
+                              title: Column(
+                                children: [
+                                  Text(
+                                    "Track Added!",
+                                    textAlign: TextAlign.center,
+                                  ),
+                                ],
+                              ),
+                            );
+                          });
                       Navigator.pop(context);
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) {
+                          return BottomNavBar();
+                        }),
+                      );
                     },
                   ),
                 ],
@@ -139,30 +163,30 @@ class FullScreenDialog extends StatelessWidget {
       print(response.body);
       //jsonDecode(response.body);
 
-      showDialog(
-          context: context,
-          builder: (context) {
-            Future.delayed(Duration(seconds: 2), () {
-              Navigator.of(context).pop(true);
-            });
-            return AlertDialog(
-              title: Column(
-                children: [
-                  Text(
-                    "Track Added!",
-                    textAlign: TextAlign.center,
-                  ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  Text(
-                    "Refresh page to see new track",
-                    textAlign: TextAlign.center,
-                  ),
-                ],
-              ),
-            );
-          });
+      // showDialog(
+      //     context: context,
+      //     builder: (context) {
+      //       Future.delayed(Duration(seconds: 2), () {
+      //         Navigator.of(context).pop(true);
+      //       });
+      //       return AlertDialog(
+      //         title: Column(
+      //           children: [
+      //             Text(
+      //               "Track Added!",
+      //               textAlign: TextAlign.center,
+      //             ),
+      //             SizedBox(
+      //               height: 10,
+      //             ),
+      //             Text(
+      //               "Refresh page to see new track",
+      //               textAlign: TextAlign.center,
+      //             ),
+      //           ],
+      //         ),
+      //       );
+      //     });
     } else {
       throw Exception('Failed to add track');
     }
