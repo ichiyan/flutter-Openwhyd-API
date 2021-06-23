@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:openwhyd_api_music_app/api/openwhyd.dart';
 import 'package:openwhyd_api_music_app/views/player.dart';
 import 'package:openwhyd_api_music_app/views/video_player.dart';
@@ -77,13 +78,26 @@ class _PlaylistTracksState extends State<PlaylistTracks> {
                     BackButton(),
                     Padding(
                       padding: EdgeInsets.symmetric(vertical: 20.0),
-                      child: Text(
-                        "Playlist Tracks",
-                        style: TextStyle(
-                          fontSize: 18.0,
-                          fontWeight: FontWeight.bold,
-                          color: Theme.of(context).accentColor,
-                        ),
+                      child: Column(
+                        children: [
+                          Text(
+                            plName,
+                            style: TextStyle(
+                              fontSize: 18.0,
+                              fontWeight: FontWeight.bold,
+                              color: Theme.of(context).accentColor,
+                            ),
+                          ),
+                          Text(
+                            "playlist tracks",
+                            style: TextStyle(
+                              fontSize: 14.0,
+                              fontWeight: FontWeight.normal,
+                              fontStyle: FontStyle.italic,
+                              color: Theme.of(context).accentColor,
+                            ),
+                          ),
+                        ],
                       ),
                     ),
                     LogoutButton(),

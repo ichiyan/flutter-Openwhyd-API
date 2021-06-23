@@ -12,7 +12,8 @@ class UserPlaylist {
       PlaylistModel newPlaylist = new PlaylistModel(
           playlist: object["name"],
           image: object["img"],
-          trackNum: object["nbTracks"]);
+          trackNum: object["nbTracks"],
+          pId: object["id"] );
       allPlaylists.add(newPlaylist);
     }
 
