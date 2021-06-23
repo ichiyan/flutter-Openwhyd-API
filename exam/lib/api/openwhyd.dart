@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:core';
+import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:crypto/crypto.dart' as crypto;
 import 'package:openwhyd_api_music_app/models/hot_tracks.dart';
@@ -157,4 +158,28 @@ Future<List<TrackModel>> fetchPlaylistTracks(int num) async {
   } else {
     throw Exception('Failed to load playlist tracks');
   }
+}
+
+void notify(
+    {required BuildContext context, int duration = 2, required Color bgColor, required Widget content, required String text}) {
+
+  ScaffoldMessenger.of(context)
+      .showSnackBar(SnackBar(
+      duration: Duration(seconds: duration),
+      backgroundColor: bgColor,
+      content: Row(children: [
+        Icon(Icons.error_outline_rounded),
+        Flexible(
+          child: Padding(
+            padding:
+            const EdgeInsets.only(
+                left: 8.0),
+            child: Text(
+              text,
+              style: TextStyle(
+                  color: Colors.white),
+            ),
+          ),
+        )
+      ])));
 }
