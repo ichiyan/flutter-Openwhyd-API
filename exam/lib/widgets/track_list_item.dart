@@ -50,6 +50,7 @@ class TrackListItem extends StatelessWidget {
       trailing: IconButton(
         onPressed: () {
           likeTrack(context, id);
+          Navigator.pop(context);
           Navigator.push(
             context,
             MaterialPageRoute(builder: (context) {

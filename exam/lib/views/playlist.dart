@@ -9,6 +9,8 @@ import 'package:openwhyd_api_music_app/widgets/gradient_containers.dart';
 import 'package:openwhyd_api_music_app/widgets/logout_button.dart';
 import 'package:openwhyd_api_music_app/globals.dart' as globals;
 
+import 'bottom_nav.dart';
+
 class Playlist extends StatefulWidget {
   static const String routeName = "Playlist";
   // final User user;
@@ -204,6 +206,13 @@ class _PlaylistState extends State<Playlist> {
     print(response.body);
     if (response.statusCode == 200) {
       print("Success!");
+      //Navigator.pop(context);
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) {
+          return BottomNavBar();
+        }),
+      );
     } else {
       throw Exception('Failed to create playlist');
     }
