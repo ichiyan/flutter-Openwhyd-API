@@ -50,6 +50,7 @@ class HorizontalPlaylistItem extends StatelessWidget {
                     color: Colors.white,
                     fontWeight: FontWeight.bold,
                     fontSize: 20,
+                    backgroundColor: Colors.black54,
                   ),
                 ),
               ),
