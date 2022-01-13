@@ -20,7 +20,7 @@ Recommended Device/Resolution
 FUNCTIONALITIES
 - Log In (connected to API & validated through validation_mixin)
 - Log Out (connected to API)
-- Forget Password? (connected to API)
+- Forgot Password? (connected to API)
 - Register (validated through validation_mixin)
 - Hot Tracks (show hot tracks and liked tracks)
 - Playlist (show playlists, show tracks in playlist, create new playlist, add track in playlist)
