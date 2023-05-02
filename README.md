@@ -1,10 +1,3 @@
-# 2203 Final Requirement
-
-Created by:
-- Balisacan, Gabriela
-- Garay, Idan
-- Paulo, Anne Therese
-
 API
 - API Used: OpenwhydAPI
 - Website: https://openwhyd.org/
